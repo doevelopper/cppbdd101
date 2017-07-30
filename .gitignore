@@ -52,6 +52,14 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
 # Add any directories, files, or patterns you don't want to be tracked by version control
 CMakeCache.txt
 CMakeFiles
