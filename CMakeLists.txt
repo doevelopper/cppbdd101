@@ -45,6 +45,7 @@ include(DefinePlatformSpecifc)
 include(goals)
 include(CompilerOption)
 include(CodingStyle)
+include(Rules)
 
 include_directories(src/main/cpp src/test/cpp)
 add_subdirectory (src/main/cpp)
