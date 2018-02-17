@@ -1,6 +1,8 @@
 #ifndef CPPBDD101_ERRH_IOERROR_HPP
 #define CPPBDD101_ERRH_IOERROR_HPP
 #include <ios>
+#include <system_error>
+		
 class IOError //: std::iostream_category
 {
 public:

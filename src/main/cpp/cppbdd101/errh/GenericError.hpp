@@ -6,11 +6,16 @@
 class GenericError //: std::generic_category
 {
 public:
-    GenericError();
-    GenericError(const GenericError& orig);
-    virtual ~GenericError();
-private:
 
+    GenericError();
+    GenericError(GenericError const&) = delete;
+    GenericError(GenericError&&) = delete;
+    GenericError& operator=(GenericError const&) = delete;
+    GenericError& operator=(GenericError&&) = delete;
+    virtual ~GenericError();
+
+private:
+    std::error_condition econd;
 };
 
 #endif

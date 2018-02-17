@@ -49,8 +49,11 @@ Contributor(s):
                 <in>ApplicationSteps.cpp</in>
                 <in>ApplicationSteps.hpp</in>
                 <in>ItTest.cpp</in>
+                <in>cucumber.wire</in>
               </df>
             </df>
+            <in>animal.feature</in>
+            <in>turtle.feature</in>
           </df>
           <in>CMakeLists.txt</in>
         </df>
@@ -59,6 +62,8 @@ Contributor(s):
             <df name="cppbdd101">
               <df name="errh">
                 <in>FutureError.cpp</in>
+                <in>GenericError.cpp</in>
+                <in>IOError.cpp</in>
               </df>
               <df name="gl">
                 <in>Painter.cpp</in>
@@ -118,11 +123,13 @@ Contributor(s):
       <flagsDictionary>
         <element flagsID="0" commonFlags="-mtune=generic -march=x86-64"/>
         <element flagsID="1"
-                 commonFlags="-mtune=generic -march=x86-64 -std=c++1z -std=c++1z -std=c++1z"/>
+                 commonFlags="-mtune=generic -march=x86-64 -std=c++1z -std=c++1z -std=c++1z -std=c++1z -std=gnu++1z -fstack-protector-all -fstack-protector-all -fstack-protector-all"/>
         <element flagsID="2" commonFlags="-std=c++14"/>
         <element flagsID="3" commonFlags="-std=c++17 -Wpedantic -Wpedantic -std=c++1z"/>
         <element flagsID="4"
                  commonFlags="-std=c++17 -Wpedantic -std=c++17 -Wpedantic -std=c++1z"/>
+        <element flagsID="5"
+                 commonFlags="-std=c++17 -std=c++17 -fstack-protector-all -fstack-protector-all -fstack-protector-all -std=c++17 -std=c++17 -std=gnu++1z"/>
       </flagsDictionary>
       <codeAssistance>
       </codeAssistance>
@@ -155,23 +162,8 @@ Contributor(s):
           </preprocessorList>
         </ccTool>
       </folder>
-      <folder path="0/src/main/cpp/cppbdd101/errh">
+      <folder path="0/src/main">
         <ccTool>
-          <incDir>
-            <pElem>src/main/cpp/cppbdd101/errh</pElem>
-            <pElem>src/main/cpp</pElem>
-            <pElem>build/Debug/src/main/cpp</pElem>
-          </incDir>
-        </ccTool>
-      </folder>
-      <folder path="0/src/main/cpp/cppbdd101/gl">
-        <ccTool>
-          <incDir>
-            <pElem>build/Debug/src/main/cpp/cppbdd101/gl</pElem>
-            <pElem>src/main/cpp/cppbdd101/gl</pElem>
-            <pElem>src/main/cpp</pElem>
-            <pElem>src/test/cpp</pElem>
-          </incDir>
           <preprocessorList>
             <Elem>APP_VERSION_STR=".."</Elem>
             <Elem>PROJECT_VERSION_MAJOR=</Elem>
@@ -179,6 +171,30 @@ Contributor(s):
             <Elem>PROJECT_VERSION_MINOR=</Elem>
             <Elem>PROJECT_VERSION_PATCH=</Elem>
           </preprocessorList>
+        </ccTool>
+      </folder>
+      <folder path="0/src/main/cpp/cppbdd101/gl">
+        <ccTool>
+          <incDir>
+            <pElem>D:/msys64/mingw64/include/c++/7.2.0/bits</pElem>
+            <pElem>src/main/cpp/cppbdd101/gl</pElem>
+            <pElem>D:/msys64/mingw64/include/log4cxx/helpers</pElem>
+            <pElem>D:/msys64/mingw64/include/c++/7.2.0/ext</pElem>
+            <pElem>D:/msys64/mingw64/include/c++/7.2.0/x86_64-w64-mingw32/bits</pElem>
+            <pElem>D:/msys64/mingw64/include/c++/7.2.0</pElem>
+            <pElem>D:/msys64/mingw64/include/c++/7.2.0/debug</pElem>
+            <pElem>D:/msys64/mingw64/include/log4cxx</pElem>
+            <pElem>D:/msys64/mingw64/include/log4cxx/spi</pElem>
+            <pElem>D:/msys64/mingw64/include/log4cxx/rolling</pElem>
+            <pElem>D:/msys64/mingw64/include/log4cxx/pattern</pElem>
+            <pElem>D:/msys64/mingw64/include/log4cxx/config</pElem>
+            <pElem>D:/msys64/mingw64/include/log4cxx/xml</pElem>
+            <pElem>D:/msys64/mingw64/include/log4cxx/net</pElem>
+            <pElem>D:/msys64/mingw64/include/log4cxx/nt</pElem>
+            <pElem>src/main/cpp</pElem>
+            <pElem>D:/msys64/mingw64/include/c++/7.2.0/x86_64-w64-mingw32</pElem>
+            <pElem>build/Debug/src/main/cpp/cppbdd101/gl</pElem>
+          </incDir>
         </ccTool>
       </folder>
       <folder path="0/src/test">
@@ -193,11 +209,18 @@ Contributor(s):
             ex="false"
             tool="1"
             flavor2="11">
-        <ccTool flags="3">
+        <ccTool flags="5">
           <incDir>
-            <pElem>D:/msys64/mingw64/include</pElem>
             <pElem>build/Debug/src/it</pElem>
+            <pElem>src/it</pElem>
+            <pElem>src/main/cpp</pElem>
+            <pElem>src/test/cpp</pElem>
+            <pElem>D:/msys64/mingw64/include</pElem>
           </incDir>
+          <preprocessorList>
+            <Elem>_DEBUG</Elem>
+            <Elem>_FORTIFY_SOURCE=2</Elem>
+          </preprocessorList>
         </ccTool>
       </item>
       <item path="src/it/cppbdd101/features/step_definitions/ItTest.cpp"
@@ -206,6 +229,9 @@ Contributor(s):
             flavor2="11">
         <ccTool flags="2">
           <incDir>
+            <pElem>src/main/cpp</pElem>
+            <pElem>src/test/cpp</pElem>
+            <pElem>src/it</pElem>
             <pElem>build/Debug/src/it</pElem>
           </incDir>
         </ccTool>
@@ -217,13 +243,6 @@ Contributor(s):
             <pElem>src/main/cpp</pElem>
             <pElem>src/test/cpp</pElem>
           </incDir>
-          <preprocessorList>
-            <Elem>APP_VERSION_STR=".."</Elem>
-            <Elem>PROJECT_VERSION_MAJOR=</Elem>
-            <Elem>PROJECT_VERSION_MICRO=</Elem>
-            <Elem>PROJECT_VERSION_MINOR=</Elem>
-            <Elem>PROJECT_VERSION_PATCH=</Elem>
-          </preprocessorList>
         </ccTool>
       </item>
       <item path="src/main/cpp/cppbdd101/Application.cpp"
@@ -236,13 +255,6 @@ Contributor(s):
             <pElem>src/main/cpp</pElem>
             <pElem>src/test/cpp</pElem>
           </incDir>
-          <preprocessorList>
-            <Elem>APP_VERSION_STR=".."</Elem>
-            <Elem>PROJECT_VERSION_MAJOR=</Elem>
-            <Elem>PROJECT_VERSION_MICRO=</Elem>
-            <Elem>PROJECT_VERSION_MINOR=</Elem>
-            <Elem>PROJECT_VERSION_PATCH=</Elem>
-          </preprocessorList>
         </ccTool>
       </item>
       <item path="src/main/cpp/cppbdd101/errh/FutureError.cpp"
@@ -250,27 +262,65 @@ Contributor(s):
             tool="1"
             flavor2="11">
         <ccTool flags="1">
+          <incDir>
+            <pElem>src/main/cpp/cppbdd101/errh</pElem>
+            <pElem>src/main/cpp</pElem>
+            <pElem>build/Debug/src/main/cpp</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/main/cpp/cppbdd101/errh/GenericError.cpp"
+            ex="false"
+            tool="1"
+            flavor2="11">
+        <ccTool flags="1">
+          <incDir>
+            <pElem>D:/msys64/mingw64/include/c++/7.2.0</pElem>
+            <pElem>src/main/cpp/cppbdd101/errh</pElem>
+            <pElem>D:/msys64/mingw64/include/c++/7.2.0/x86_64-w64-mingw32/bits</pElem>
+            <pElem>D:/msys64/mingw64/include/c++/7.2.0/bits</pElem>
+            <pElem>D:/msys64/mingw64/include/c++/7.2.0/debug</pElem>
+            <pElem>D:/msys64/mingw64/include/c++/7.2.0/ext</pElem>
+            <pElem>src/main/cpp</pElem>
+            <pElem>D:/msys64/mingw64/include/c++/7.2.0/x86_64-w64-mingw32</pElem>
+            <pElem>build/Debug/src/main/cpp</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/main/cpp/cppbdd101/errh/IOError.cpp"
+            ex="false"
+            tool="1"
+            flavor2="11">
+        <ccTool flags="1">
+          <incDir>
+            <pElem>src/main/cpp/cppbdd101/errh</pElem>
+            <pElem>D:/msys64/mingw64/include/c++/7.2.0</pElem>
+            <pElem>D:/msys64/mingw64/include/c++/7.2.0/bits</pElem>
+            <pElem>D:/msys64/mingw64/include/c++/7.2.0/x86_64-w64-mingw32/bits</pElem>
+            <pElem>D:/msys64/mingw64/include/c++/7.2.0/debug</pElem>
+            <pElem>D:/msys64/mingw64/include/c++/7.2.0/ext</pElem>
+            <pElem>D:/msys64/mingw64/include/c++/7.2.0/x86_64-w64-mingw32</pElem>
+            <pElem>build/Debug/src/main/cpp</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="src/main/cpp/cppbdd101/gl/Painter.cpp"
             ex="false"
             tool="1"
             flavor2="11">
-        <ccTool flags="4">
+        <ccTool flags="1">
         </ccTool>
       </item>
       <item path="src/main/cpp/cppbdd101/gl/Turtle.cpp"
             ex="false"
             tool="1"
             flavor2="11">
-        <ccTool flags="4">
+        <ccTool flags="1">
         </ccTool>
       </item>
       <item path="src/test/cpp/Test.cpp" ex="false" tool="1" flavor2="11">
-        <ccTool flags="3">
+        <ccTool flags="5">
           <incDir>
-            <pElem>src/main/cpp</pElem>
-            <pElem>src/test/cpp</pElem>
             <pElem>build/Debug/src/test/cpp</pElem>
           </incDir>
           <preprocessorList>
@@ -279,6 +329,8 @@ Contributor(s):
             <Elem>PROJECT_VERSION_MICRO=</Elem>
             <Elem>PROJECT_VERSION_MINOR=</Elem>
             <Elem>PROJECT_VERSION_PATCH=</Elem>
+            <Elem>_DEBUG</Elem>
+            <Elem>_FORTIFY_SOURCE=2</Elem>
           </preprocessorList>
         </ccTool>
       </item>
@@ -288,8 +340,6 @@ Contributor(s):
             flavor2="11">
         <ccTool flags="3">
           <incDir>
-            <pElem>src/main/cpp</pElem>
-            <pElem>src/test/cpp</pElem>
             <pElem>build/Debug/src/test/cpp</pElem>
           </incDir>
           <preprocessorList>
@@ -321,7 +371,6 @@ Contributor(s):
             <pElem>D:/msys64/mingw64/include/log4cxx/xml</pElem>
             <pElem>D:/msys64/mingw64/include/log4cxx/net</pElem>
             <pElem>D:/msys64/mingw64/include/log4cxx/nt</pElem>
-            <pElem>src/test/cpp</pElem>
             <pElem>build/Debug/src/test/cpp/cppbdd101/gl</pElem>
           </incDir>
         </ccTool>
@@ -342,7 +391,6 @@ Contributor(s):
             <pElem>D:/msys64/mingw64/include/log4cxx/xml</pElem>
             <pElem>D:/msys64/mingw64/include/log4cxx/net</pElem>
             <pElem>D:/msys64/mingw64/include/log4cxx/nt</pElem>
-            <pElem>src/test/cpp</pElem>
             <pElem>build/Debug/src/test/cpp/cppbdd101/gl</pElem>
           </incDir>
         </ccTool>
@@ -367,7 +415,6 @@ Contributor(s):
             <pElem>D:/msys64/mingw64/include/log4cxx/xml</pElem>
             <pElem>D:/msys64/mingw64/include/log4cxx/net</pElem>
             <pElem>D:/msys64/mingw64/include/log4cxx/nt</pElem>
-            <pElem>src/test/cpp</pElem>
             <pElem>build/Debug/src/test/cpp/cppbdd101/gl</pElem>
           </incDir>
         </ccTool>
@@ -392,7 +439,6 @@ Contributor(s):
             <pElem>D:/msys64/mingw64/include/log4cxx/xml</pElem>
             <pElem>D:/msys64/mingw64/include/log4cxx/net</pElem>
             <pElem>D:/msys64/mingw64/include/log4cxx/nt</pElem>
-            <pElem>src/test/cpp</pElem>
             <pElem>build/Debug/src/test/cpp/cppbdd101/gl</pElem>
           </incDir>
         </ccTool>
@@ -417,7 +463,6 @@ Contributor(s):
             <pElem>D:/msys64/mingw64/include/log4cxx/xml</pElem>
             <pElem>D:/msys64/mingw64/include/log4cxx/net</pElem>
             <pElem>D:/msys64/mingw64/include/log4cxx/nt</pElem>
-            <pElem>src/test/cpp</pElem>
             <pElem>build/Debug/src/test/cpp/cppbdd101/gl</pElem>
           </incDir>
         </ccTool>
@@ -440,7 +485,6 @@ Contributor(s):
             <pElem>D:/msys64/mingw64/include/log4cxx/xml</pElem>
             <pElem>D:/msys64/mingw64/include/log4cxx/net</pElem>
             <pElem>D:/msys64/mingw64/include/log4cxx/nt</pElem>
-            <pElem>src/test/cpp</pElem>
             <pElem>build/Debug/src/test/cpp/cppbdd101/gl</pElem>
           </incDir>
         </ccTool>
@@ -465,16 +509,13 @@ Contributor(s):
             <pElem>D:/msys64/mingw64/include/log4cxx/xml</pElem>
             <pElem>D:/msys64/mingw64/include/log4cxx/net</pElem>
             <pElem>D:/msys64/mingw64/include/log4cxx/nt</pElem>
-            <pElem>src/test/cpp</pElem>
             <pElem>build/Debug/src/test/cpp/cppbdd101/gl</pElem>
           </incDir>
         </ccTool>
       </item>
       <item path="src/test/cpp/cppbdd101Test.cpp" ex="false" tool="1" flavor2="11">
-        <ccTool flags="3">
+        <ccTool flags="5">
           <incDir>
-            <pElem>src/main/cpp</pElem>
-            <pElem>src/test/cpp</pElem>
             <pElem>build/Debug/src/test/cpp</pElem>
           </incDir>
           <preprocessorList>
@@ -483,6 +524,8 @@ Contributor(s):
             <Elem>PROJECT_VERSION_MICRO=</Elem>
             <Elem>PROJECT_VERSION_MINOR=</Elem>
             <Elem>PROJECT_VERSION_PATCH=</Elem>
+            <Elem>_DEBUG</Elem>
+            <Elem>_FORTIFY_SOURCE=2</Elem>
           </preprocessorList>
         </ccTool>
       </item>
@@ -518,6 +561,8 @@ Contributor(s):
       </makefileType>
       <item path="src/it/CMakeLists.txt" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="src/it/cppbdd101/animal.feature" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/it/cppbdd101/features/step_definitions/ApplicationSteps.cpp"
             ex="false"
             tool="1"
@@ -527,6 +572,13 @@ Contributor(s):
             ex="false"
             tool="3"
             flavor2="0">
+      </item>
+      <item path="src/it/cppbdd101/features/step_definitions/cucumber.wire"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/it/cppbdd101/turtle.feature" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/main/cpp/CMakeLists.txt" ex="false" tool="3" flavor2="0">
       </item>

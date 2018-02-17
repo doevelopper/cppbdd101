@@ -4,10 +4,6 @@ GenericError::GenericError()
 {
 }
 
-GenericError::GenericError(const GenericError& orig)
-{
-}
-
 GenericError::~GenericError()
 {
 }

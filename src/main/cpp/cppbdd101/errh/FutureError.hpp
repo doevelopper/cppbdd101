@@ -11,5 +11,5 @@ private:
 
 };
 
-#endif /* FUTUREERROR_HPP */
+#endif
 

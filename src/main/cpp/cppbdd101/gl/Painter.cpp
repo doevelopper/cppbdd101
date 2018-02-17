@@ -1,7 +1,7 @@
 #include <cppbdd101/gl/Painter.hpp>
 
 Painter::Painter()
-: logger(log4cxx::Logger::getLogger(std::string("template.gl.Painter")))
+: logger(log4cxx::Logger::getLogger(std::string("cppbdd101.gl.Painter")))
 {
     LOG4CXX_TRACE(logger , __LOG4CXX_FUNC__);
 }

@@ -25,9 +25,16 @@ endif(MINGW)
 add_executable(${PROJECT_NAME}.bin-It-Test ${SOURCE_FILES} )
 
 target_link_libraries(${PROJECT_NAME}.bin-It-Test 
+    cucumber-cpp
     ${THIRD_PARTY_LIB} 
     ${TEST_THIRD_PARTY_LIB}
-    cucumber-cpp
 #    ${Boost_LIBRARIES}
     ${DEP_LIBRARIES}
+)
+
+add_custom_target(
+    ${PROJECT_NAME}.bin-integration-test
+#   DEPENDS ${PROJECT_NAME}.bin-It-Test
+#   COMMAND ${PROJECT_NAME}.bin-It-Test --port=3902 >/dev/null & cucumber _2.0.0_ ${CMAKE_CURRENT_SOURCE_DIR}/features 
+    COMMENT "Running ${PROJECT_NAME}.bin integration test"
 )
