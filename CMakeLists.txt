@@ -8,7 +8,11 @@ set(${PROJECT_NAME}_MAJOR_VERSION       "${MAJOR}")
 set(${PROJECT_NAME}_MINOR_VERSION       "${MINOR}")
 set(${PROJECT_NAME}_MICRO_VERSION       "${MICRO}")
 set(${PROJECT_NAME}_PATCH_VERSION       "${PATCH}")
+set(${PROJECT_NAME}_PATCH_LEVEL         "${PATCH}")
 set(${PROJECT_NAME}_REVISION_VERSION    "${REV}")
+set( ${PROJECT_NAME}_VERSION
+    "${${PROJECT_NAME}_MAJOR_VERSION}.${${PROJECT_NAME}_MINOR_VERSION}.${${PROJECT_NAME}_PATCH_LEVEL}" )
+      # these variables are used to set the correct numbering of
 #set(VSTR MAJOR MINOR MICRO PATCH TWEAK PREFIX)
 
 add_definitions(-DPROJECT_VERSION_MAJOR=${MAJOR})
@@ -30,7 +34,7 @@ set(TEST_THIRD_PARTY_LIB gmock gtest benchmark)
 set(INTEG_TEST_THIRD_PARTY_LIB )
 
 list(APPEND CMAKE_MODULE_PATH
-    "${CMAKE_SOURCE_DIR}/src/main/resources/modules"
+    "${CMAKE_SOURCE_DIR}/src/main/resources/cmakeModule"
     "${CMAKE_SOURCE_DIR}/src/main/resources/toolChains"
     "${CMAKE_SOURCE_DIR}/src/main/resources/macros"
     "${CMAKE_SOURCE_DIR}/src/main/resources/config"
@@ -46,7 +50,11 @@ include(goals)
 include(CompilerOption)
 include(CodingStyle)
 include(Rules)
-
+find_package(Cucumber-cpp)
+find_package(GoogleTest)
+#find_package(Boost REQUIRED)
+#add_library(boost INTERFACE IMPORTED)
+#set_property(TARGET boost PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR})
 include_directories(src/main/cpp src/test/cpp)
 add_subdirectory (src/main/cpp)
 add_subdirectory (src/test/cpp)

@@ -75,6 +75,14 @@ Contributor(s):
             <in>CMakeLists.txt</in>
             <in>cppbdd101.cpp</in>
           </df>
+          <df name="resources">
+            <df name="cmakeModule">
+              <in>FindCppBenchmark.cmake</in>
+              <in>FindCucumber-cpp.cmake</in>
+              <in>FindGoogleBenchmark.cmake</in>
+              <in>FindGoogleTest.cmake</in>
+            </df>
+          </df>
         </df>
         <df name="test">
           <df name="cpp">
@@ -317,6 +325,26 @@ Contributor(s):
             flavor2="11">
         <ccTool flags="1">
         </ccTool>
+      </item>
+      <item path="src/main/resources/cmakeModule/FindCppBenchmark.cmake"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/main/resources/cmakeModule/FindCucumber-cpp.cmake"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/main/resources/cmakeModule/FindGoogleBenchmark.cmake"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/main/resources/cmakeModule/FindGoogleTest.cmake"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="src/test/cpp/Test.cpp" ex="false" tool="1" flavor2="11">
         <ccTool flags="5">
@@ -590,6 +618,26 @@ Contributor(s):
             flavor2="0">
       </item>
       <item path="src/main/cpp/cppbdd101/Application.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/main/resources/cmakeModule/FindCppBenchmark.cmake"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/main/resources/cmakeModule/FindCucumber-cpp.cmake"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/main/resources/cmakeModule/FindGoogleBenchmark.cmake"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/main/resources/cmakeModule/FindGoogleTest.cmake"
             ex="false"
             tool="3"
             flavor2="0">

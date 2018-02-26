@@ -6,7 +6,7 @@ set(SOURCE_FILES
 
 add_library(${PROJECT_NAME}Test ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME}Test  ${PROJECT_NAME} gl ${TEST_THIRD_PARTY_LIB})
-
+#target_link_libraries(${PROJECT_NAME}Test  ${PROJECT_NAME} GTest::Gtest Gmock::Gmock)
 set_target_properties(${PROJECT_NAME}Test PROPERTIES
     VERSION ${APP_VERSION_STR}
     SOVERSION ${PROJECT_VERSION_MAJOR}
