@@ -1,0 +1,24 @@
+
+# Cache Variables:
+#  CPPCHECK_EXECUTABLE
+#
+# Non-cache variables you might use in your CMakeLists.txt:
+#  CPPCHECK_FOUND
+#  CPPCHECK_VERSION
+#  CPPCHECK_POSSIBLEERROR_ARG
+#  CPPCHECK_UNUSEDFUNC_ARG
+#  CPPCHECK_STYLE_ARG
+#  CPPCHECK_QUIET_ARG
+#  CPPCHECK_INCLUDEPATH_ARG
+#  CPPCHECK_FAIL_REGULAR_EXPRESSION
+#  CPPCHECK_WARN_REGULAR_EXPRESSION
+#  CPPCHECK_MARK_AS_ADVANCED - whether to mark our vars as advanced even
+#    if we don't find this program.
+#
+
+
+find_program(CPPCHECK_EXECUTABLE
+    NAMES cppcheck cli
+    PATHS "${CPPCHECK_ROOT_DIR}"
+    PATH_SUFFIXES cli
+    NO_DEFAULT_PATH)

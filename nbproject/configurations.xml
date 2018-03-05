@@ -78,9 +78,18 @@ Contributor(s):
           <df name="resources">
             <df name="cmakeModule">
               <in>FindCppBenchmark.cmake</in>
+              <in>FindCppCheck.cmake</in>
               <in>FindCucumber-cpp.cmake</in>
               <in>FindGoogleBenchmark.cmake</in>
               <in>FindGoogleTest.cmake</in>
+              <in>FindValgrind.cmake</in>
+            </df>
+            <df name="guides">
+              <in>CODE_OF_CONDUCT.md</in>
+              <in>Ten Commandments</in>
+              <in>contributing.md</in>
+              <in>contribution-guidelines.md</in>
+              <in>gitFlow.md</in>
             </df>
           </df>
         </df>
@@ -331,6 +340,11 @@ Contributor(s):
             tool="3"
             flavor2="0">
       </item>
+      <item path="src/main/resources/cmakeModule/FindCppCheck.cmake"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="src/main/resources/cmakeModule/FindCucumber-cpp.cmake"
             ex="false"
             tool="3"
@@ -342,6 +356,36 @@ Contributor(s):
             flavor2="0">
       </item>
       <item path="src/main/resources/cmakeModule/FindGoogleTest.cmake"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/main/resources/cmakeModule/FindValgrind.cmake"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/main/resources/guides/CODE_OF_CONDUCT.md"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/main/resources/guides/Ten Commandments"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/main/resources/guides/contributing.md"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/main/resources/guides/contribution-guidelines.md"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/main/resources/guides/gitFlow.md"
             ex="false"
             tool="3"
             flavor2="0">
@@ -627,6 +671,11 @@ Contributor(s):
             tool="3"
             flavor2="0">
       </item>
+      <item path="src/main/resources/cmakeModule/FindCppCheck.cmake"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="src/main/resources/cmakeModule/FindCucumber-cpp.cmake"
             ex="false"
             tool="3"
@@ -638,6 +687,36 @@ Contributor(s):
             flavor2="0">
       </item>
       <item path="src/main/resources/cmakeModule/FindGoogleTest.cmake"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/main/resources/cmakeModule/FindValgrind.cmake"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/main/resources/guides/CODE_OF_CONDUCT.md"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/main/resources/guides/Ten Commandments"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/main/resources/guides/contributing.md"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/main/resources/guides/contribution-guidelines.md"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/main/resources/guides/gitFlow.md"
             ex="false"
             tool="3"
             flavor2="0">
