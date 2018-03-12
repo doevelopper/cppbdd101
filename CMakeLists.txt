@@ -15,31 +15,20 @@ set( ${PROJECT_NAME}_VERSION
       # these variables are used to set the correct numbering of
 #set(VSTR MAJOR MINOR MICRO PATCH TWEAK PREFIX)
 
-add_definitions(-DPROJECT_VERSION_MAJOR=${MAJOR})
-add_definitions(-DPROJECT_VERSION_MINOR=${MINOR})
-add_definitions(-DPROJECT_VERSION_MICRO=${MICRO})
-add_definitions(-DPROJECT_VERSION_PATCH=${PATCH})
-add_definitions(-DAPP_VERSION_STR="${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT__VERSION_MICRO}")
-
-
 option(ENABLE_QA_CHECK              "Software quality. Conformance to one or more standards"    OFF)
 option(ENABLE_COVERAGE              "Build the project with coverage support"                   OFF)
 option(ENABLE_CPPLINT               "Ensure that code conforms to Google's coding style guides" OFF)
 option(ENABLE_FORMATING_STYLE       "Code Beautifier"                                           OFF)
 option(ENABLE_CYCLOMATIC_COMPLEXITY "Cyclomatic Complexity Analyzer"                            OFF)
 option(ENABLE_CPPCHECK              "Static code analysis tool "                                OFF)
-
-set(THIRD_PARTY_LIB ${CMAKE_THREAD_LIBS_INIT} apr-1 expat aprutil-1 log4cxx )
-set(TEST_THIRD_PARTY_LIB gmock gtest benchmark)
-set(INTEG_TEST_THIRD_PARTY_LIB )
+option(BUILD_SHARED_LIBS            "If enabled, shared libs will be built by default, otherwise static libs" OFF)
 
 list(APPEND CMAKE_MODULE_PATH
     "${CMAKE_SOURCE_DIR}/src/main/resources/cmakeModule"
     "${CMAKE_SOURCE_DIR}/src/main/resources/toolChains"
     "${CMAKE_SOURCE_DIR}/src/main/resources/macros"
     "${CMAKE_SOURCE_DIR}/src/main/resources/config"
-    "${CMAKE_SOURCE_DIR}/src/test/resources/modules"
-
+    "${CMAKE_SOURCE_DIR}/src/test/resources/cmakeTestModule"
 )
 
 set (NS "cpp101")
@@ -50,8 +39,12 @@ include(goals)
 include(CompilerOption)
 include(CodingStyle)
 include(Rules)
-find_package(Cucumber-cpp)
+
+find_package(Log4cxx)
 find_package(GoogleTest)
+find_package(Cucumber-cpp)
+find_package(GoogleBenchmark)
+
 #find_package(Boost REQUIRED)
 #add_library(boost INTERFACE IMPORTED)
 #set_property(TARGET boost PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR})

@@ -1,0 +1,38 @@
+This file contains the PGP and GPG keys of LEVITICS
+developers. Please don't use them for email unless you have
+to. Their main purpose is code signing.
+
+Users: pgp < KEYS
+       gpg --import KEYS
+
+LEVITICS Developers:
+        pgp -kxa <your name> and append it to this file.
+        (pgpk -ll <your name> && pgpk -xa <your name>) >> this file.
+        (gpg --list-sigs <your name> \
+             && gpg --armor --export <your name>) >> this file.
+
+************************************************************************************************************
+pub   		1024D/41A0D191 2017-02-06
+uid         Adrian H L (Ahl) <happyman@hotmail.com>
+sig 3       41A0D191 2010-02-06  Adrian H L  (Ahl) <happyman@hotmail.com>
+sub   		4096g/3DE4A683 2017-02-06
+sig         41A0D191 2010-02-06  Adrian H L  (Alh) <happyman@hotmail.com>
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: GnuPG v1.4.10 (Darwin)
+
+mQGiBEttEj0RBADOxaE/U7QcW7mH8EwJ3r5OgpJtabY+
+-----END PGP PUBLIC KEY BLOCK-----
+
+pub   2048R/964A6511 2017-08-17
+uid                  Lone Wolf <nathan.maves@gmail.com>
+sig 3        964A6511 2017-08-17  Lone Wolf <happyman@hotmail.com>
+sub   2048R/593F31A5 2017-08-17
+sig          964A6511 2017-08-17  Lone Wolf <happyman@hotmail.com>
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: GnuPG/MacGPG2 v2.0.12 (Darwin)
+
+mQENBEqJfxABCADc2+LqOD8VkirFvZ0G6bHasqdaTuWtNgwxFnRAu1Nk+w0J92W4
+=2smu
+-----END PGP PUBLIC KEY BLOCK-----

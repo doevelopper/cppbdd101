@@ -1,0 +1,45 @@
+node {
+ 
+    withEnv(["PATH+MAVEN=${tool 'Maven3'}bin"]) {
+ 
+        stage('Checkout') {
+            def branch = env.gitlabBranch
+            env.branch = branch
+            git url: 'http://172.16.42.157/minkowp/start.git', credentialsId: '5693747c-2f45-4557-ada2-a1da9bbfe0af', branch: branch
+        }
+ 
+        stage('Test') {
+            def pom = readMavenPom file: 'pom.xml'
+            print "Build: " + pom.version
+            env.POM_VERSION = pom.version
+            sh 'mvn clean test -Dmaven.test.failure.ignore=true'
+            junit '**/target/surefire-reports/TEST-*.xml'
+            currentBuild.description = "v${pom.version} (${env.branch})"
+        }
+ 
+        stage('QA') {
+            withSonarQubeEnv('sonar') {
+                sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
+            }
+        }
+ 
+        stage('Build') {
+            def server = Artifactory.server "server1"
+            def buildInfo = Artifactory.newBuildInfo()
+            def rtMaven = Artifactory.newMavenBuild()
+            rtMaven.tool = 'Maven3'
+            rtMaven.deployer releaseRepo:'libs-release-local', snapshotRepo:'libs-snapshot-local', server: server
+            rtMaven.resolver releaseRepo:'remote-repos', snapshotRepo:'remote-repos', server: server
+            rtMaven.run pom: 'pom.xml', goals: 'clean install -Dmaven.test.skip=true', buildInfo: buildInfo
+            publishBuildInfo server: server, buildInfo: buildInfo
+        }
+ 
+        stage('Deploy') {
+            dir('ansible') {
+                ansiblePlaybook playbook: 'preprod.yml'
+            }
+            mail from: 'ci@example.com', to: 'piotr.minkowski@play.pl', subject: "Nowa wersja start: '${env.POM_VERSION}'", body: "Wdrożono nowa wersję start '${env.POM_VERSION}' na środowisku preprodukcyjnym."
+        }
+ 
+    }
+}

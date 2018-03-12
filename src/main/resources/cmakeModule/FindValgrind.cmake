@@ -102,3 +102,28 @@ find_package_handle_standard_args(Valgrind
                                   REQUIRED_VARS VALGRIND_EXECUTABLE
                                   VERSION_VAR VALGRIND_VERSION_STRING)
 
+function (declare_tool_group tool)
+    add_custom_target(${tool})
+    add_dependencies(tooling  ${tool})
+endfunction ()
+
+function (declare_tool_test tool test)
+    add_custom_target(${tool}-${test})
+    add_dependencies(${tool} ${tool}-${test})
+endfunction ()
+
+
+if (VALGRIND_EXECUTABLE)
+    set(valgrind_arguments)
+    list(APPEND valgrind_arguments "--gen-suppressions=all")
+    list(APPEND valgrind_arguments "--verbose")
+    declare_tool_group(valgrind)
+    declare_tool_group(cachegrind)
+    declare_tool_group(callgrind)
+    declare_tool_group(helgrind)
+    declare_tool_group(drd)
+    declare_tool_group(massif)
+    declare_tool_group(dhat)
+    declare_tool_group(sgcheck)
+    declare_tool_group(bbv)
+endif (VALGRIND_EXECUTABLE)

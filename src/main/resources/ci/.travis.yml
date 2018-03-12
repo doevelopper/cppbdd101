@@ -1,0 +1,211 @@
+language: cpp
+sudo: required
+dist: trusty
+group: wtf
+
+# Travis CI VM OSs -> 2 OSs
+os:
+    - linux
+    - osx
+
+# Travis CI build matrix components -> 2 compilers
+compiler:
+    - gcc
+    - clang
+
+# Travis CI environmental variables -> 2 env variables
+env:
+    global:
+    - TRAVIS_BUILD_TYPE=Debug
+    - TRAVIS_BUILD_TYPE=Release
+  # Coverity
+    - secure: "...."
+    - COVERITY_SCAN_BUILD_COMMAND="make -j2"
+    - COVERITY_SCAN_PROJECT_NAME="doevelopper/cppbdd101"
+    - COVERITY_SCAN_NOTIFICATION_EMAIL="happyman@hotmail.fr"
+    - COVERITY_SCAN_BRANCH_PATTERN="master"
+    - COVERITY_SCAN_BUILD_URL="https://scan.coverity.com/scripts/travisci_build_coverity_scan.sh"
+    - COVERITY_SCAN_BUILD="curl -s $COVERITY_SCAN_BUILD_URL | bash"
+
+git:
+    depth: 500
+
+stages:
+  - "build only"
+  - test
+
+branches:
+    only:
+        - master
+        - coverity_scan
+    except:
+        - gh-page
+
+addons:
+    coverity_scan:
+        project:
+            name: "doevelopper/cppbdd101"
+            description: "Build submitted via Travis CI"
+        notification_email: {NOTIFICATION_EMAIL}
+        build_command_prepend: "(rm -rf $TRAVIS_BUILD_DIR/build ; mkdir $TRAVIS_BUILD_DIR/build ; cd $TRAVIS_BUILD_DIR/build ; cmake -DCMAKE_BUILD_TYPE=Release $TRAVIS_BUILD_DIR)"
+        build_command:   "make -C $TRAVIS_BUILD_DIR/build"
+        branch_pattern: coverity_scan
+    artifacts:
+        paths:
+            - "cppbdd.zip"
+        key:
+            secure: ....
+        secret:
+            secure: ....
+        bucket: cppbdd101-travis
+        region: us-east-1
+        endpoint: artifactory.local
+    apt:
+        packages:
+            - gcc
+            - clang-3.8
+            - automake autoconf libtool libssl-dev graphviz mscgen
+            - libconfig-dev
+            - codespell
+            - libpcap-dev
+            - libnuma-dev
+#        coverity_scan:
+#                project:
+#                        name: "$TRAVIS_REPO_SLUG"
+#                        notification_email: xxxx
+#                        build_command_prepend: "./bootstrap && ./configure --enable-test-cpp --enable-test-vald --enable-test-helper --enable-test-perf --enable-user-guides --enable-test-perf-proc --enable-test-example"
+#                        build_command:   "make"
+#                        branch_pattern: coverity_scan
+
+deploy:
+    provider: releases
+    api_key:
+        secure: ....
+    file: "Firmware.zip"
+    skip_cleanup: true
+    on:
+        tags: true
+        condition: $CAN_DEPLOY = True && $TRAVIS_OS_NAME = Linux
+        all_branches: true
+        repo: PX4/Firmware
+
+
+cache:
+    ccache: true
+    pip: true
+    directories:
+        - $HOME/.m2
+        - $HOME/cunit-install
+        - $HOME/doxygen-install
+env:
+    global:
+        #
+        # By default Linaro CODECOV_TOKEN token is used. It's ok to use it to see
+        # for individual commit validation. But you you want to track tests history
+        # you need generated new one at https://codecov.io specific for your repo.
+        - CODECOV_TOKEN=a733c34c-5f5c-4ff1-af4b-e9f5edb1ab5e
+        - DPDK_VERS="17.08"
+        - MAVEN_OPTS="-Xmx512m"
+        - JAVA_OPTS="-Xmx512m"
+    matrix:
+        - CONF=""
+        - CONF="--disable-abi-compat"
+        - CONF="--enable-deprecated"
+        - CONF="--enable-dpdk-zero-copy"
+        - CONF="--disable-static-applications"
+        - CONF="--disable-host-optimization"
+        - CONF="--disable-host-optimization --disable-abi-compat"
+        - DPDK_SHARED="y" CONF="--disable-static-applications"
+        - DPDK_VERS="17.11" CONF=""
+        - DPDK_VERS="17.11" DPDK_SHARED="y" CONF="--disable-static-applications"
+
+before_script:
+    - uname -a
+    # to stop the script after an error/warning
+    - set -e
+    - |-
+        case "${BUILD_TYPE}" in
+            "coverage")
+                cmake -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} -DBUILD_COVERAGE=ON ..
+            ;;
+            "asan")
+                cmake -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} -DENABLE_SANITIZER=address ..
+            ;;
+            "ubsan")
+                cmake -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} -DENABLE_SANITIZER=undefined ..
+            ;;
+            "cross")
+                cmake -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} -DCMAKE_TOOLCHAIN_FILE=../cmake/Toolchain-mingw64.cmake -DCMAKE_EXE_LINKER_FLAGS="-static -s" ..
+            ;;
+            "release")
+                cmake -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} ..
+            ;;
+            *)
+                # Run CMake
+                - mkdir build
+                - cd build
+                - cmake -DBUILD_TESTING:BOOL=ON -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} ..
+            ;;
+        esac
+
+before_install:
+    #- echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+    # Update package managers
+    - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get -qq update;  fi
+    #- if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get -qq update;  sudo apt-get install -qq --force-yes libgd2-xpm   fi
+    #- if [ `uname -m` = x86_64 ]; then sudo dpkg --add-architecture i386; sudo apt-get update -qq; sudo apt-get install -qq --force-yes libgd2-xpm ia32-libs ia32-libs-multiarch; fi
+    - if [ "$TRAVIS_OS_NAME" == "osx"   ]; then brew update;              fi
+
+    # Use ccache also for clang and clang++ on linux
+    - if [ "$TRAVIS_OS_NAME" == "linux" ]; then if [ "$CC" == "clang" ];    then sudo ln -s ../../bin/ccache /usr/lib/ccache/clang;   fi; fi
+    - if [ "$TRAVIS_OS_NAME" == "linux" ]; then if [ "$CC" == "clang" ];    then export CFLAGS="-Qunused-arguments";                  fi; fi
+    - if [ "$TRAVIS_OS_NAME" == "linux" ]; then if [ "$CXX" == "clang++" ]; then sudo ln -s ../../bin/ccache /usr/lib/ccache/clang++; fi; fi
+    - if [ "$TRAVIS_OS_NAME" == "linux" ]; then if [ "$CXX" == "clang++" ]; then export CXXFLAGS="-Qunused-arguments";                fi; fi
+
+    # Install ccache on osx
+    - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install ccache;                               fi
+    - if [ "$TRAVIS_OS_NAME" == "osx" ]; then export PATH="/usr/local/opt/ccache/libexec:$PATH"; fi
+
+    # Print some more system information after installing all build tools
+    - echo "-------------------- BEGIN SYSTEM INFORMATION --------------------"
+    - uname -a
+    - if [ "$TRAVIS_OS_NAME" == "linux" ]; then lsb_release -a;                     fi
+    - if [ "$TRAVIS_OS_NAME" == "osx" ];   then system_profiler SPSoftwareDataType; fi
+    - env
+    - which cmake
+    - cmake --version
+    - which $CC
+    - $CC --version
+    - which $CXX
+    - $CXX --version
+    - which ccache
+    - ccache --version
+    - ccache -s
+    - echo "--------------------  END SYSTEM INFORMATION  --------------------"
+
+script:
+    - make VERBOSE=1
+    #- make test
+    - ctest --verbose
+
+    - wget https://dl.bintray.com/jfrog/jfrog-cli-go/1.14.0/jfrog-cli-linux-amd64/jfrog
+    - chmod +x jfrog
+    - mvn clean install
+    - ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_PASSWORD
+    - ./jfrog rt u "multi*/*.jar" travisci-generic-local --build-name=travisci-generic-artifactory --build-number=$TRAVIS_BUILD_NUMBER --flat=false
+    - ./jfrog rt u "multi*/*.war" travisci-generic-local --build-name=travisci-generic-artifactory --build-number=$TRAVIS_BUILD_NUMBER --flat=false
+    - ./jfrog rt bce travisci-generic-artifactory $TRAVIS_BUILD_NUMBER
+    - ./jfrog rt bp travisci-generic-artifactory $TRAVIS_BUILD_NUMBER
+
+after_failure:
+  - cat config.log
+  - find . -name "*.trs" | xargs grep -l '^.test-result. FAIL' | while read trs ; do echo FAILURE detected at $trs; cat ${trs%%.trs}.log ; done
+  
+notifications:
+    email:
+        recipients:
+            - happyman@hotmail.fr
+            - rolland.doe@gmail.com
+        on_success: always  # options: [always|never|change] default: always
+        on_failure: always  # options: [always|never|change] default: always
+        on_start: false     # default: false

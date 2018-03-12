@@ -218,11 +218,10 @@ find_path(GMOCK_INCLUDE_DIR gmock/gmock.h
     HINTS
     $ENV{GMOCK_ROOT}/include
     ${GMOCK_ROOT}/include
-    /usr/local/include/cucumber-cpp
-    /usr/include/cucumber-cpp
-    /msys64/mingw64/include/cucumber-cpp
-    /mingw64/include/cucumber-cpp
-    /include/cucumber-cpp
+    /usr/local/include/gmock
+    /mingw64/include/gmock
+    /usr/include/gmock
+    /msys64/mingw64/include/gmock
 )
 
 mark_as_advanced(GMOCK_INCLUDE_DIR)
@@ -231,11 +230,10 @@ find_path(GTEST_INCLUDE_DIR gtest/gtest.h
     HINTS
     $ENV{GTEST_ROOT}/include
     ${GTEST_ROOT}/include
-    /usr/local/include/cucumber-cpp
-    /usr/include/cucumber-cpp
-    /msys64/mingw64/include/cucumber-cpp
-    /mingw64/include/cucumber-cpp
-    /include/cucumber-cpp
+    /usr/local/include/gtest
+    /usr/include/gtest
+    /msys64/mingw64/include/gtest
+    /mingw64/include/gtest
 )
 
 mark_as_advanced(GTEST_INCLUDE_DIR)
@@ -283,6 +281,13 @@ endif()
 include(FindPackageHandleStandardArgs)
 FIND_PACKAGE_HANDLE_STANDARD_ARGS(GMock DEFAULT_MSG GMOCK_LIBRARY GMOCK_INCLUDE_DIR GMOCK_MAIN_LIBRARY)
 FIND_PACKAGE_HANDLE_STANDARD_ARGS(GTest DEFAULT_MSG GTEST_LIBRARY GTEST_INCLUDE_DIR GTEST_MAIN_LIBRARY)
+
+#message( STATUS "GMOCK_LIBRARY ${GMOCK_LIBRARY}")
+#message( STATUS "GTEST_LIBRARY ${GTEST_LIBRARY}")
+#message( STATUS "GMOCK_MAIN_LIBRARY ${GMOCK_MAIN_LIBRARY}")
+#message( STATUS "GTEST_MAIN_LIBRARY ${GTEST_MAIN_LIBRARY}")
+#message( STATUS "GMOCK_INCLUDE_DIR ${GMOCK_INCLUDE_DIR}")
+#message( STATUS "GTEST_INCLUDE_DIR ${GTEST_INCLUDE_DIR}")
 
 if(GMOCK_FOUND AND GTEST_FOUND)
     #message( STATUS "GTEST_FOUND and GMOCK_FOUND")
