@@ -61,6 +61,7 @@ Contributor(s):
           <df name="cpp">
             <df name="cppbdd101">
               <df name="errh">
+                <in>CMakeLists.txt</in>
                 <in>FutureError.cpp</in>
                 <in>GenericError.cpp</in>
                 <in>IOError.cpp</in>
@@ -285,6 +286,11 @@ Contributor(s):
             <pElem>src/test/cpp</pElem>
           </incDir>
         </ccTool>
+      </item>
+      <item path="src/main/cpp/cppbdd101/errh/CMakeLists.txt"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="src/main/cpp/cppbdd101/errh/FutureError.cpp"
             ex="false"
@@ -708,6 +714,11 @@ Contributor(s):
             flavor2="0">
       </item>
       <item path="src/main/cpp/cppbdd101/Application.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/main/cpp/cppbdd101/errh/CMakeLists.txt"
             ex="false"
             tool="3"
             flavor2="0">

@@ -28,7 +28,7 @@ env:
     - COVERITY_SCAN_BUILD="curl -s $COVERITY_SCAN_BUILD_URL | bash"
 
 git:
-    depth: 500
+    depth: 3
 
 stages:
   - "build only"
@@ -61,14 +61,19 @@ addons:
         region: us-east-1
         endpoint: artifactory.local
     apt:
+        sources:
+            - ubuntu-toolchain-r-test
         packages:
             - gcc
             - clang-3.8
-            - automake autoconf libtool libssl-dev graphviz mscgen
+            - automake cmake autoconf libtool libssl-dev graphviz mscgen
             - libconfig-dev
-            - codespell
             - libpcap-dev
-            - libnuma-dev
+            - binutils
+            - cabextract
+            - libcurl4-openssl-dev
+            - libelf-dev
+            - libdw-dev
 #        coverity_scan:
 #                project:
 #                        name: "$TRAVIS_REPO_SLUG"

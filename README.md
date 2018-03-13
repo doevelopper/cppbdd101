@@ -1,4 +1,13 @@
-# Cpp BDD 101#
+```
+ CCCCC  PPPPPP  PPPPPP     BBBBB   DDDDD   DDDDD       1   00000   1  
+CC    C PP   PP PP   PP    BB   B  DD  DD  DD  DD     111 00   00 111 
+CC      PPPPPP  PPPPPP     BBBBBB  DD   DD DD   DD     11 00   00  11 
+CC    C PP      PP         BB   BB DD   DD DD   DD     11 00   00  11 
+ CCCCC  PP      PP         BBBBBB  DDDDDD  DDDDDD     111  00000  111
+........................................................................................
+....01000011 01010000 01010000  01000010 01000100 01000100  00110001 00110000 00110001 
+                                  --A.H.L
+```
 
 ![tbd](https://img.shields.io/badge/development%20status-active-green.svg)
 ![tbd](https://img.shields.io/badge/platforms-osx%20|%20win%20|%20linux-lightgrey.svg)
@@ -6,33 +15,36 @@
 [![tbd](https://img.shields.io/crates/l/rustc-serialize.svg?style=plastic)]()
 
 This is my first tutorial for the fundamental concepts of C++.
-This with respoect to modern best prqctices of software engineering.
+This with respoect to modern best practices of software engineering.
 
 Todo
 ----
 
-* [ ] CI script covering many cloud ci and local storage ci solutions
-* [ ] Provide custom script for runing static coverage analysis tools
-* [ ] Provide ability to generate specifications from code sources
-* [ ] more specific FAQ and Troubleshooting help
+* [ ] CI script covering many cloud ci and local storage ci solutions :feet:
+* [ ] Provide custom script for runing static coverage analysis tools :skull:
+* [ ] Provide ability to generate specifications from code sources  :fu:
+* [ ] Provide seamless integration with common IDE CLion/Eclipse-cdt/Netbeans... :ok_hand:
+* [ ] More specific FAQ and Troubleshooting help :zzz:
+* [ ] C++11/14/17 Features :cyclone:
+* [ ] Design patterns lectures  :alien:
+* [ ] Offuscated c++ snippets... :trollface:
 
 ## Build status
 Branch      | Linux/OSX | Windows | Coverage | Documentation | Test |
 ------------|-----------|---------|----------|---------------|--------|
- ✅ [master](https://github.com/doevelopper/levitics-arkhe-cfs/tree/master)   | [![Build Status](https://travis-ci.org/Levitics/levitics-arkhe-gcs.svg?branch=master "Build status of branch master")](https://travis-ci.org/Levitics/levitics-arkhe-gcs)  | [![Build status](https://ci.appveyor.com/api/projects/status/g0llpbvhpjuxjnlw/branch/master?svg=true)](https://ci.appveyor.com/project/vinniefalco/beast/branch/master)   | [![codecov](https://codecov.io/gh/boostorg/Beast/branch/master/graph/badge.svg)](https://codecov.io/gh/boostorg/beast/branch/master)   | [![Documentation](https://img.shields.io/badge/documentation-master-brightgreen.svg)](http://www.boost.org/doc/libs/master/libs/beast/doc/html/beast.html)  | [![Matrix](https://img.shields.io/badge/matrix-master-brightgreen.svg)](http://www.boost.org/development/tests/master/developer/beast.html)
- ✅ [develop](https://github.com/doevelopper/levitics-arkhe-cfs/tree/develop) | [![Build Status](https://travis-ci.org/Levitics/levitics-arkhe-gcs.svg?branch=develop "Build status of branch develop")](https://travis-ci.org/Levitics/levitics-arkhe-gcs) | [![Build status](https://ci.appveyor.com/api/projects/status/g0llpbvhpjuxjnlw/branch/develop?svg=true)](https://ci.appveyor.com/project/vinniefalco/beast/branch/develop) | [![codecov](https://codecov.io/gh/boostorg/Beast/branch/develop/graph/badge.svg)](https://codecov.io/gh/boostorg/beast/branch/develop) | [![Documentation](https://img.shields.io/badge/documentation-develop-brightgreen.svg)](http://www.boost.org/doc/libs/develop/libs/beast/) | [![Matrix](https://img.shields.io/badge/matrix-develop-brightgreen.svg)](http://www.boost.org/development/tests/develop/developer/beast.html)
- ✅ [releases](https://github.com/doevelopper/levitics-arkhe-cfs/tree/releases) | [![Build Status](https://travis-ci.org/Levitics/levitics-arkhe-gcs.svg?branch=releases "Build status of branch releases")](https://travis-ci.org/Levitics/levitics-arkhe-gcs) | [![Build status](https://ci.appveyor.com/api/projects/status/g0llpbvhpjuxjnlw/branch/develop?svg=true)](https://ci.appveyor.com/project/vinniefalco/beast/branch/releases) | [![codecov](https://codecov.io/gh/boostorg/Beast/branch/develop/graph/badge.svg)](https://codecov.io/gh/boostorg/beast/branch/releases) | [![Documentation](https://img.shields.io/badge/documentation-develop-brightgreen.svg)](http://www.boost.org/doc/libs/develop/libs/beast/) | [![Matrix](https://img.shields.io/badge/matrix-develop-brightgreen.svg)](http://www.boost.org/development/tests/develop/developer/beast.html)
+ ✅ [master](https://github.com/doevelopper/cppbdd101/tree/master)   | [![Build Status](https://travis-ci.org/Levitics/levitics-arkhe-gcs.svg?branch=master "Build status of branch master")](https://travis-ci.org/Levitics/levitics-arkhe-gcs)  | [![Build status](https://ci.appveyor.com/api/projects/status/g0llpbvhpjuxjnlw/branch/master?svg=true)](https://ci.appveyor.com/project/vinniefalco/beast/branch/master)   | [![codecov](https://codecov.io/gh/boostorg/Beast/branch/master/graph/badge.svg)](https://codecov.io/gh/boostorg/beast/branch/master)   | [![Documentation](https://img.shields.io/badge/documentation-master-brightgreen.svg)](http://www.boost.org/doc/libs/master/libs/beast/doc/html/beast.html)  | [![Matrix](https://img.shields.io/badge/matrix-master-brightgreen.svg)](http://www.boost.org/development/tests/master/developer/beast.html)
+ ✅ [develop](https://github.com/doevelopper/cppbdd101/tree/develop) | [![Build Status](https://travis-ci.org/Levitics/levitics-arkhe-gcs.svg?branch=develop "Build status of branch develop")](https://travis-ci.org/Levitics/levitics-arkhe-gcs) | [![Build status](https://ci.appveyor.com/api/projects/status/g0llpbvhpjuxjnlw/branch/develop?svg=true)](https://ci.appveyor.com/project/vinniefalco/beast/branch/develop) | [![codecov](https://codecov.io/gh/boostorg/Beast/branch/develop/graph/badge.svg)](https://codecov.io/gh/boostorg/beast/branch/develop) | [![Documentation](https://img.shields.io/badge/documentation-develop-brightgreen.svg)](http://www.boost.org/doc/libs/develop/libs/beast/) | [![Matrix](https://img.shields.io/badge/matrix-develop-brightgreen.svg)](http://www.boost.org/development/tests/develop/developer/beast.html)
+ ✅ [releases](https://github.com/doevelopper/cppbdd101/tree/releases) | [![Build Status](https://travis-ci.org/Levitics/levitics-arkhe-gcs.svg?branch=releases "Build status of branch releases")](https://travis-ci.org/Levitics/levitics-arkhe-gcs) | [![Build status](https://ci.appveyor.com/api/projects/status/g0llpbvhpjuxjnlw/branch/develop?svg=true)](https://ci.appveyor.com/project/vinniefalco/beast/branch/releases) | [![codecov](https://codecov.io/gh/boostorg/Beast/branch/develop/graph/badge.svg)](https://codecov.io/gh/boostorg/beast/branch/releases) | [![Documentation](https://img.shields.io/badge/documentation-develop-brightgreen.svg)](http://www.boost.org/doc/libs/develop/libs/beast/) | [![Matrix](https://img.shields.io/badge/matrix-develop-brightgreen.svg)](http://www.boost.org/development/tests/develop/developer/beast.html)
 
 ## Binaries Distribution management
 | Distribution  Chanel         | Description                                                                                                                                                                                   |
 |------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [__Nightly__](#www.tbd.acme) | Builds created out of the central repository every night, packaged up every night for bleeding-edge testers to install and test.These are not qualified by QA.                                                                                                      |
-| [__Aurora__](#www.tbd.acme)  | Builds created out of the aurora repository, which is synced from central repository every weeks.There is a small amount of QA at the start of the 1 week period before the updates are offered.as such its status is roughly "experimental".  |
-| [__Beta__](#www.tbd.acme)    | Builds created out of the master repository, qualified by QA as being of sufficient quality to release to beta users.                                                                         |
-| [__Release__](#www.tbd.acme) | Builds created out of the release repository, qualified by QA as being of sufficient quality to release to hundreds of millions of people.                                                    |
+| [__Nightly__](#www.tbd.acme) :bangbang: | Builds created out of the central repository every night, packaged up every night for bleeding-edge testers to install and test.These are not qualified by QA.                                                                                                      |
+| [__Aurora__](#www.tbd.acme) :heavy_exclamation_mark: | Builds created out of the aurora repository, which is synced from central repository every weeks.There is a small amount of QA at the start of the 1 week period before the updates are offered.as such its status is roughly "experimental".  |
+| [__Beta__](#www.tbd.acme)  :interrobang: | Builds created out of the master repository, qualified by QA as being of sufficient quality to release to beta users.                                                                         |
+| [__Release__](#www.tbd.acme) :heavy_check_mark: | Builds created out of the release repository, qualified by QA as being of sufficient quality to release to hundreds of millions of people.                                                    |
 
-## Libraries Dependencies  and Installation Ubuntu/Debian
-![Dependencies](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg)
+## Libraries Dependencies  and Installation Ubuntu/Debian ![Dependencies](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg)
 
 > * _Build tools_
 
@@ -97,9 +109,9 @@ Branch      | Linux/OSX | Windows | Coverage | Documentation | Test |
 >
 > [Converts cpplint output to JUnit format.](https://pypi.python.org/pypi/cpplint-junit) `[sudo] apt-get install/--upgrade  cpplint-junit`
 
-## Versioning
+## Versioning [![Semver v2.0.0](http://img.shields.io/SemVer/2.0.0.png)](http://semver.org/spec/v2.0.0.html)
 
-For transparency of our release cycle and in striving to maintain backward compatibility, **LACFSS** is maintained under the Semantic Versioning guidelines [![Semver v2.0.0](http://img.shields.io/SemVer/2.0.0.png)](http://semver.org/spec/v2.0.0.html). Sometimes we screw up, but we'll adhere to those rules whenever possible.
+For transparency of our release cycle and in striving to maintain backward compatibility, **CPPBDD** is maintained under the Semantic Versioning guidelines . Sometimes we screw up, but we'll adhere to those rules whenever possible.
 
 ## Code Review
 Here are some resources to learn more about
@@ -115,38 +127,36 @@ code reviews:
 
 ## Platfrom
 
-| Target Board     | Linux | Xenomai  | Linux RT | Nuttx | FreeRTOS | RTEMS | Picos18 |
-|:----------------:|:-----:|----------|----------|:-----:|:--------:|:-----:|---------|
-|   Qemu arm-x64   |  [ ]  |     [ ]  |     [ ]  |  [ ]  |     [ ]  |  [ ]  |    [ ]  |
-|   Fox Board G20  |  [ ]  |     [ ]  |     [ ]  |  [ ]  |     [ ]  |  [ ]  |    [ ]  |
-|  Fox Board LX832 |  [ ]  |     [ ]  |     [ ]  |  [ ]  |     [ ]  |  [ ]  |    [ ]  |
-|  Raspberry PI 2  |  [ ]  |     [ ]  |     [ ]  |  [ ]  |     [ ]  |  [ ]  |    [ ]  |
-|  RaspBerry PI 3  |  [ ]  |     [ ]  |     [ ]  |  [ ]  |     [ ]  |  [ ]  |    [ ]  |
-|      Pic32MZ     |  [ ]  |     [ ]  |     [ ]  |  [ ]  |     [ ]  |  [ ]  |    [ ]  |
-|  STM32 Discovery |  [ ]  |     [ ]  |     [ ]  |  [ ]  |     [ ]  |  [ ]  |    [ ]  |
-| ARM Cortex M4/M7 |  [ ]  |     [ ]  |     [ ]  |  [ ]  |     [ ]  |  [ ]  |    [ ]  |
-| Intel Edisson    |  [ ]  |     [ ]  |     [ ]  |  [ ]  |     [ ]  |  [ ]  |    [ ]  |
+| Target Board     | Linux/Ubuntu/Debian | Windows 7/10  |    OSx    |
+|:----------------:|:-------------------:|:-------------:|:---------:|
+|   Qemu arm-x64   |  [ ]                |     [ ]       |     [ ]   |
+|   Fox Board G20  |  [ ]                |     [ ]       |     [ ]   |
+|  RaspBerry PI 3  |  [ ]                |     [ ]       |     [ ]   |
+|     i386/X_64    |  [ ]                |     [ ]       |     [ ]   |
 
 ## Links
 
-* [Web site](http://www.tbd.acme/)
-* [Project forums](http://services.tbd.acme/)
-* [Wiki, docs and manuals](http://documentations.tbd.acme/)
-* [Bug and issue tracker](http://defects.tbd.acme/)
-* [Project build server](http://cicd.tbd.acme/)
-* [Repository browser](http://code.tbd.acmeg/)
-* [Read/write git repository](ssh://git@code.tbd.acme)
-* [Read-only official mirror](https://github.com/doevelopper/levitics-arkhe-cfs)
-* [Toolchain downloads](http://downloads.tbd.acme)
+The project provides feature-rich development and collaboration
+environment using advanced tools such as GCC compilers, git, Atlassian
+JIRA Software, Atlassian Confluence, Atlassian FishEye, Atlassian Crucible, Atlassian Bamboo, github mirror and forums.
 
-## Contributions
+* [Main project front-end](http://www.tbd.acme/) (redirect to wiki)
+* [Project forums](http://services.tbd.acme/)
+* [Wiki, docs and manuals](http://documentations.tbd.acme) (Atlassian Confluence)
+* [Bug and issue tracker](http://defects.tbd.acme/) (Atlassian JIRA Software)
+* [Project build server](http://cicd.tbd.acme/) (Atlassian Bamboo , Jenkins-CI)
+* [Repository browser](http://code.tbd.acmeg/)   (FishEye, Crucible)
+* [Read/write git repository](ssh://git@code.tbd.acme)  (bitbucket with keys)
+* [Read-only official mirror](https://github.com/doevelopper/cppbdd101) (GitHub)
+* [Toolchain downloads](http://downloads.tbd.acme)  (Env orchestration scripts)
+
+## Contributions ![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)
 
 Any contributions you make to this effort **are of course greatly appreciated**.
-![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)
 
 ### Copyright Notice and License
 
-All our own materials are released under a [Creative Commons](http://creativecommons.org/) licence.
+All our own materials are released under a [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/) licence.
 
 #### Choosing a licence
 
@@ -159,22 +169,17 @@ Creative Commons covers use of creative works such as written material, music or
 
 In most cases, software licences would be unnecessary in learning resources, but if you created a general-purpose software library to go with your resource, you should look at choosing an appropriate licence for the library.
 
-© 2011-2018 ACME SYSTEMS, Inc.All Rights Reserved.
+© 2011-2018 ACME SYSTEMS, Inc. All Rights Reserved.
 
 - Code and documentation copyright 2011-2017 ACME SYSTEMS, Inc. 
-- Code released under [Apache License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)(https://opensource.org/licenses/Apache-2.0). 
-- Docs released under [Creative Commons](https://github.com/twbs/bootstrap/blob/master/docs/LICENSE). 
-- [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](http://www.gnu.org/licenses/lgpl-3.0)  
-- [![Creative Commons License](http://i.creativecommons.org/l/by-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-sa/4.0/)
-- [![CC0](https://licensebuttons.net/p/zero/1.0/88x31.png)](https://creativecommons.org/publicdomain/zero/1.0/)
+- Code are released under [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+- Docs are released under [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+- CI/CD Scripts are under [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](http://www.gnu.org/licenses/lgpl-3.0)  
 
 ## Contact
 
-* [![Email](https://img.shields.io/badge/mailto-sabertazimi-brightgreen.svg?style=flat-square)](mailto:happyman@hotmail.fr)
-* [![GitHub](https://img.shields.io/badge/contact-github-000000.svg?style=flat-square)](https://github.com/doevelopper)
-
 ---
 
-> [tbd.acme](https://www.tbd.acme) &nbsp;&middot;&nbsp;
+> Portal [acme](https://www.tbd.acme) &nbsp;&middot;&nbsp;
 > GitHub [@doevelopper](https://github.com/doevelopper) &nbsp;&middot;&nbsp;
 > Twitter [@doevelopper](https://twitter.com/doevelopper)
