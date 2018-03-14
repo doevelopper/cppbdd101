@@ -1,6 +1,6 @@
 
-include_directories(${CMAKE_CURRENT_LIST_DIR})
-add_subdirectory(cppbdd101/errh)
+#include_directories(${CMAKE_CURRENT_LIST_DIR})
+#add_subdirectory(cppbdd101/errh)
 #add_subdirectory(cppbdd101/gl)
 
 #set(SOURCE_FILES

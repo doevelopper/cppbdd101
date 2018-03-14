@@ -45,11 +45,13 @@ find_package(GoogleTest)
 find_package(Cucumber-cpp)
 find_package(GoogleBenchmark)
 
+add_subdirectory (edac)
+
 #find_package(Boost REQUIRED)
 #add_library(boost INTERFACE IMPORTED)
 #set_property(TARGET boost PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR})
 #include_directories(src/main/cpp src/test/cpp)
-add_subdirectory (src/main/cpp)
+#add_subdirectory (src/main/cpp)
 #add_subdirectory (src/test/cpp)
 #add_subdirectory (src/it)
 

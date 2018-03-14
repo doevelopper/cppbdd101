@@ -24,6 +24,16 @@ Please ensure your pull request adheres to the following guidelines:
 * Discuss potential ways to improve project
 * Improve existing implementation, performance, etc.
 
+## Submitting a pull request
+
+1. [Fork][fork] and clone the repository
+2. Configure and install the dependencies: ` See Requirements sections`
+3. Make sure the tests pass on your machine: `make test`
+4. Create a new branch: `git checkout -b my-branch-name`
+5. Make your change, add tests, and make sure the tests still pass
+6. Push to your fork and [submit a pull request][pr]
+7. Pat your self on the back and wait for your pull request to be reviewed and merged.
+
 ## 🛎 Questions
 
 Feel free to open a ticket with your question.
@@ -74,6 +84,12 @@ To make release-it globally available so you can run it on your (test) project:
 ```sh
     cmake --build build --target integration-test
 ```
+
+## Resources
+
+- [How to Contribute to Open Source](https://opensource.guide/how-to-contribute/)
+- [Using Pull Requests](https://help.github.com/articles/about-pull-requests/)
+- [GitHub Help](https://help.github.com)
 
 Thank you for your suggestions!
 

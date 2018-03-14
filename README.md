@@ -20,14 +20,14 @@ This with respoect to modern best practices of software engineering.
 Todo
 ----
 
-* [ ] CI script covering many cloud ci and local storage ci solutions :feet:
-* [ ] Provide custom script for runing static coverage analysis tools :skull:
-* [ ] Provide ability to generate specifications from code sources  :fu:
-* [ ] Provide seamless integration with common IDE CLion/Eclipse-cdt/Netbeans... :ok_hand:
-* [ ] More specific FAQ and Troubleshooting help :zzz:
-* [ ] C++11/14/17 Features :cyclone:
-* [ ] Design patterns lectures  :alien:
-* [ ] Offuscated c++ snippets... :trollface:
+* [ ] :feet: CI script covering many cloud ci and local storage ci solutions
+* [ ] :skull: Provide custom script for runing static coverage analysis tools
+* [ ] :fu: Provide ability to generate specifications from code sources
+* [ ] :ok_hand: Provide seamless integration with common IDE CLion/Eclipse-cdt/Netbeans... 
+* [ ] :zzz: More specific FAQ and Troubleshooting help
+* [ ] :cyclone: C++11/14/17 Features
+* [ ] :alien: Design patterns lectures
+* [ ] :trollface: Offuscated c++ snippets...
 
 ## Build status
 Branch      | Linux/OSX | Windows | Coverage | Documentation | Test |
@@ -39,12 +39,12 @@ Branch      | Linux/OSX | Windows | Coverage | Documentation | Test |
 ## Binaries Distribution management
 | Distribution  Chanel         | Description                                                                                                                                                                                   |
 |------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [__Nightly__](#www.tbd.acme) :bangbang: | Builds created out of the central repository every night, packaged up every night for bleeding-edge testers to install and test.These are not qualified by QA.                                                                                                      |
-| [__Aurora__](#www.tbd.acme) :heavy_exclamation_mark: | Builds created out of the aurora repository, which is synced from central repository every weeks.There is a small amount of QA at the start of the 1 week period before the updates are offered.as such its status is roughly "experimental".  |
-| [__Beta__](#www.tbd.acme)  :interrobang: | Builds created out of the master repository, qualified by QA as being of sufficient quality to release to beta users.                                                                         |
-| [__Release__](#www.tbd.acme) :heavy_check_mark: | Builds created out of the release repository, qualified by QA as being of sufficient quality to release to hundreds of millions of people.                                                    |
+| :bangbang: [__Nightly__](#www.tbd.acme) | Builds created out of the central repository every night, packaged up every night for bleeding-edge testers to install and test.These are not qualified by QA.                                                                                                      |
+| :heavy_exclamation_mark: [__Aurora__](#www.tbd.acme) | Builds created out of the aurora repository, which is synced from central repository every weeks.There is a small amount of QA at the start of the 1 week period before the updates are offered.as such its status is roughly "experimental".  |
+| :interrobang: [__Beta__](#www.tbd.acme)  | Builds created out of the master repository, qualified by QA as being of sufficient quality to release to beta users.                                                                         |
+| :heavy_check_mark: [__Release__](#www.tbd.acme) | Builds created out of the release repository, qualified by QA as being of sufficient quality to release to hundreds of millions of people.                                                    |
 
-## Libraries Dependencies  and Installation Ubuntu/Debian ![Dependencies](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg)
+## Requirements Ubuntu/Debian ![Dependencies](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg)
 
 > * _Build tools_
 

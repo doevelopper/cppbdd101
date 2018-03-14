@@ -64,7 +64,7 @@ addons:
         sources:
             - ubuntu-toolchain-r-test
         packages:
-            - gcc
+            - gcc-7
             - clang-3.8
             - automake cmake autoconf libtool libssl-dev graphviz mscgen
             - libconfig-dev
@@ -74,6 +74,9 @@ addons:
             - libcurl4-openssl-dev
             - libelf-dev
             - libdw-dev
+            - g++-7
+            - clang-3.8
+            - binutils
 #        coverity_scan:
 #                project:
 #                        name: "$TRAVIS_REPO_SLUG"
@@ -83,14 +86,14 @@ addons:
 #                        branch_pattern: coverity_scan
 
 deploy:
-    provider: releases
+    provider: bintray
     api_key:
         secure: ....
-    file: "Firmware.zip"
+    file: "Cppbdd101.zip"
     skip_cleanup: true
     on:
         tags: true
-        condition: $CAN_DEPLOY = True && $TRAVIS_OS_NAME = Linux
+        condition: $CAN_DEPLOY = True && $TRAVIS_OS_NAME = Linux #$BUILDTYPE = Release
         all_branches: true
         repo: PX4/Firmware
 
@@ -156,7 +159,10 @@ before_script:
 before_install:
     #- echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
     # Update package managers
-    - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get -qq update;  fi
+    - sudo apt-get update -qq
+    - sudo apt-get install -qq build-essential cmake git-core lcov ggcov 
+    - sudo apt-get install libboost-all-dev
+    - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get -qq update; sudo apt-get install -y -qq lcov curl; fi
     #- if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get -qq update;  sudo apt-get install -qq --force-yes libgd2-xpm   fi
     #- if [ `uname -m` = x86_64 ]; then sudo dpkg --add-architecture i386; sudo apt-get update -qq; sudo apt-get install -qq --force-yes libgd2-xpm ia32-libs ia32-libs-multiarch; fi
     - if [ "$TRAVIS_OS_NAME" == "osx"   ]; then brew update;              fi
@@ -205,7 +211,13 @@ script:
 after_failure:
   - cat config.log
   - find . -name "*.trs" | xargs grep -l '^.test-result. FAIL' | while read trs ; do echo FAILURE detected at $trs; cat ${trs%%.trs}.log ; done
-  
+
+after_success:
+  - |
+    if [[ "${BUILD_TYPE}" == "Coverage" ]]; then
+        bash <(curl -s https://codecov.io/bash) -X gcov || echo "Codecov did not collect coverage reports"
+    fi
+
 notifications:
     email:
         recipients:
@@ -214,3 +226,13 @@ notifications:
         on_success: always  # options: [always|never|change] default: always
         on_failure: always  # options: [always|never|change] default: always
         on_start: false     # default: false
+        
+install:
+    - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
+    - mkdir -p ${DEPS_DIR} && cd ${DEPS_DIR}
+    - |
+        if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
+            echo ""
+        elif [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
+            echo ""
+        fi
