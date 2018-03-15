@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include <string>
+#include <map>
 #include <edac/ErrorsList.hpp>
 
 /*!
@@ -65,27 +66,19 @@ public:
     /*!
      * @brief Set custom error message 
      */
-    void setMessage(const std::string &msg) { m_err_message = msg; };
+    void setMessage(const std::string &msg);
     /*!
      * @brief Get custom error message 
      */
-    const std::string &getMessage() const { return m_err_message; };
+    const std::string &getMessage() const;
     /*!
      * @brief Get error code. 
      */
-    const ErrorsList::EdacErr getErrorCode() const { return m_error_code; };
+    ErrorsList::EdacErr getErrorCode() const;
     /*!
      * @brief Get error severity. 
      */
-    const ErrorsList::EdacErrSeverity getErrorSeverity() const  { return m_sev; };
-    /*!
-     * @brief Get trace index associated with the error. 
-     */
-    const Index getErrorIndex() const { return m_idx; };
-    /*!
-     * @brief Get the trace source channel ID associated with the error.
-     */
-    const uint8_t getErrorChanID() const { return m_chan_ID; };
+    ErrorsList::EdacErrSeverity getErrorSeverity() const;;
     /*!
      * @brief Generate a formatted error string for the supplied error. 
      */
@@ -106,16 +99,18 @@ private:
     Index m_idx;                        ///< Trace buffer index associated with this error (optional) */
     std::uint8_t m_chan_ID;             ///< trace  source ID associated with this error (optional) */
     std::string m_err_message;          ///< Additional text associated with this error (optional) */
+    
+    static const std::map<std::uint32_t, std::pair<std::string, std::string> > ERRORCODEMAPPER;
 
 };
 
-inline EdacError& EdacError::operator=(const EdacError *p_err)
+inline EdacError& EdacError::operator=(const EdacError *pErr)
 {
-    this->m_error_code = p_err->getErrorCode();
-    this->m_sev = p_err->getErrorSeverity();
-    this->m_idx = p_err->getErrorIndex();
-    this->m_chan_ID = p_err->getErrorChanID();
-    this->m_err_message = p_err->getMessage();
+    this->m_error_code = pErr->getErrorCode();
+    this->m_sev = pErr->getErrorSeverity();
+    //this->m_idx = p_err->getErrorIndex();
+    //this->m_chan_ID = p_err->getErrorChanID();
+    this->m_err_message = pErr->getMessage();
     return *this;
 }
 

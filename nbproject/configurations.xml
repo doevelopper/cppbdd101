@@ -53,6 +53,16 @@ Contributor(s):
               </df>
             </df>
           </df>
+          <df name="test">
+            <df name="cpp">
+              <df name="edac">
+                <in>EdacErrorTest.cpp</in>
+                <in>EdacErrorTest.hpp</in>
+                <in>ErrorsListTest.cpp</in>
+                <in>ErrorsListTest.hpp</in>
+              </df>
+            </df>
+          </df>
         </df>
       </df>
       <df name="src">
@@ -207,6 +217,26 @@ Contributor(s):
             flavor2="0">
       </item>
       <item path="edac/src/main/cpp/edac/ErrorsList.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="edac/src/test/cpp/edac/EdacErrorTest.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="edac/src/test/cpp/edac/EdacErrorTest.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="edac/src/test/cpp/edac/ErrorsListTest.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="edac/src/test/cpp/edac/ErrorsListTest.hpp"
             ex="false"
             tool="3"
             flavor2="0">
@@ -739,6 +769,26 @@ Contributor(s):
             flavor2="0">
       </item>
       <item path="edac/src/main/cpp/edac/ErrorsList.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="edac/src/test/cpp/edac/EdacErrorTest.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="edac/src/test/cpp/edac/EdacErrorTest.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="edac/src/test/cpp/edac/ErrorsListTest.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="edac/src/test/cpp/edac/ErrorsListTest.hpp"
             ex="false"
             tool="3"
             flavor2="0">

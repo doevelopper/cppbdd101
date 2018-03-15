@@ -1,6 +1,7 @@
 #ifndef EDAC_ERRORSLIST_HPP
 #define EDAC_ERRORSLIST_HPP
 
+
 class ErrorsList 
 {
 public:

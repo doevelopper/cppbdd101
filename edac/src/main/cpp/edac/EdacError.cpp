@@ -2,27 +2,15 @@
 
 #include <sstream>
 #include <iomanip>
-#include <map>
 #include <limits>
+#include <gmock/gmock-actions.h>
 
-std::map<std::string, std::pair<int, std::string> > errorC =
+const std::map<std::uint32_t, std::pair<std::string, std::string> > ERRORCODEMAPPER =
 {
-    {"EDAC_OK", {0, "No Error."} },
-    {"EDAC_ERR_LAST", { std::numeric_limits<int>::max(), "No Error."} },
+    {0, {"EDAC_OK", "No Error."} },
+    {1, {"EDAC_ERR_FAIL", "General failure."} },
+    {std::numeric_limits<int>::max(), {"EDAC_ERR_LAST" , "No Error."} },
 };
-        
-std::map<std::string, std::string> errorCodeDescription =
-{
-    std::pair <std::string, std::string> ("EDAC_OK", "No Error."),
-    std::pair <std::string, std::string> ("EDAC_ERR_LAST", "No error - error code end marker."),
-};
-
-static const char *s_errorCodeDescs[][2] = 
-{
-    {"EDAC_OK", "No Error."},
-    {"EDAC_ERR_FAIL","General failure."},
-    {"EDAC_ERR_LAST", "No error - error code end marker"}
-}
 
 EdacError::EdacError(const ErrorsList::EdacErrSeverity sev_type, const ErrorsList::EdacErr code)
 : m_error_code(code)
@@ -34,37 +22,64 @@ EdacError::~EdacError()
 {
 }
 
-const std::string EdacError::getErrorString(const EdacError &error)
-{
-    
+void 
+EdacError::setMessage(const std::string &msg) 
+{ 
+    m_err_message = msg; 
 }
 
-void EdacError::appendErrorDetails(std::string &errStr, const EdacError &error)
+const std::string & 
+EdacError::getMessage() const 
+{ 
+    return m_err_message; 
+}
+
+ErrorsList::EdacErr 
+EdacError::getErrorCode() const 
+{ 
+    return m_error_code; 
+}
+
+ErrorsList::EdacErrSeverity 
+EdacError::getErrorSeverity() const  
+{ 
+    return m_sev; 
+}
+
+const std::string 
+EdacError::getErrorString(const EdacError &error)
 {
-    int numerrstr = ((sizeof(s_errorCodeDescs) / sizeof(const char *)) / 2);
-    int code = (int)error.getErrorCode
-    Index idx = error.getErrorIndex();
-    std::uint8_t chan_ID = error.getErrorChanID
+    switch(error.getErrorSeverity())
+    {
+        case ErrorsList::EdacErrSeverity::EDAC_ERR_SEV_NONE:
+        break;
+        case ErrorsList::EdacErrSeverity::EDAC_ERR_SEV_INFO:
+        break;
+        case ErrorsList::EdacErrSeverity::EDAC_ERR_SEV_WARN:
+        break;
+        case ErrorsList::EdacErrSeverity::EDAC_ERR_SEV_ERROR:
+        break;
+        default:
+        break;
+    }
+    
+    return(std::string("SCHROEDINBUG Severity"));
+}
+
+void EdacError::appendErrorDetails(std::string & errStr, const EdacError & error)
+{
+    std::uint32_t code = static_cast<std::uint32_t>(error.getErrorCode());
 
     std::ostringstream oss;
-    oss << "0x" << std::hex << std::setfill('0') << std::setw(4) << code;
-    if(code < numerrstr)
+    oss << "0x" << std::hex << std::setfill('0') << std::setw(8) << code;
+
+    if(ERRORCODEMAPPER.find(code) != std::end(ERRORCODEMAPPER))
     {
-        oss << " (" << s_errorCodeDescs[code][0] << ") [" << s_errorCodeDescs[code][1] << "]; ";
+        oss << " (" << code << ") [" << std::get<1>(ERRORCODEMAPPER.find(code)->second) << "]; ";
     }
     else
     {
         oss << " (unknown); ";
-    }
-
-    if(idx != OCSD_BAD_TRC_INDEX)
-    {
-        oss << "TrcIdx=" << std::dec << idx << "; ";
-    }
-
-    if(chan_ID != OCSD_BAD_CS_SRC_ID)
-    {
-        oss << "CS ID=" << std::hex << std::setfill('0') << std::setw(2) << (std::uint16_t)chan_ID << "; ";
     }
 
     oss << error.getMessage();
