@@ -4,13 +4,13 @@
 
 class FutureError
 {
-public:
-FutureError();
-FutureError(const FutureError & orig);
-virtual ~FutureError();
-private:
+    public:
 
+        FutureError();
+        FutureError(const FutureError & orig);
+        virtual ~FutureError();
+
+    private:
 };
 
 #endif
-

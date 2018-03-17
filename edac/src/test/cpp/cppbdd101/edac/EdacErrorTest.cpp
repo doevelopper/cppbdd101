@@ -1,3 +1,4 @@
+
 #include <cppbdd101/edac/EdacErrorTest.hpp>
 
 log4cxx::LoggerPtr EdacErrorTest::logger = log4cxx::Logger::getLogger(std::string("cppbdd101.edac.EdacErrorTest") );

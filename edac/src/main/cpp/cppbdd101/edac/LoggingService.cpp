@@ -1,3 +1,4 @@
+
 #include <unistd.h>
 #include <iostream>
 #include <typeinfo>
@@ -11,6 +12,7 @@ LoggingService::LoggingService(unsigned long delay)
     : m_watchPeriod(delay)
 {
     std::string configurationPath("");
+
     if( log4cxx::LogManager::getLoggerRepository()->isConfigured() )
     {
         throw std::logic_error("log4cxx configuration detected");
@@ -41,7 +43,6 @@ LoggingService::LoggingService(unsigned long delay)
 
     if( configurationPath.empty() /*&& getenv(log4cxx.properties)*/ )
     {
-
         log4cxx::PatternLayoutPtr layout   (new log4cxx::PatternLayout  (
                                                 "%d{yyyy-MM-dd HH:mm:ss.SSS} (%-6c) [%-6p] [%15.15t] (%-10.20l) -- %m%n"
                                                 ) );
@@ -63,21 +64,23 @@ LoggingService::LoggingService(unsigned long delay)
             if( configurationPath.substr(configurationPath.find_last_of(".") + 1).compare("xml") == 0 )
             {
 #if APR_HAS_THREADS
-                log4cxx::xml::DOMConfigurator::configureAndWatch(configurationPath, static_cast< long >( this->periodicalCheck() ) );
+                log4cxx::xml::DOMConfigurator::configureAndWatch(configurationPath,
+                                                                 static_cast< long >( this->periodicalCheck() ) );
 #else
-                //configurationPath.append(logFileProperties);
+
+                // configurationPath.append(logFileProperties);
                 log4cxx::xml::DOMConfigurator::configure(log4cxx::File(configurationPath).getPath() );
 #endif
             }
             else
             {
 #if APR_HAS_THREADS
-                log4cxx::PropertyConfigurator::configureAndWatch(configurationPath, static_cast< long >( this->periodicalCheck() ) );
+                log4cxx::PropertyConfigurator::configureAndWatch(configurationPath,
+                                                                 static_cast< long >( this->periodicalCheck() ) );
 #else
                 log4cxx::PropertyConfigurator::configure(configurationPath);
 #endif
             }
-
         }
 
         log4cxx::Logger::getRootLogger()->setLevel(log4cxx::Level::getAll() );
@@ -87,9 +90,10 @@ LoggingService::LoggingService(unsigned long delay)
         // LOG4CXX_TRACE(log4cxx::Logger::getRootLogger(),"Logger initialized. Appenders sise:" << log4cxx::Logger::getRootLogger()->getAllAppenders().size() );
     }
 
-
     LOG4CXX_INFO(log4cxx::Logger::getRootLogger(), "----START LOGGING-----" );
-    LOG4CXX_TRACE(log4cxx::Logger::getRootLogger(), "Logger initialized. Appenders sise:" << log4cxx::Logger::getRootLogger()->getAllAppenders().size() );
+    LOG4CXX_TRACE(
+        log4cxx::Logger::getRootLogger(),
+        "Logger initialized. Appenders sise:" << log4cxx::Logger::getRootLogger()->getAllAppenders().size() );
 }
 
 LoggingService::~LoggingService()
@@ -120,8 +124,7 @@ LoggingService::loggerReset ()
     return ( true );
 }
 
-std::string
-LoggingService::getFileExtension (const std::string & s)
+std::string LoggingService::getFileExtension (const std::string & s)
 {
     LOG4CXX_TRACE(log4cxx::Logger::getRootLogger(), __LOG4CXX_FUNC__);
     size_t i = s.rfind('.', s.length() );

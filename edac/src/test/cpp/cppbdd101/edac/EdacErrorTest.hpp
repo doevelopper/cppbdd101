@@ -1,3 +1,4 @@
+
 #ifndef CPPBDD101_EDAC_EDACERRORTEST_HPP
 #define CPPBDD101_EDAC_EDACERRORTEST_HPP
 
@@ -6,26 +7,28 @@
 
 using ::testing::AtLeast;
 
-class EdacErrorTest : public ::testing::Test
+class EdacErrorTest :
+    public ::testing::Test
 {
-public:
-EdacErrorTest();
-virtual ~EdacErrorTest();
-virtual void SetUp ();
-virtual void TearDown();
+    public:
 
-protected:
-/*!
- * @brief Object that is about to be tested.
- */
-EdacError * objectUnderTest;
-/*!
- * @brief Class logger.
- */
-static log4cxx::LoggerPtr logger;
-private:
+        EdacErrorTest();
+        virtual ~EdacErrorTest();
+        virtual void SetUp ();
+        virtual void TearDown();
 
+    protected:
+
+        /*!
+         * @brief Object that is about to be tested.
+         */
+        EdacError * objectUnderTest;
+        /*!
+         * @brief Class logger.
+         */
+        static log4cxx::LoggerPtr logger;
+
+    private:
 };
 
 #endif
-

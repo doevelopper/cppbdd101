@@ -1,3 +1,4 @@
+
 #ifndef CPPBDD101_EDAC_IOERROR_HPP
 #define CPPBDD101_EDAC_IOERROR_HPP
 
@@ -6,12 +7,12 @@
 
 class IOError //: std::iostream_category
 {
-public:
-IOError();
-virtual ~IOError();
-private:
+    public:
 
+        IOError();
+        virtual ~IOError();
+
+    private:
 };
 
 #endif
-

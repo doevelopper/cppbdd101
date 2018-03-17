@@ -1,5 +1,6 @@
 set(UNCRUSTIFY_CONFIG "${PROJECT_SOURCE_DIR}/src/main/resources/config/uncrustify.cfg")
-set(UNCRUSTIFY_FLAGS --no-backup -l CPP  -c ${UNCRUSTIFY_CONFIG})
+# set(UNCRUSTIFY_FLAGS --no-backup -l CPP -q -c ${UNCRUSTIFY_CONFIG})
+set(UNCRUSTIFY_FLAGS --no-backup -l CPP -c ${UNCRUSTIFY_CONFIG})
 
 if(ENABLE_FORMATING_STYLE)
     find_program(UNCRUSTIFY uncrustify
@@ -40,5 +41,6 @@ function(apply_style_targets STYLE_TARGET BASE_DIRECTORY)
     endif()
 
     add_dependencies(style ${STYLE_TARGET}-style)
+    # add_dependencies(initialize ${STYLE_TARGET}-style)
 
 endfunction()

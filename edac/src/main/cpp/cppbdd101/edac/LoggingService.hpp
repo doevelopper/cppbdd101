@@ -1,3 +1,4 @@
+
 #ifndef CPPBDD101_EDAC_LOGGINGSERVICE_HPP
 #define CPPBDD101_EDAC_LOGGINGSERVICE_HPP
 
@@ -27,67 +28,69 @@
 #include <log4cxx/xml/domconfigurator.h>
 class LoggingService
 {
-public:
-LoggingService();
-/*!
- * @brief
- * @param delay Volue in ms to check if logger config level has changed.
- */
-LoggingService(unsigned long delay = 5000L);
-/*!
- * @brief
- */
-virtual ~LoggingService();
-/*!
- * @brief
- */
-log4cxx::LoggerPtr operator -> (void)
-{
-    return this->m_logger;
-}
-/*!
- * @brief
- */
-log4cxx::LoggerPtr operator = (const LoggingService & logger)
-{
-    (void)logger;
-    return this->m_logger;
-}
-/*!
- * @brief Retrieve valy of delay beetween the read of config file
- * @param  s is a char array containing a proper C-string
- * @return value do delay (minus null) as an usigned int
- */
-unsigned long periodicalCheck () const;
-/*!
- * @brief
- */
-bool loggerReset ();
-/*!
- * @brief
- * @param[in]  loggerName  The Logger name to get reference from.
- */
-log4cxx::LoggerPtr getLoggerByName (const char * loggerName);
+    public:
 
-private:
-/*!
- *  @brief
- *  @return logger configuration status
- */
-bool checkLogManagerStatus ();
-/*!
- *  @brief
- *  @param[in,out] dest
- *  @return file extension
- */
-std::string getFileExtension (const std::string & s);
+        LoggingService();
+        /*!
+         * @brief
+         * @param delay Volue in ms to check if logger config level has changed.
+         */
+        LoggingService(unsigned long delay = 5000L);
+        /*!
+         * @brief
+         */
+        virtual ~LoggingService();
+        /*!
+         * @brief
+         */
+        log4cxx::LoggerPtr operator -> (void)
+        {
+            return this->m_logger;
+        }
+        /*!
+         * @brief
+         */
+        log4cxx::LoggerPtr operator = (const LoggingService & logger)
+        {
+            (void)logger;
 
-static const char * configEnv;          ///< Array of MPEG frame sizes (bytes)
-log4cxx::LoggerPtr m_logger;            ///< Array of MPEG frame sizes (bytes)
-unsigned long m_watchPeriod;            ///< Value for periodical check if configFilename has been created or modified!
-private:
+            return this->m_logger;
+        }
+        /*!
+         * @brief Retrieve valy of delay beetween the read of config file
+         * @param  s is a char array containing a proper C-string
+         * @return value do delay (minus null) as an usigned int
+         */
+        unsigned long periodicalCheck () const;
+        /*!
+         * @brief
+         */
+        bool loggerReset ();
+        /*!
+         * @brief
+         * @param[in]  loggerName  The Logger name to get reference from.
+         */
+        log4cxx::LoggerPtr getLoggerByName (const char * loggerName);
 
+    private:
+
+        /*!
+         *  @brief
+         *  @return logger configuration status
+         */
+        bool checkLogManagerStatus ();
+        /*!
+         *  @brief
+         *  @param[in,out] dest
+         *  @return file extension
+         */
+        std::string getFileExtension (const std::string & s);
+
+        static const char * configEnv;  ///< Array of MPEG frame sizes (bytes)
+        log4cxx::LoggerPtr m_logger;    ///< Array of MPEG frame sizes (bytes)
+        unsigned long m_watchPeriod;    ///< Value for periodical check if configFilename has been created or modified!
+
+    private:
 };
 
 #endif
-

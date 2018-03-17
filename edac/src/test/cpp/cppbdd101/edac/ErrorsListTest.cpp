@@ -1,3 +1,4 @@
+
 #include <cppbdd101/edac/ErrorsListTest.hpp>
 
 log4cxx::LoggerPtr ErrorsListTest::logger = log4cxx::Logger::getLogger(std::string("cppbdd101.edac.ErrorsListTest") );
@@ -5,7 +6,6 @@ ErrorsListTest::ErrorsListTest()
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
 }
-
 
 ErrorsListTest::~ErrorsListTest()
 {

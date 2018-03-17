@@ -1,3 +1,4 @@
+
 #include <cppbdd101/edac/EdacError.hpp>
 #include <sstream>
 #include <iomanip>
@@ -35,6 +36,7 @@ const std::string &
 EdacError::getMessage() const
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
+
     return m_err_message;
 }
 
@@ -42,6 +44,7 @@ ErrorsList::EdacErr
 EdacError::getErrorCode() const
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
+
     return m_error_code;
 }
 
@@ -49,6 +52,7 @@ ErrorsList::EdacErrSeverity
 EdacError::getErrorSeverity() const
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
+
     return m_sev;
 }
 
@@ -56,6 +60,7 @@ const std::string
 EdacError::getErrorString(const EdacError & error)
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
+
     switch( error.getErrorSeverity() )
     {
     case ErrorsList::EdacErrSeverity::EDAC_ERR_SEV_NONE:

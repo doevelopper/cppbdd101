@@ -1,3 +1,4 @@
+
 #ifndef CPPBDD101_EDAC_EDACERROR_HPP
 #define CPPBDD101_EDAC_EDACERROR_HPP
 
@@ -22,98 +23,106 @@
 
 class EdacError
 {
-public:
-using Index = std::uint32_t;
-EdacError();
-/*!
- *  @brief Default error constructor with severity and error code.
- */
-EdacError(const ErrorsList::EdacErrSeverity sev_type, const ErrorsList::EdacErr code);
-/*!
- *  @brief Constructor with optional trace index.
- */
-EdacError(const ErrorsList::EdacErrSeverity sev_type, const ErrorsList::EdacErr code, const Index idx);
-/*!
- * @brief Constructor with optional trace index and channel ID.
- */
-EdacError(const ErrorsList::EdacErrSeverity sev_type, const ErrorsList::EdacErr code, const Index idx, const uint8_t chan_id);
-/*!
- * @brief Default error constructor with severity and error code - plus message.
- */
-EdacError(const ErrorsList::EdacErrSeverity sev_type, const ErrorsList::EdacErr code, const std::string & msg);
-/*!
- * @brief Constructor with optional trace index - plus message.
- */
-EdacError(const ErrorsList::EdacErrSeverity sev_type, const ErrorsList::EdacErr code, const Index idx, const std::string & msg);
-/*!
- * @brief Constructor with optional trace index and channel ID - plus message.
- */
-EdacError(const ErrorsList::EdacErrSeverity sev_type, const ErrorsList::EdacErr code, const Index idx, const uint8_t chan_id, const std::string & msg);
-/*!
- * @brief Copy constructor
- */
-EdacError(const EdacError * pError);
-/*!
- * @brief Copy constructor
- */
-EdacError(const EdacError & Error);
-EdacError & operator=(const EdacError * p_err);
-EdacError & operator=(const EdacError & err);
-/*!
- * @brief Destructor
- */
-virtual ~EdacError();
-/*!
- * @brief Set custom error message
- */
-void setMessage(const std::string & msg);
-/*!
- * @brief Get custom error message
- */
-const std::string & getMessage() const;
-/*!
- * @brief Get error code.
- */
-ErrorsList::EdacErr getErrorCode() const;
-/*!
- * @brief Get error severity.
- */
-ErrorsList::EdacErrSeverity getErrorSeverity() const;;
-/*!
- * @brief Generate a formatted error string for the supplied error.
- */
-static const std::string getErrorString(const EdacError & error);
+    public:
 
-private:
-/*!
- * @brief build the error string.
- */
-static void appendErrorDetails(std::string & errStr, const EdacError & error);
-/*!
- * @brief Make no parameter default constructor inaccessible.
- */
-//EdacError();
+        using Index = std::uint32_t;
+        EdacError();
+        /*!
+         *  @brief Default error constructor with severity and error code.
+         */
+        EdacError(const ErrorsList::EdacErrSeverity sev_type, const ErrorsList::EdacErr code);
+        /*!
+         *  @brief Constructor with optional trace index.
+         */
+        EdacError(const ErrorsList::EdacErrSeverity sev_type, const ErrorsList::EdacErr code, const Index idx);
+        /*!
+         * @brief Constructor with optional trace index and channel ID.
+         */
+        EdacError(const ErrorsList::EdacErrSeverity sev_type, const ErrorsList::EdacErr code, const Index idx,
+                  const uint8_t chan_id);
+        /*!
+         * @brief Default error constructor with severity and error code - plus message.
+         */
+        EdacError(const ErrorsList::EdacErrSeverity sev_type, const ErrorsList::EdacErr code, const std::string & msg);
+        /*!
+         * @brief Constructor with optional trace index - plus message.
+         */
+        EdacError(const ErrorsList::EdacErrSeverity sev_type, const ErrorsList::EdacErr code, const Index idx,
+                  const std::string & msg);
+        /*!
+         * @brief Constructor with optional trace index and channel ID - plus message.
+         */
+        EdacError(const ErrorsList::EdacErrSeverity sev_type, const ErrorsList::EdacErr code, const Index idx,
+                  const uint8_t chan_id, const std::string & msg);
+        /*!
+         * @brief Copy constructor
+         */
+        EdacError(const EdacError * pError);
+        /*!
+         * @brief Copy constructor
+         */
+        EdacError(const EdacError & Error);
+        EdacError & operator=(const EdacError * p_err);
+        EdacError & operator=(const EdacError & err);
+        /*!
+         * @brief Destructor
+         */
+        virtual ~EdacError();
+        /*!
+         * @brief Set custom error message
+         */
+        void setMessage(const std::string & msg);
+        /*!
+         * @brief Get custom error message
+         */
+        const std::string & getMessage() const;
+        /*!
+         * @brief Get error code.
+         */
+        ErrorsList::EdacErr getErrorCode() const;
+        /*!
+         * @brief Get error severity.
+         */
+        ErrorsList::EdacErrSeverity getErrorSeverity() const;;
+        /*!
+         * @brief Generate a formatted error string for the supplied error.
+         */
+        static const std::string getErrorString(const EdacError & error);
 
-ErrorsList::EdacErr m_error_code;       ///< Error code for this error
-ErrorsList::EdacErrSeverity m_sev;      ///< severity for this error
-Index m_idx;                            ///< Trace buffer index associated with this error (optional) */
-std::uint8_t m_chan_ID;                 ///< trace  source ID associated with this error (optional) */
-std::string m_err_message;              ///< Additional text associated with this error (optional) */
+    private:
 
-static const std::map< std::uint32_t, std::pair< std::string, std::string > > ERRORCODEMAPPER;
-/*!
- * @brief Class logger.
- */
-static log4cxx::LoggerPtr logger;
+        /*!
+         * @brief build the error string.
+         */
+        static void appendErrorDetails(std::string & errStr, const EdacError & error);
+        /*!
+         * @brief Make no parameter default constructor inaccessible.
+         */
+
+        // EdacError();
+
+        ErrorsList::EdacErr m_error_code;  ///< Error code for this error
+        ErrorsList::EdacErrSeverity m_sev; ///< severity for this error
+        Index m_idx;                       ///< Trace buffer index associated with this error (optional) */
+        std::uint8_t m_chan_ID;            ///< trace  source ID associated with this error (optional) */
+        std::string m_err_message;         ///< Additional text associated with this error (optional) */
+
+        static const std::map< std::uint32_t, std::pair< std::string, std::string > > ERRORCODEMAPPER;
+        /*!
+         * @brief Class logger.
+         */
+        static log4cxx::LoggerPtr logger;
 };
 
 inline EdacError & EdacError::operator=(const EdacError * pErr)
 {
     this->m_error_code = pErr->getErrorCode();
     this->m_sev = pErr->getErrorSeverity();
-    //this->m_idx = p_err->getErrorIndex();
-    //this->m_chan_ID = p_err->getErrorChanID();
+
+    // this->m_idx = p_err->getErrorIndex();
+    // this->m_chan_ID = p_err->getErrorChanID();
     this->m_err_message = pErr->getMessage();
+
     return *this;
 }
 
@@ -122,6 +131,4 @@ inline EdacError & EdacError::operator=(const EdacError & err)
     return ( *this = &err );
 }
 
-
 #endif
-
