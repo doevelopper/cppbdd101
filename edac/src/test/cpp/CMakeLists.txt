@@ -1,6 +1,6 @@
 set(SOURCE_FILES
-    edac/ErrorsListTest
-    edac/EdacErrorTest
+    cppbdd101/edac/ErrorsListTest
+    cppbdd101/edac/EdacErrorTest
 )
 
 add_library(${ModuleName}.test ${SOURCE_FILES})

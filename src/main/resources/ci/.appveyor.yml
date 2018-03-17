@@ -6,15 +6,50 @@ platform:
 environment:
     matrix:
         - GENERATOR: MinGW Makefiles
+        - arch: Win64
 
+branches:
+    only:
+        - master
+        - develop
+
+image:
+    - Visual Studio 2013
+    - Visual Studio 2015
+    - Visual Studio 2017
+
+configuration:
+    - Debug
+    - Release
+
+# Use the source dir expected by gclient.
+
+clone_folder: D:\repository\cppbdd101
+# Before checkout.
+init:
+    - cd %APPVEYOR_BUILD_FOLDER%\..\..
+    - set arch=
+    - if "%arch%"=="Win64" ( set arch= Win64)
+    - echo %arch%
+    - echo %APPVEYOR_BUILD_WORKER_IMAGE%
+    - if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2017" ( set generator="Visual Studio 15 2017%arch%" )
+    - if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2015" ( set generator="Visual Studio 14 2015%arch%" )
+    - if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2013" ( set generator="Visual Studio 12 2013%arch%" )
+    - echo %generator%  
+# After checkout.
+install:
+    - PATH C:\projects\depot_tools;%PATH%
+    - cd %APPVEYOR_BUILD_FOLDER%\..
 
 build:
     verbosity: detailed
+    parallel: true
 
 install:
     - cmake --version
 
 before_build:
+    - cmd: |-
     # Workaround for CMake not wanting sh.exe on PATH for MinGW
     - set PATH=%PATH:C:\Program Files\Git\usr\bin;=%
     - ECHO %PATH%
@@ -24,10 +59,19 @@ before_build:
     - DIR C:\mingw\bin  
     - mkdir build
     - cd build
+    - cmake --version
     - cmake -G "%GENERATOR%" ..
 
 build_script:
-    - mingw32-make example_examplelibrary_tests
+    - mingw32-make 
     - dir tests
     - dir C:\projects\cpp-exercises\build\tests\exampletest
     - tests\exampletest\example_examplelibrary_tests.exe
+
+test_script:
+  - src\windows\%CONFIGURATION%\cppbdd101.exe
+  - src\windows\%CONFIGURATION%\dump_syms_unittest.exe
+  
+artifacts:
+  - path: '**\*.exe'
+  - path: '**\*.lib'

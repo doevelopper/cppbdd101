@@ -1,8 +1,8 @@
 
 set(SOURCE_FILES
-    edac/ErrorsList
-    edac/EdacError
-    edac/LoggingService
+    cppbdd101/edac/ErrorsList
+    cppbdd101/edac/EdacError
+    cppbdd101/edac/LoggingService
 )
 
 add_library(${ModuleName}.main ${SOURCE_FILES})

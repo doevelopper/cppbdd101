@@ -1,0 +1,65 @@
+# Travis build integration.
+# https://docs.travis-ci.com/
+
+language: cpp
+sudo: required
+dist: trusty
+#group: wtf
+
+# Travis CI VM OSs -> 2 OSs
+os:
+    - linux
+
+# Travis CI build matrix components -> 2 compilers
+compiler:
+    - gcc
+    - clang
+
+# Travis CI environmental variables 
+env:
+    global:
+        - CMAKE_OPTIONS="-DOPTION_BUILD_EXAMPLES=On -DCMAKE_BUILD_TYPE=Debug"
+        - TRAVIS_BUILD_TYPE=Debug
+        - TRAVIS_BUILD_TYPE=Release
+        - TEST_SUITE=integration_tests
+        - TEST_SUITE=unit_tests
+        # Coverity
+        # COVERITY_SCAN_TOKEN
+        # ** specific to your project **
+        - secure: "...."
+        - COVERITY_SCAN_BUILD_COMMAND="make -j2"
+        - COVERITY_SCAN_PROJECT_NAME="doevelopper/cppbdd101"
+        - COVERITY_SCAN_NOTIFICATION_EMAIL="happyman@hotmail.fr"
+        - COVERITY_SCAN_BRANCH_PATTERN="master"
+        - COVERITY_SCAN_BUILD_URL="https://scan.coverity.com/scripts/travisci_build_coverity_scan.sh"
+        - COVERITY_SCAN_BUILD="curl -s $COVERITY_SCAN_BUILD_URL | bash"
+
+git:
+    depth: 1
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-7
+      - g++-7
+
+matrix:
+    include:
+        - compiler: gcc
+              env: COMPILER=g++-7
+        - compiler: clang
+              env: COMPILER=clang++-3.9
+
+before_install:
+    - if [ "$TRAVIS_OS_NAME" = "linux"  ]; then sudo apt-get -qq update;    fi
+
+before_script:
+    - if [ "$COMPILER" = "g++-7"        ]; then export CXX="g++-7" CC="gcc-7";              fi
+    - if [ "$COMPILER" = "clang++-3.9"  ]; then export CXX="clang++-3.9" CC="clang-3.9";    fi
+
+script:
+    - cmake -E chdir build
+    - cmake --build $BUILD_DIR
+    - cmake --build $BUILD_DIR --target test

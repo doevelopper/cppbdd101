@@ -1,9 +1,9 @@
 
 set(SRCS 
-    lectures/ggltest/SimpleTest
-    lectures/gotw/ComplexTest
-    lectures/gotw/StackTest
-    lectures/gotw/StackExceptionTest
+    cppbdd101/lectures/ggltest/SimpleTest
+    cppbdd101/lectures/gotw/ComplexTest
+    cppbdd101/lectures/gotw/StackTest
+    cppbdd101/lectures/gotw/StackExceptionTest
 )
 
 add_library(${ModuleName}.test ${SRCS})
