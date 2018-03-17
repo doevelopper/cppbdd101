@@ -1,6 +1,6 @@
 #ifndef EDAC_ERRORSLIST_HPP
 #define EDAC_ERRORSLIST_HPP
-
+#include <log4cxx/logger.h>
 
 class ErrorsList 
 {
@@ -22,7 +22,10 @@ public:
     ErrorsList();
     virtual ~ErrorsList();
 private:
-
+    /*!
+     * @brief Class logger. 
+     */
+    static log4cxx::LoggerPtr logger;
 };
 
 #endif

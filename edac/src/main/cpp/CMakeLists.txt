@@ -2,6 +2,7 @@
 set(SOURCE_FILES
     edac/ErrorsList
     edac/EdacError
+    edac/LoggingService
 )
 
 add_library(edac ${SOURCE_FILES})
@@ -24,7 +25,7 @@ target_link_libraries(
 )
 
 target_include_directories(edac PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/mylib>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/edac>
   $<INSTALL_INTERFACE:include/edac>  # <prefix>/include/edac
 )
 

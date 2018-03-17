@@ -1,9 +1,9 @@
 #include <edac/EdacError.hpp>
-
 #include <sstream>
 #include <iomanip>
 #include <limits>
-#include <gmock/gmock-actions.h>
+
+log4cxx::LoggerPtr EdacError::logger = log4cxx::Logger::getLogger(std::string("cppbdd101.edac.EdacError"));
 
 const std::map<std::uint32_t, std::pair<std::string, std::string> > ERRORCODEMAPPER =
 {
@@ -16,39 +16,46 @@ EdacError::EdacError(const ErrorsList::EdacErrSeverity sev_type, const ErrorsLis
 : m_error_code(code)
 , m_sev(sev_type)
 {
+    LOG4CXX_TRACE(logger , __LOG4CXX_FUNC__);
 }
 
 EdacError::~EdacError() 
 {
+    LOG4CXX_TRACE(logger , __LOG4CXX_FUNC__);
 }
 
 void 
 EdacError::setMessage(const std::string &msg) 
 { 
+    LOG4CXX_TRACE(logger , __LOG4CXX_FUNC__);
     m_err_message = msg; 
 }
 
 const std::string & 
 EdacError::getMessage() const 
 { 
+    LOG4CXX_TRACE(logger , __LOG4CXX_FUNC__);
     return m_err_message; 
 }
 
 ErrorsList::EdacErr 
 EdacError::getErrorCode() const 
 { 
+    LOG4CXX_TRACE(logger , __LOG4CXX_FUNC__);
     return m_error_code; 
 }
 
 ErrorsList::EdacErrSeverity 
 EdacError::getErrorSeverity() const  
 { 
+    LOG4CXX_TRACE(logger , __LOG4CXX_FUNC__);
     return m_sev; 
 }
 
 const std::string 
 EdacError::getErrorString(const EdacError &error)
 {
+    LOG4CXX_TRACE(logger , __LOG4CXX_FUNC__);
     switch(error.getErrorSeverity())
     {
         case ErrorsList::EdacErrSeverity::EDAC_ERR_SEV_NONE:
@@ -68,6 +75,7 @@ EdacError::getErrorString(const EdacError &error)
 
 void EdacError::appendErrorDetails(std::string & errStr, const EdacError & error)
 {
+    LOG4CXX_TRACE(logger , __LOG4CXX_FUNC__);
     std::uint32_t code = static_cast<std::uint32_t>(error.getErrorCode());
 
     std::ostringstream oss;

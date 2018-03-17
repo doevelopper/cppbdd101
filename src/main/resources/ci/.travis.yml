@@ -1,7 +1,7 @@
 language: cpp
 sudo: required
 dist: trusty
-group: wtf
+#group: wtf
 
 # Travis CI VM OSs -> 2 OSs
 os:
@@ -19,6 +19,8 @@ env:
     - TRAVIS_BUILD_TYPE=Debug
     - TRAVIS_BUILD_TYPE=Release
   # Coverity
+    # COVERITY_SCAN_TOKEN
+    # ** specific to your project **
     - secure: "...."
     - COVERITY_SCAN_BUILD_COMMAND="make -j2"
     - COVERITY_SCAN_PROJECT_NAME="doevelopper/cppbdd101"
@@ -34,9 +36,16 @@ stages:
   - "build only"
   - test
 
+# blocklist
+branches:
+    except:
+        - legacy
+        - experimental
+ # safelist 
 branches:
     only:
         - master
+        - develop
         - coverity_scan
     except:
         - gh-page
@@ -65,7 +74,8 @@ addons:
             - ubuntu-toolchain-r-test
         packages:
             - gcc-7
-            - clang-3.8
+            - g++-7
+            - clang-5.0
             - automake cmake autoconf libtool libssl-dev graphviz mscgen
             - libconfig-dev
             - libpcap-dev
@@ -74,16 +84,23 @@ addons:
             - libcurl4-openssl-dev
             - libelf-dev
             - libdw-dev
-            - g++-7
-            - clang-3.8
             - binutils
-#        coverity_scan:
-#                project:
-#                        name: "$TRAVIS_REPO_SLUG"
-#                        notification_email: xxxx
-#                        build_command_prepend: "./bootstrap && ./configure --enable-test-cpp --enable-test-vald --enable-test-helper --enable-test-perf --enable-user-guides --enable-test-perf-proc --enable-test-example"
-#                        build_command:   "make"
-#                        branch_pattern: coverity_scan
+        coverity_scan:
+            project:
+                #name: "$TRAVIS_REPO_SLUG"
+                name: doevelopper/cppbdd101
+                notification_email: happyman@hotmail.fr
+                description: "Cpp BDD 101 Build submitted via Travis CI"
+                    # Commands to prepare for build_command
+                    # ** likely specific to your build **
+                    #build_command_prepend: "./bootstrap && ./configure --enable-test-cpp --enable-test-vald --enable-test-helper --enable-test-perf --enable-user-guides --enable-test-perf-proc --enable-test-example"
+                build_command_prepend: "cov-configure --comptype gcc --compiler gcc-4.8&& ./autogen.sh && ./configure && make clean"
+                    # The command that will be added as an argument to "cov-build" to compile your project for analysis,
+                    # ** likely specific to your build **
+                build_command:   "make VERBOSE=1 -j4"
+                branch_pattern: coverity_scan
+
+before_deploy:
 
 deploy:
     provider: bintray
@@ -95,16 +112,18 @@ deploy:
         tags: true
         condition: $CAN_DEPLOY = True && $TRAVIS_OS_NAME = Linux #$BUILDTYPE = Release
         all_branches: true
-        repo: PX4/Firmware
+        repo: doevelopper/cppbdd101
 
+after_deploy:
 
 cache:
     ccache: true
     pip: true
+    apt: true
     directories:
         - $HOME/.m2
-        - $HOME/cunit-install
-        - $HOME/doxygen-install
+        - $HOME/cppbdd-install
+        - $HOME/cppbdd-doxygen-install
 env:
     global:
         #
@@ -160,9 +179,15 @@ before_install:
     #- echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
     # Update package managers
     - sudo apt-get update -qq
-    - sudo apt-get install -qq build-essential cmake git-core lcov ggcov 
+    - sudo apt-get install -qq build-essential git-core lcov ggcov 
     - sudo apt-get install libboost-all-dev
+    - sudo apt-get update && sudo apt-get install build-essential software-properties-common -y && sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+    - sudo apt-get update
+    - sudo apt-get install gcc-snapshot -y
+    - sudo apt-get install gcc-6 g++-6 -y 
+    - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 60 --slave /usr/bin/g++ g++ /usr/bin/g++-6
     - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get -qq update; sudo apt-get install -y -qq lcov curl; fi
+    - curl https://cmake.org/files/v3.10/cmake-3.10.3-Linux-x86_64.tar.gz  | sudo tar -x -z --strip-components 1 -C /usr
     #- if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get -qq update;  sudo apt-get install -qq --force-yes libgd2-xpm   fi
     #- if [ `uname -m` = x86_64 ]; then sudo dpkg --add-architecture i386; sudo apt-get update -qq; sudo apt-get install -qq --force-yes libgd2-xpm ia32-libs ia32-libs-multiarch; fi
     - if [ "$TRAVIS_OS_NAME" == "osx"   ]; then brew update;              fi
@@ -194,11 +219,20 @@ before_install:
     - ccache -s
     - echo "--------------------  END SYSTEM INFORMATION  --------------------"
 
+before_script:
+
 script:
+    -   if [[ "${COVERITY_SCAN_BRANCH}" == 1 ]];
+            then
+                echo "Don't build on coverty_scan branch.";
+                exit 0;
+        fi
     - make VERBOSE=1
     #- make test
     - ctest --verbose
-
+#    - if [ ${COVERITY_SCAN_BRANCH} != 1 ]; then make ; fi
+#    - if [ "${COVERITY_SCAN_BRANCH}" != 1 ]; then mkdir build && cd build && travis_wait 60 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../product $CMAKECMD_ARGS ../ ; fi
+#    - if [ -f CMakeCache.txt ]; then make -j4 ; fi
     - wget https://dl.bintray.com/jfrog/jfrog-cli-go/1.14.0/jfrog-cli-linux-amd64/jfrog
     - chmod +x jfrog
     - mvn clean install
@@ -207,6 +241,8 @@ script:
     - ./jfrog rt u "multi*/*.war" travisci-generic-local --build-name=travisci-generic-artifactory --build-number=$TRAVIS_BUILD_NUMBER --flat=false
     - ./jfrog rt bce travisci-generic-artifactory $TRAVIS_BUILD_NUMBER
     - ./jfrog rt bp travisci-generic-artifactory $TRAVIS_BUILD_NUMBER
+
+after_script:
 
 after_failure:
   - cat config.log
@@ -225,8 +261,10 @@ notifications:
             - rolland.doe@gmail.com
         on_success: always  # options: [always|never|change] default: always
         on_failure: always  # options: [always|never|change] default: always
-        on_start: false     # default: false
-        
+        on_start: always    # default: false
+
+before_install:
+
 install:
     - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
     - mkdir -p ${DEPS_DIR} && cd ${DEPS_DIR}

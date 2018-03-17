@@ -4,4 +4,5 @@ set(SOURCE_FILES
 )
 
 add_library(edacTest ${SOURCE_FILES})
-#target_link_libraries(edacTest PRIVATE GTest::GTest GTest::GTestMain)
+target_link_libraries(edacTest PRIVATE GTest::GTest edac)#GTest::GTestMain
+#add_executable(edacTest.bin)

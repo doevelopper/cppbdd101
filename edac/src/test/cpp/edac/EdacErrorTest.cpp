@@ -1,12 +1,43 @@
 #include <edac/EdacErrorTest.hpp>
 
-edac::EdacErrorTest::EdacErrorTest() 
+EdacErrorTest::EdacErrorTest() 
 {
+    LOG4CXX_TRACE(logger , __LOG4CXX_FUNC__);
 }
 
-
-
-edac::EdacErrorTest::~EdacErrorTest() 
+EdacErrorTest::~EdacErrorTest() 
 {
+    LOG4CXX_TRACE(logger , __LOG4CXX_FUNC__);
 }
 
+void EdacErrorTest::SetUp ()
+{
+    LOG4CXX_TRACE(logger , __LOG4CXX_FUNC__);
+    objectUnderTest = new EdacError();
+}
+
+void EdacErrorTest::TearDown ()
+{
+    LOG4CXX_TRACE(logger , __LOG4CXX_FUNC__);
+    delete objectUnderTest;
+}
+
+TEST_F(EdacErrorTest , testEQTrue)
+{
+    EXPECT_EQ(1, 1);
+}
+
+TEST_F(EdacErrorTest , testTrue)
+{
+    EXPECT_TRUE(true);
+}
+
+TEST_F(EdacErrorTest , testSucceed)
+{
+    SUCCEED();
+}
+
+TEST_F(EdacErrorTest , testFail)
+{
+    FAIL();
+}

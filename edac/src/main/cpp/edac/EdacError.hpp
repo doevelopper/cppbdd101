@@ -101,7 +101,10 @@ private:
     std::string m_err_message;          ///< Additional text associated with this error (optional) */
     
     static const std::map<std::uint32_t, std::pair<std::string, std::string> > ERRORCODEMAPPER;
-
+    /*!
+     * @brief Class logger. 
+     */
+    static log4cxx::LoggerPtr logger;
 };
 
 inline EdacError& EdacError::operator=(const EdacError *pErr)

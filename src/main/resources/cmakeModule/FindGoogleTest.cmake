@@ -290,7 +290,7 @@ FIND_PACKAGE_HANDLE_STANDARD_ARGS(GTest DEFAULT_MSG GTEST_LIBRARY GTEST_INCLUDE_
 #message( STATUS "GTEST_INCLUDE_DIR ${GTEST_INCLUDE_DIR}")
 
 if(GMOCK_FOUND AND GTEST_FOUND)
-    #message( STATUS "GTEST_FOUND and GMOCK_FOUND")
+#    message( STATUS "GTEST_FOUND and GMOCK_FOUND")
     set(GMOCK_INCLUDE_DIRS ${GMOCK_INCLUDE_DIR})
     _append_debugs(GMOCK_LIBRARIES      GMOCK_LIBRARY)
     _append_debugs(GMOCK_MAIN_LIBRARIES GMOCK_MAIN_LIBRARY)
@@ -304,7 +304,7 @@ if(GMOCK_FOUND AND GTEST_FOUND)
     find_package(Threads QUIET)
 
     if(NOT TARGET GTest::GTest)
-        #__gtest_determine_library_type(GTEST_LIBRARY)
+        __gtest_determine_library_type(GTEST_LIBRARY)
         add_library(GTest::GTest ${GTEST_LIBRARY_TYPE} IMPORTED)
 
         if(TARGET Threads::Threads)
@@ -328,7 +328,7 @@ if(GMOCK_FOUND AND GTEST_FOUND)
     endif(NOT TARGET GTest::GTest)
 
     if(NOT TARGET GTest::Main)
-        #__gtest_determine_library_type(GTEST_MAIN_LIBRARY)
+        __gtest_determine_library_type(GTEST_MAIN_LIBRARY)
         add_library(GTest::Main ${GTEST_MAIN_LIBRARY_TYPE} IMPORTED)
         set_target_properties(GTest::Main PROPERTIES
             INTERFACE_LINK_LIBRARIES "GTest::GTest")
@@ -338,7 +338,7 @@ if(GMOCK_FOUND AND GTEST_FOUND)
     endif(NOT TARGET GTest::Main)
 
     if(NOT TARGET GMock::GMock )
-        #__gtest_determine_library_type(GTEST_LIBRARY)
+        __gtest_determine_library_type(GTEST_LIBRARY)
         add_library(GMock::GMock  ${GMOCK_LIBRARY_TYPE} IMPORTED)
 
         if(TARGET Threads::Threads)
