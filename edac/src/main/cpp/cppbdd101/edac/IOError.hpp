@@ -3,12 +3,12 @@
 
 #include <ios>
 #include <system_error>
-		
+
 class IOError //: std::iostream_category
 {
 public:
-    IOError();
-    virtual ~IOError();
+IOError();
+virtual ~IOError();
 private:
 
 };

@@ -1,4 +1,4 @@
-set(UNCRUSTIFY_CONFIG "${PROJECT_SOURCE_DIR}/src/main/resources/config/raw.style.cfg")
+set(UNCRUSTIFY_CONFIG "${PROJECT_SOURCE_DIR}/src/main/resources/config/uncrustify.cfg")
 set(UNCRUSTIFY_FLAGS --no-backup -l CPP  -c ${UNCRUSTIFY_CONFIG})
 
 if(ENABLE_FORMATING_STYLE)

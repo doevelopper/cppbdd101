@@ -4,7 +4,7 @@ FutureError::FutureError()
 {
 }
 
-FutureError::FutureError(const FutureError& orig)
+FutureError::FutureError(const FutureError & orig)
 {
 }
 

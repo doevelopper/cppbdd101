@@ -7,15 +7,15 @@ class GenericError //: std::generic_category
 {
 public:
 
-    GenericError();
-    GenericError(GenericError const&) = delete;
-    GenericError(GenericError&&) = delete;
-    GenericError& operator=(GenericError const&) = delete;
-    GenericError& operator=(GenericError&&) = delete;
-    virtual ~GenericError();
+GenericError();
+GenericError(GenericError const &) = delete;
+GenericError(GenericError &&) = delete;
+GenericError & operator=(GenericError const &) = delete;
+GenericError & operator=(GenericError &&) = delete;
+virtual ~GenericError();
 
 private:
-    std::error_condition econd;
+std::error_condition econd;
 };
 
 #endif

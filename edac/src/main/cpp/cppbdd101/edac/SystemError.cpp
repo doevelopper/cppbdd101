@@ -4,7 +4,7 @@ SystemError::SystemError()
 {
 }
 
-SystemError::SystemError(const SystemError& orig)
+SystemError::SystemError(const SystemError & orig)
 {
 }
 
