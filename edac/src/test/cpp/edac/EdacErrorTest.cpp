@@ -1,5 +1,5 @@
 #include <edac/EdacErrorTest.hpp>
-
+log4cxx::LoggerPtr EdacErrorTest::logger = log4cxx::Logger::getLogger(std::string("cppbdd101.edac.EdacErrorTest"));
 EdacErrorTest::EdacErrorTest() 
 {
     LOG4CXX_TRACE(logger , __LOG4CXX_FUNC__);

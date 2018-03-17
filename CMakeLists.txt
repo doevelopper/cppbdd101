@@ -45,7 +45,8 @@ find_package(GoogleTest)
 find_package(Cucumber-cpp)
 find_package(GoogleBenchmark)
 
-add_subdirectory (edac)
+add_subdirectory(edac)
+add_subdirectory(lectures)
 
 #find_package(Boost REQUIRED)
 #add_library(boost INTERFACE IMPORTED)

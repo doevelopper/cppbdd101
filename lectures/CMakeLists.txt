@@ -1,4 +1,6 @@
-set(ModuleName "cppbdd101.edac")
+set(ModuleName "cppbdd101.lectures")
+
 add_subdirectory (src/main/cpp)
 add_subdirectory (src/test/cpp)
 #add_subdirectory (src/it)
+

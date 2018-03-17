@@ -3,6 +3,6 @@ set(SOURCE_FILES
     edac/EdacErrorTest
 )
 
-add_library(edacTest ${SOURCE_FILES})
-target_link_libraries(edacTest PRIVATE GTest::GTest edac)#GTest::GTestMain
+add_library(${ModuleName}.test ${SOURCE_FILES})
+target_link_libraries(${ModuleName}.test PRIVATE GTest::GTest ${ModuleName}.main)#GTest::GTestMain
 #add_executable(edacTest.bin)

@@ -5,10 +5,10 @@ set(SOURCE_FILES
     edac/LoggingService
 )
 
-add_library(edac ${SOURCE_FILES})
+add_library(${ModuleName}.main ${SOURCE_FILES})
 
 target_compile_features(
-    edac
+    ${ModuleName}.main
     PUBLIC
         cxx_strong_enums
         cxx_variadic_templates
@@ -20,11 +20,11 @@ target_compile_features(
 )
 
 target_link_libraries(
-    edac
+    ${ModuleName}.main
     PUBLIC LOG4CXX::LOG4CXX
 )
 
-target_include_directories(edac PUBLIC
+target_include_directories(${ModuleName}.main PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/edac>
   $<INSTALL_INTERFACE:include/edac>  # <prefix>/include/edac
 )

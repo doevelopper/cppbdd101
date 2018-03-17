@@ -67,6 +67,49 @@ Contributor(s):
           </df>
         </df>
       </df>
+      <df name="lectures">
+        <df name="src">
+          <df name="main">
+            <df name="cpp">
+              <df name="lectures">
+                <df name="ggltest">
+                  <in>Simple.cpp</in>
+                  <in>Simple.hpp</in>
+                </df>
+                <df name="gotw">
+                  <in>Complex.cpp</in>
+                  <in>Complex.hpp</in>
+                  <in>Stack.cpp</in>
+                  <in>Stack.hpp</in>
+                  <in>StackException.cpp</in>
+                  <in>StackException.hpp</in>
+                </df>
+              </df>
+              <in>CMakeLists.txt</in>
+            </df>
+          </df>
+          <df name="test">
+            <df name="cpp">
+              <df name="lectures">
+                <df name="ggltest">
+                  <in>SimpleTest.cpp</in>
+                  <in>SimpleTest.hpp</in>
+                </df>
+                <df name="gotw">
+                  <in>ComplexTest.cpp</in>
+                  <in>ComplexTest.hpp</in>
+                  <in>StackExceptionTest.cpp</in>
+                  <in>StackExceptionTest.hpp</in>
+                  <in>StackTest.cpp</in>
+                  <in>StackTest.hpp</in>
+                </df>
+              </df>
+              <in>CMakeLists.txt</in>
+            </df>
+          </df>
+        </df>
+        <in>CMakeLists.txt</in>
+      </df>
       <df name="src">
         <df name="it">
           <df name="cppbdd101">
@@ -115,6 +158,7 @@ Contributor(s):
               <in>FindCucumber-cpp.cmake</in>
               <in>FindGoogleBenchmark.cmake</in>
               <in>FindGoogleTest.cmake</in>
+              <in>FindOpenSplice.cmake</in>
               <in>FindValgrind.cmake</in>
             </df>
             <df name="guides">
@@ -133,6 +177,9 @@ Contributor(s):
               <in>pkg-config.pc.cmake</in>
               <in>platformInfo.cmake</in>
               <in>version.cmake</in>
+            </df>
+            <df name="sripts">
+              <in>configure-cmake</in>
             </df>
           </df>
         </df>
@@ -315,6 +362,98 @@ Contributor(s):
           </incDir>
         </ccTool>
       </folder>
+      <item path="lectures/CMakeLists.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/CMakeLists.txt"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/lectures/ggltest/Simple.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/lectures/ggltest/Simple.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/lectures/gotw/Complex.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/lectures/gotw/Complex.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/lectures/gotw/Stack.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/lectures/gotw/Stack.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/lectures/gotw/StackException.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/lectures/gotw/StackException.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/test/cpp/CMakeLists.txt"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/test/cpp/lectures/ggltest/SimpleTest.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/test/cpp/lectures/ggltest/SimpleTest.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/test/cpp/lectures/gotw/ComplexTest.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/test/cpp/lectures/gotw/ComplexTest.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/test/cpp/lectures/gotw/StackExceptionTest.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/test/cpp/lectures/gotw/StackExceptionTest.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/test/cpp/lectures/gotw/StackTest.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/test/cpp/lectures/gotw/StackTest.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="src/it/cppbdd101/features/step_definitions/ApplicationSteps.cpp"
             ex="false"
             tool="1"
@@ -472,6 +611,11 @@ Contributor(s):
             tool="3"
             flavor2="0">
       </item>
+      <item path="src/main/resources/cmakeModule/FindOpenSplice.cmake"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="src/main/resources/cmakeModule/FindValgrind.cmake"
             ex="false"
             tool="3"
@@ -538,6 +682,11 @@ Contributor(s):
             flavor2="0">
       </item>
       <item path="src/main/resources/macros/version.cmake"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/main/resources/sripts/configure-cmake"
             ex="false"
             tool="3"
             flavor2="0">
@@ -833,6 +982,98 @@ Contributor(s):
             tool="3"
             flavor2="0">
       </item>
+      <item path="lectures/CMakeLists.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/CMakeLists.txt"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/lectures/ggltest/Simple.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/lectures/ggltest/Simple.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/lectures/gotw/Complex.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/lectures/gotw/Complex.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/lectures/gotw/Stack.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/lectures/gotw/Stack.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/lectures/gotw/StackException.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/lectures/gotw/StackException.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/test/cpp/CMakeLists.txt"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/test/cpp/lectures/ggltest/SimpleTest.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/test/cpp/lectures/ggltest/SimpleTest.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/test/cpp/lectures/gotw/ComplexTest.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/test/cpp/lectures/gotw/ComplexTest.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/test/cpp/lectures/gotw/StackExceptionTest.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/test/cpp/lectures/gotw/StackExceptionTest.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/test/cpp/lectures/gotw/StackTest.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/test/cpp/lectures/gotw/StackTest.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="src/it/CMakeLists.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/it/cppbdd101/animal.feature" ex="false" tool="3" flavor2="0">
@@ -912,6 +1153,11 @@ Contributor(s):
             tool="3"
             flavor2="0">
       </item>
+      <item path="src/main/resources/cmakeModule/FindOpenSplice.cmake"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="src/main/resources/cmakeModule/FindValgrind.cmake"
             ex="false"
             tool="3"
@@ -978,6 +1224,11 @@ Contributor(s):
             flavor2="0">
       </item>
       <item path="src/main/resources/macros/version.cmake"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/main/resources/sripts/configure-cmake"
             ex="false"
             tool="3"
             flavor2="0">
