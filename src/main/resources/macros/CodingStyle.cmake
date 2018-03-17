@@ -2,7 +2,8 @@ set(UNCRUSTIFY_CONFIG "${PROJECT_SOURCE_DIR}/src/main/resources/config/raw.style
 set(UNCRUSTIFY_FLAGS --no-backup -l CPP  -c ${UNCRUSTIFY_CONFIG})
 
 if(ENABLE_FORMATING_STYLE)
-    find_program(UNCRUSTIFY uncrustify)
+    find_program(UNCRUSTIFY uncrustify
+	 DOC "Path of uncrustify program")
     if(UNCRUSTIFY)
         execute_process(
             COMMAND ${UNCRUSTIFY} --version OUTPUT_VARIABLE UNCRUSTIFY_VERSION

@@ -18,7 +18,7 @@ compiler:
 # Travis CI environmental variables 
 env:
     global:
-        - CMAKE_OPTIONS="-DOPTION_BUILD_EXAMPLES=On -DCMAKE_BUILD_TYPE=Debug"
+        - CMAKE_OPTIONS="-DOPTION_BUILD_EXAMPLES=On -DCMAKE_BUILD_TYPE=Debug -DCMAKE_VERBOSE_MAKEFILE=TRUE"
         - TRAVIS_BUILD_TYPE=Debug
         - TRAVIS_BUILD_TYPE=Release
         - TEST_SUITE=integration_tests
@@ -60,6 +60,13 @@ before_script:
     - if [ "$COMPILER" = "clang++-3.9"  ]; then export CXX="clang++-3.9" CC="clang-3.9";    fi
 
 script:
-    - cmake -E chdir build
-    - cmake --build $BUILD_DIR
+    - cmake -E make_directory $BUILD_DIR
+    - cmake -E chdir $BUILD_DIR
+    - cmake -E time cmake .. -G"Unix Makefiles" 
+    - cmake -E time cmake --build $BUILD_DIR --target all --config Debug  --clean-first
     - cmake --build $BUILD_DIR --target test
+    - cmake --build $BUILD_DIR --config Debug
+    - cmake -E chdir $BUILD_DIR ctest --output-on-failure
+    - cmake --build $BUILD_DIR --config Release
+    - cmake -E chdir $BUILD_DIR ctest --output-on-failure
+	
