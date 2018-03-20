@@ -38,6 +38,8 @@ include(DefinePlatformSpecifc)
 include(goals)
 include(CompilerOption)
 include(CodingStyle)
+include(cppcheck)
+include(CpplintWrapper)
 include(Rules)
 
 find_package(Log4cxx)

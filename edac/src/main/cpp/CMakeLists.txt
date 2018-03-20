@@ -3,6 +3,11 @@ set(SOURCE_FILES
     cppbdd101/edac/ErrorsList
     cppbdd101/edac/EdacError
     cppbdd101/edac/LoggingService
+	cppbdd101/edac/ErrnoMapper
+	cppbdd101/edac/SystemError
+	cppbdd101/edac/IsErrorActive
+	cppbdd101/edac/private/ErrorCodePrivate
+	cppbdd101/edac/Exceptions
 )
 
 add_library(${ModuleName}.main ${SOURCE_FILES})

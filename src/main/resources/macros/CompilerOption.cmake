@@ -32,7 +32,9 @@ endif()
 set(CMAKE_CXX_EXTENSIONS                           ON) ## on g++ this ensures: -std=c++XX and not -std=gnu++XX
 set(CXX_STANDARD_REQUIRED                          ON)
 set(CMAKE_CXX_STANDARD_REQUIRED                    ON)
-set(CMAKE_CXX_FLAGS                                "${CMAKE_CXX_FLAGS} -std=c++17 -W -Wall -Wextra ")
+set(CMAKE_CXX_FLAGS                                "${CMAKE_CXX_FLAGS} -W -Wall -Wextra ")
+set(CMAKE_CXX_FLAGS                                "${CMAKE_CXX_FLAGS} -Winit-self ") #-Wmissing-include-dirs 
+set(CMAKE_CXX_FLAGS                                "${CMAKE_CXX_FLAGS} -Wno-pragmas -Wredundant-decls  -fpermissive ")
 set(CMAKE_CXX_FLAGS_DEBUG                          "${CMAKE_CXX_FLAGS} -O0 -g")
 set(CMAKE_CXX_FLAGS_DEBUG                          "${CMAKE_CXX_FLAGS_DEBUG} -D_DEBUG -D_FORTIFY_SOURCE=2 ")
 set(CMAKE_CXX_FLAGS_DEBUG                          "${CMAKE_CXX_FLAGS_DEBUG} -fno-omit-frame-pointer ") # -fno-strict-aliasing 
@@ -53,6 +55,24 @@ set(EXTRA_CXX_FLAGS "${EXTRA_CXX_FLAGS} -Wno-missing-field-initializers")
 set(EXTRA_CXX_FLAGS "${EXTRA_CXX_FLAGS} -Wno-missing-braces")
 set(EXTRA_CXX_FLAGS "${EXTRA_CXX_FLAGS} -Wno-sign-compare")
 set(EXTRA_CXX_FLAGS "${EXTRA_CXX_FLAGS} -fdiagnostics-show-option")
+
+## gprof and gcov support
+set(CMAKE_CXX_FLAGS_PROFILE "-O0 -pg -g -ggdb -W -Wreturn-type -Wno-shadow -Wall -Wextra")
+set(CMAKE_CXX_FLAGS_PROFILE "${CMAKE_CXX_FLAGS_PROFILE} -Wunused-variable -Wunused-parameter")
+set(CMAKE_CXX_FLAGS_PROFILE "${CMAKE_CXX_FLAGS_PROFILE} -Wunused-function -Wunused")
+set(CMAKE_CXX_FLAGS_PROFILE "${CMAKE_CXX_FLAGS_PROFILE} -Woverloaded-virtual -Wno-system-headers")
+set(CMAKE_CXX_FLAGS_PROFILE "${CMAKE_CXX_FLAGS_PROFILE} -Wno-non-virtual-dtor -pg -fprofile-arcs")
+set(CMAKE_CXX_FLAGS_PROFILE "${CMAKE_CXX_FLAGS_PROFILE} -ftest-coverage")
+    # Experimental
+set(CMAKE_CXX_FLAGS_EXPERIMENTAL "-O0 -pg -g -ggdb -Wall -Werror -W -Wshadow")
+set(CMAKE_CXX_FLAGS_EXPERIMENTAL "${CMAKE_CXX_FLAGS_EXPERIMENTAL} -Wunused-variable")
+set(CMAKE_CXX_FLAGS_EXPERIMENTAL "${CMAKE_CXX_FLAGS_EXPERIMENTAL} -Wunused-parameter")
+set(CMAKE_CXX_FLAGS_EXPERIMENTAL "${CMAKE_CXX_FLAGS_EXPERIMENTAL} -Wunused-function")
+set(CMAKE_CXX_FLAGS_EXPERIMENTAL "${CMAKE_CXX_FLAGS_EXPERIMENTAL} -Wunused -Woverloaded-virtual")
+set(CMAKE_CXX_FLAGS_EXPERIMENTAL "${CMAKE_CXX_FLAGS_EXPERIMENTAL} -Wno-system-headers")
+set(CMAKE_CXX_FLAGS_EXPERIMENTAL "${CMAKE_CXX_FLAGS_EXPERIMENTAL} -Wno-non-virtual-dtor")
+set(CMAKE_CXX_FLAGS_EXPERIMENTAL "${CMAKE_CXX_FLAGS_EXPERIMENTAL} -pg -fprofile-generate ")
+set(CMAKE_CXX_FLAGS_EXPERIMENTAL "${CMAKE_CXX_FLAGS_EXPERIMENTAL} -fprofile-arcs -ftest-coverage")
 
 set(GCC_COMMON_WARNING_FLAGS "${GCC_COMMON_WARNING_FLAGS} -fcheck-new ") #-fdiagnostics-parseable-fixits
 set(GCC_COMMON_WARNING_FLAGS "${GCC_COMMON_WARNING_FLAGS} -Wcast-align -Wchar-subscripts ") #-Wimplicit-fallthrough

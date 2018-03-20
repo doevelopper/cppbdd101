@@ -11,7 +11,7 @@ if(ENABLE_FORMATING_STYLE)
             OUTPUT_STRIP_TRAILING_WHITESPACE)
             string(REGEX REPLACE ".+([0-9]+\\.[0-9]+)" "\\1" UNCRUSTIFY_VERSION ${UNCRUSTIFY_VERSION}
         )
-        message(STATUS "${UNCRUSTIFY} : ${UNCRUSTIFY_VERSION}")
+        # message(STATUS "${UNCRUSTIFY} : ${UNCRUSTIFY_VERSION}")
         mark_as_advanced(UNCRUSTIFY)
 
     endif(UNCRUSTIFY)
