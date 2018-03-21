@@ -19,7 +19,7 @@ if(ENABLE_CYCLOMATIC_COMPLEXITY)
     find_package(PythonInterp)
 
     if(PYTHONINTERP_FOUND)
-        set(LIZARD_SCRIPT "${PROJECT_SOURCE_DIR}/src/main/resources/scripts/lizard-1.12.15/lizard.py")
+        set(LIZARD_SCRIPT "${PROJECT_SOURCE_DIR}/src/main/resources/scripts/lizard-1.14.7/lizard.py")
         mark_as_advanced(LIZARD_SCRIPT LIZARD_OPTIONS)
 
         if(ENABLE_CYCLOMATIC_COMPLEXITY)
@@ -42,12 +42,12 @@ endif(ENABLE_CYCLOMATIC_COMPLEXITY)
 function(CYCLOMATIC_COMPLEXITY_ANALYZER target_name bin_folder)
 
     if(RUN_LIZARD)
-        set(WORKING_DIR "${TARGET_BUILD_DIRECTORY}/qa/lizard/${target_name}")
+        set(WORKING_DIR "${CMAKE_CURRENT_BINARY_DIR}/qa/lizard/${target_name}")
         if(NOT TARGET ${target_name}-cyclomatic)
             file(MAKE_DIRECTORY ${bin_folder})
             file(MAKE_DIRECTORY ${WORKING_DIR})
             add_custom_target(${target_name}-cyclomatic 
-                         COMMAND ${PYTHON_EXECUTABLE} ${LIZARD_SCRIPT} ${LIZARD_OPTIONS}  ${bin_folder} --xml  > ${WORKING_DIR}/lizard.xml#--html #${WORKING_DIR}
+                         COMMAND ${PYTHON_EXECUTABLE} ${LIZARD_SCRIPT} ${LIZARD_OPTIONS} -x"*/src/test/*" ${bin_folder} --xml  > ${WORKING_DIR}/lizard.xml#--html #${WORKING_DIR}
 #                         COMMAND ${PYTHON_EXECUTABLE} ${LIZARD_SCRIPT}   ${bin_folder}
 #                         WORKING_DIRECTORY ${bin_folder}
                          WORKING_DIRECTORY ${WORKING_DIR}

@@ -82,12 +82,13 @@ function(ADD_CPPCHECK_ANALYSIS target_name bin_folder)
         )
     endif(RUN_CPPCHECK)
 
-    if(NOT TARGET cppcheck)
-        add_custom_target(cppcheck
-            COMMENT "Static code analysis."
-        )
-    endif()
+    # if(NOT TARGET cppcheck)
+        # add_custom_target(cppcheck
+            # COMMENT "Static code analysis."
+        # )
+    # endif()
 
-    add_dependencies(cppcheck ${target_name}-cppcheck)
+    # add_dependencies(cppcheck ${target_name}-cppcheck)
+    add_dependencies(initialize ${target_name}-cppcheck)
 
 endfunction(ADD_CPPCHECK_ANALYSIS)

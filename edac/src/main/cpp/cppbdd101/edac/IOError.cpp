@@ -4,3 +4,7 @@
 IOError::IOError()
 {
 }
+
+IOError::~IOError()
+{
+}

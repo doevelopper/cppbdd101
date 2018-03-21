@@ -8,8 +8,8 @@ find_package(PythonInterp)
 if(PYTHONINTERP_FOUND)
 #    message(STATUS "Found Python. Python version is ${PYTHON_VERSION_STRING}.")
     if(${PYTHON_VERSION_MAJOR} EQUAL 3)
-        message(WARNING "OUCH! The Python found is Python 3. Cpplint.py doesn't run on it so far.")
-        message(WARNING "Cpplint won't detect errors. Install Python 2 to fix this issue.")
+        # message(WARNING "OUCH! The Python found is Python 3. Cpplint.py doesn't run on it so far.")
+        # message(WARNING "Cpplint won't detect errors. Install Python 2 to fix this issue.")
     endif(${PYTHON_VERSION_MAJOR} EQUAL 3)
     if(ENABLE_CPPLINT)
         set(RUN_CPPLINT true)
@@ -141,8 +141,9 @@ set(LINT_FILTER) # basically everything Google C++ Style recommends. Except...
 mark_as_advanced(LINT_FILTER)
 
 
-set(LINT_SCRIPT "${PROJECT_SOURCE_DIR}/src/main/resources/scripts/cpplint-1.3.0/cpplint.py")
+# set(LINT_SCRIPT "${PROJECT_SOURCE_DIR}/src/main/resources/scripts/cpplint-1.3.0/cpplint.py")
 # set(LINT_SCRIPT "${PROJECT_SOURCE_DIR}/src/main/resources/scripts/cpplint-python-3.py")
+set(LINT_SCRIPT "${PROJECT_SOURCE_DIR}/src/main/resources/scripts/cpplint.py")
 
 mark_as_advanced(LINT_SCRIPT)
 set(LINT_WRAPPER "${PROJECT_SOURCE_DIR}/src/main/resources/scripts/cpplint-wrapper.py")
@@ -187,7 +188,7 @@ function(CPPLINT_RECURSIVE target_name src_folder top_level_directory)
 #                            --counting=total
                             --counting=detailed
                             --verbose=5
-#                            --root=DIDACTICS
+#                            --root=CPPBDD101
                             ${src_folder}
                             > ${WORKING_DIR}/lint.xml 2>&1
                          WORKING_DIRECTORY ${WORKING_DIR}

@@ -35,17 +35,23 @@ set (NS "cpp101")
 
 include(PreventInSourceBuilds)
 include(DefinePlatformSpecifc)
+include(ProcessorCount)
+ProcessorCount(Ncpu)
 include(goals)
 include(CompilerOption)
 include(CodingStyle)
 include(cppcheck)
 include(CpplintWrapper)
+include(cyclomatic)
 include(Rules)
 
 find_package(Log4cxx)
+find_package(Threads)
 find_package(GoogleTest)
 find_package(Cucumber-cpp)
 find_package(GoogleBenchmark)
+
+enable_testing()
 
 add_subdirectory(edac)
 add_subdirectory(lectures)

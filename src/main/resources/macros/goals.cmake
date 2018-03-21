@@ -51,13 +51,17 @@ add_custom_target(cleanall
 )
 
 add_custom_target (distclean
-    COMMAND rm -vf ${CMAKE_SOURCE_DIR}/*.log
-    COMMAND rm -vf ${CMAKE_SOURCE_DIR}/Makefile
-    COMMAND rm -vf ${CMAKE_SOURCE_DIR}/install_manifest.txt
-    COMMAND rm -vf ${CMAKE_SOURCE_DIR}/cmake_install.cmake
-    COMMAND find ${CMAKE_SOURCE_DIR} -type f -name CMakeCache.txt | xargs -r rm -vf
-    COMMAND find ${CMAKE_SOURCE_DIR} -type d -name CMakeFiles | xargs -r rm -rvf
-    COMMAND find ${CMAKE_SOURCE_DIR} -type f -name "*.marks" | xargs -r rm -vf
+    # COMMAND rm -vf ${CMAKE_SOURCE_DIR}/*.log
+    # COMMAND rm -vf ${CMAKE_SOURCE_DIR}/Makefile
+    # COMMAND rm -vf ${CMAKE_SOURCE_DIR}/install_manifest.txt
+    # COMMAND rm -vf ${CMAKE_SOURCE_DIR}/cmake_install.cmake
+    # COMMAND find ${CMAKE_SOURCE_DIR} -type f -name CMakeCache.txt | xargs -r rm -vf
+    # COMMAND find ${CMAKE_SOURCE_DIR} -type d -name CMakeFiles | xargs -r rm -rvf
+    # COMMAND find ${CMAKE_SOURCE_DIR} -type f -name "*.marks" | xargs -r rm -vf
+    COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target clean
+    COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target runclean
+    COMMAND ${CMAKE_COMMAND} -E remove_directory CMakeFiles
+	COMMAND ${CMAKE_COMMAND} -E remove CMakeCache.txt cmake_install.cmake Makefile
 	COMMENT "Cleaning target"
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 )
@@ -270,4 +274,20 @@ if(NOT TARGET deploy)
         COMMENT "Integration or release environment, copies the final package to the remote repository for sharing with other developers and projects."
         DEPENDS m-install
     )
+endif()
+
+if(NOT TARGET ${PROJECT_NAME}-debug
+	add_custom_target(${PROJECT_NAME}-debug
+		COMMAND ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=Debug ${CMAKE_SOURCE_DIR} WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/build-${CMAKE_BUILD_TYPE} #${PROJECT_SOURCE_DIR} vs ${CMAKE_SOURCE_DIR}
+		COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target all WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/build-${CMAKE_BUILD_TYPE}
+		COMMENT "Switch CMAKE_BUILD_TYPE to Debug. Building debug application"
+	)
+endif()
+
+if(NOT TARGET ${PROJECT_NAME}-release
+	add_custom_target(${PROJECT_NAME}-release
+		COMMAND ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=Release ${CMAKE_SOURCE_DIR} WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/build-${CMAKE_BUILD_TYPE}
+		COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target all WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/build-${CMAKE_BUILD_TYPE}
+		COMMENT "Switch CMAKE_BUILD_TYPE to Release. Building  Release application"
+	)
 endif()

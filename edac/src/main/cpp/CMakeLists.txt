@@ -5,6 +5,10 @@ set(SOURCE_FILES
     cppbdd101/edac/LoggingService
 	cppbdd101/edac/ErrnoMapper
 	cppbdd101/edac/SystemError
+	cppbdd101/edac/FutureError
+	cppbdd101/edac/GenericError
+	cppbdd101/edac/IOError
+	cppbdd101/edac/LowLevelApiError
 	cppbdd101/edac/IsErrorActive
 	cppbdd101/edac/private/ErrorCodePrivate
 	cppbdd101/edac/Exceptions
@@ -33,6 +37,9 @@ target_include_directories(${ModuleName}.main PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/edac>
   $<INSTALL_INTERFACE:include/edac>  # <prefix>/include/edac
 )
+
+add_dependencies(compile ${ModuleName}.main)
+
 
 #target_sources(edac
 #    PRIVATE EdacError EdacError

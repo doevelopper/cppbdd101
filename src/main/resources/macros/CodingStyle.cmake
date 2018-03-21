@@ -34,13 +34,13 @@ function(apply_style_targets STYLE_TARGET BASE_DIRECTORY)
         add_custom_target(${STYLE_TARGET}-style COMMAND ${CMAKE_COMMAND} -E echo "NO Code formating applied")
     endif(UNCRUSTIFY)
 
-    if(NOT TARGET style)
-        add_custom_target(style
-            COMMENT "Prettying source code with uncrustify"
-        )
-    endif()
+    # if(NOT TARGET style)
+        # add_custom_target(style
+            # COMMENT "Prettying source code with uncrustify"
+        # )
+    # endif()
 
-    add_dependencies(style ${STYLE_TARGET}-style)
-    # add_dependencies(initialize ${STYLE_TARGET}-style)
+    # add_dependencies(style ${STYLE_TARGET}-style)
+    add_dependencies(validate ${STYLE_TARGET}-style)
 
 endfunction()
