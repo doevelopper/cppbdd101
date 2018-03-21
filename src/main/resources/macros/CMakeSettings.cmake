@@ -1,12 +1,16 @@
-set(CMAKE_VERBOSE_MAKEFILE ON)
-set(CMAKE_COLOR_MAKEFILE ON)
-set(CMAKE_RULE_MESSAGES ON)
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_INCLUDE_DIRECTORIES_PROJECT_BEFORE ON)
-set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
-set(CMAKE_LINK_DEPENDS_NO_SHARED ON)
+# set(CMAKE_VERBOSE_MAKEFILE ON)
+# set(CMAKE_COLOR_MAKEFILE ON)
+# set(CMAKE_RULE_MESSAGES ON)
+# set(CMAKE_INCLUDE_CURRENT_DIR ON)
+# set(CMAKE_INCLUDE_DIRECTORIES_PROJECT_BEFORE ON)
+# set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
+# set(CMAKE_LINK_DEPENDS_NO_SHARED ON)
 
-set(BUILD_SHARED_LIBS TRUE CACHE BOOL "If enabled, shared libs will be built by default, otherwise static libs")
+# set(BUILD_SHARED_LIBS TRUE CACHE BOOL "If enabled, shared libs will be built by default, otherwise static libs")
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
 # Force output directory destination, especially for MSVC (@so7747857).
 # function(setTargetOutputDirectory target)
@@ -15,6 +19,9 @@ set(BUILD_SHARED_LIBS TRUE CACHE BOOL "If enabled, shared libs will be built by 
             # ${type}_OUTPUT_DIRECTORY         ${CMAKE_${type}_OUTPUT_DIRECTORY}
             # ${type}_OUTPUT_DIRECTORY_DEBUG   ${CMAKE_${type}_OUTPUT_DIRECTORY}
             # ${type}_OUTPUT_DIRECTORY_RELEASE ${CMAKE_${type}_OUTPUT_DIRECTORY}
+				## ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+				## LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+				## RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
         # )
     # endforeach()
 # endfunction()

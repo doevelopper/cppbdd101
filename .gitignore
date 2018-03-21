@@ -71,7 +71,8 @@ build-wrapper-win-x86/
 sonar-scanner-3.0.3.778-linux/
 sonar-scanner-3.0.3.778-windows/
 cpplint.egg-*
-lizard-1.14.7/test/*
+*7/test/*
+#!*lizard-1.14.7/test/
 # Add any directories, files, or patterns you don't want to be tracked by version control
 CMakeCache.txt
 CMakeFiles

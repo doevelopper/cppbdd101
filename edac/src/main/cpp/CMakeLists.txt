@@ -35,7 +35,7 @@ target_link_libraries(
 
 target_include_directories(${ModuleName}.main PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/edac>
-  $<INSTALL_INTERFACE:include/edac>  # <prefix>/include/edac
+  $<INSTALL_INTERFACE:${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/edac>  # <prefix>/include/edac
 )
 
 add_dependencies(compile ${ModuleName}.main)

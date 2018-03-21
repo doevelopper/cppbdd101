@@ -4,7 +4,7 @@ set(UNCRUSTIFY_FLAGS --no-backup -l CPP -c ${UNCRUSTIFY_CONFIG})
 
 if(ENABLE_FORMATING_STYLE)
     find_program(UNCRUSTIFY uncrustify
-	 DOC "Path of uncrustify program")
+        DOC "Path of uncrustify program")
     if(UNCRUSTIFY)
         execute_process(
             COMMAND ${UNCRUSTIFY} --version OUTPUT_VARIABLE UNCRUSTIFY_VERSION
@@ -17,7 +17,7 @@ if(ENABLE_FORMATING_STYLE)
     endif(UNCRUSTIFY)
 
 else(ENABLE_FORMATING_STYLE)
-		message(STATUS "Formating style Skipped!")
+    message(STATUS "Formating style Skipped!")
 endif(ENABLE_FORMATING_STYLE)
 
 function(apply_style_targets STYLE_TARGET BASE_DIRECTORY)
@@ -31,7 +31,9 @@ function(apply_style_targets STYLE_TARGET BASE_DIRECTORY)
             )
         endif()
     else(UNCRUSTIFY)
-        add_custom_target(${STYLE_TARGET}-style COMMAND ${CMAKE_COMMAND} -E echo "NO Code formating applied")
+        add_custom_target(${STYLE_TARGET}-style
+            COMMAND ${CMAKE_COMMAND} -E echo "NO Code formating applied"
+        )
     endif(UNCRUSTIFY)
 
     # if(NOT TARGET style)

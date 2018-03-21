@@ -129,6 +129,36 @@ set(CMAKE_CXX_FLAGS_DEBUG               "${CMAKE_CXX_FLAGS_DEBUG}         ${COMM
 set(CMAKE_CXX_FLAGS_RELEASE             "${CMAKE_CXX_FLAGS_RELEASE}       ${COMMON_CMAKE_CXX_FLAGS}")
 set(CMAKE_CXX_FLAGS                     "${CMAKE_CXX_FLAGS}               ${COMMON_CMAKE_CXX_FLAGS}")
 
+SET(CMAKE_CXX_FLAGS_COVERAGE
+    " -g -fprofile-arcs -ftest-coverage"
+    CACHE STRING "Flags used by the C++ compiler during coverage builds."
+    FORCE
+)
+
+SET(CMAKE_C_FLAGS_COVERAGE
+    " -g -fprofile-arcs -ftest-coverage"
+    CACHE STRING "Flags used by the C compiler during coverage builds."
+    FORCE
+)
+
+SET(CMAKE_EXE_LINKER_FLAGS_COVERAGE
+    ""
+    CACHE STRING "Flags used for linking binaries during coverage builds."
+    FORCE
+)
+
+SET(CMAKE_SHARED_LINKER_FLAGS_COVERAGE
+    ""
+    CACHE STRING "Flags used by the shared libraries linker during coverage builds."
+    FORCE
+)
+
+MARK_AS_ADVANCED(
+    CMAKE_CXX_FLAGS_COVERAGE
+    CMAKE_C_FLAGS_COVERAGE
+    CMAKE_EXE_LINKER_FLAGS_COVERAGE
+    CMAKE_SHARED_LINKER_FLAGS_COVERAGE
+)
 
 # foreach(compilerFeatures ${CMAKE_CXX_COMPILE_FEATURES})
 #     message("compile Feature ${compilerFeatures}")
@@ -146,7 +176,7 @@ set(CMAKE_CXX_FLAGS                     "${CMAKE_CXX_FLAGS}               ${COMM
 #set(COVERAGE_FLAGS "-g -O0 --coverage -Wall -ftime-report -fmem-report -fvar-tracking -fvar-tracking-assignments")
 #set(COVERAGE_FLAGS "-g -O0 --coverage -Wall -Q ftime-report -fmem-report")
 
-function(score_set_gcc_compile_options theTarget)
+function(set_gcc_compile_options theTarget)
     # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wno-error=shadow -Wno-error=switch -Wno-error=switch-enum -Wno-error=empty-body -Wno-error=overloaded-virtual -Wno-error=suggest-final-methods -Wno-error=suggest-final-types -Wno-error=suggest-override -Wno-error=maybe-uninitialized")
     target_compile_options(${theTarget} PUBLIC
         -Wno-div-by-zero

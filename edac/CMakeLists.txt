@@ -1,4 +1,4 @@
-set(ModuleName "cppbdd101.edac")
+set(ModuleName "${PROJECT_NAME}.edac")
 
 if(ENABLE_FORMATING_STYLE)
     apply_style_targets(
@@ -41,5 +41,4 @@ endif(ENABLE_CYCLOMATIC_COMPLEXITY)
 
 add_subdirectory (src/main/cpp)
 add_subdirectory (src/test/cpp)
-
 #add_subdirectory (src/it)
