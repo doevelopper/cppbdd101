@@ -21,7 +21,9 @@ env:
         - CCACHE_MAXSIZE=250M
         - CCACHE_MAXFILES=2000
         - CCACHE_COMPRESS=1
+        - GENERATOR="MSYS Makefiles"
         - CMAKE_OPTIONS="-DOPTION_BUILD_EXAMPLES=On -DCMAKE_BUILD_TYPE=Debug -DCMAKE_VERBOSE_MAKEFILE=TRUE"
+        - CMAKE_OPTIONS="-DWERROR_LEVEL_1=ON -DRELEASE_LEVEL="SNAPSHOOT" -DENABLE_FORMATING_STYLE=ON -DENABLE_CPPLINT=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
         - TRAVIS_BUILD_TYPE=Debug
         - TRAVIS_BUILD_TYPE=Release
         - TEST_SUITE=integration_tests
@@ -80,13 +82,16 @@ addons:
         packages:
             - gcc-7
             - g++-7
+            - libssl-dev
+            - python-dev
+            - python3-dev
 
 matrix:
     include:
         - compiler: gcc
               env: COMPILER=g++-7
         - compiler: clang
-              env: COMPILER=clang++-3.9
+              env: COMPILER=clang++-5.0
 
 before_install:
     - if [ "$TRAVIS_OS_NAME" = "linux"  ]; then sudo apt-get -qq update;    fi
@@ -129,3 +134,5 @@ notifications:
         on_success: always  # options: [always|never|change] default: always
         on_failure: always  # options: [always|never|change] default: always
         on_start: always    # default: false
+        use_notice: true
+        skip_join: true

@@ -31,6 +31,19 @@ if(NOT TARGET coverage)
     )
 endif()
 
+if(ENABLE_SANITY_CHECK)
+    if(NOT TARGET sanity-check)
+        ADD_CUSTOM_TARGET(sanity-check
+            COMMENT "Software quality assurance: Style -> CPPCheck -> Cyclomatic -> CPPlint -> Coverage"
+        )
+        add_dependencies(sanity-check coverage style cppcheck cyclomatic lint)
+    endif(NOT TARGET sanity-check)
+else(ENABLE_SANITY_CHECK)
+    add_custom_target(sanity-check 
+        COMMAND ${CMAKE_COMMAND} -E echo "Software quality assurance disabled"
+    )
+endif(ENABLE_SANITY_CHECK)
+
 if(ENABLE_QA_CHECK)
     if(NOT TARGET qa-check)
         ADD_CUSTOM_TARGET(qa-check

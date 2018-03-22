@@ -4,7 +4,8 @@
 
 #include <vector>
 #include <gmock/gmock.h>
-#include <logger/logger.h>
+#include <log4cxx/logger.h>
+
 namespace cppbdd101
 {
     namespace test
@@ -19,16 +20,16 @@ namespace cppbdd101
                 virtual ~Test();
 
                 int run (int argc = 0, char * argv[] = NULL);
-				static void showUsage(std::string name);
+                static void showUsage(std::string name);
 
             private:
 
                 std::string m_testSuites;
                 unsigned int m_numberOfTestIteration;
-        /*!
-         * @brief Class logger.
-         */
-        static log4cxx::LoggerPtr logger;
+                /*!
+                 * @brief Class logger.
+                 */
+                static log4cxx::LoggerPtr logger;
         };
     }
 }
