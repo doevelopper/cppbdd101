@@ -8,10 +8,30 @@ environment:
         - GENERATOR: MinGW Makefiles
         - arch: Win64
 
+        - GENERATOR: Visual Studio 14 2015 Win64
+            APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+
+        # Clang/LLVM
+        - GENERATOR: Visual Studio 14 2015 Win64
+          TOOLSET: LLVM-vs2014
+            APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+
+        # /std:c++14
+        - GENERATOR: Visual Studio 15 2017 Win64
+          CXXFLAGS: /std:c++14 /permissive-
+            APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+
+        # /std:c++latest
+        - GENERATOR: Visual Studio 15 2017 Win64
+          CXXFLAGS: /std:c++latest /permissive-
+            APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+
 branches:
     only:
         - master
         - develop
+
+clone_depth: 1
 
 image:
     - Visual Studio 2013
@@ -57,16 +77,20 @@ before_build:
     - DIR C:\mingw-w64\x86_64-6.3.0-posix-seh-rt_v5-rev1
     - DIR C:\mingw-w64\x86_64-6.3.0-posix-seh-rt_v5-rev1\mingw64\bin
     - DIR C:\mingw\bin  
+    - cmake -G "$env:GENERATOR"
     - mkdir build
     - cd build
     - cmake --version
-    - cmake -G "%GENERATOR%" ..
+#    - cmake -G "%GENERATOR%" ..
+    cmake --build . --config Debug
+    ctest --output-on-failure --build-config Debug
+    cmake --build . --config Release
+    ctest --output-on-failure --build-config Release
 
 build_script:
     - mingw32-make 
     - dir tests
-    - dir C:\projects\cpp-exercises\build\tests\exampletest
-    - tests\exampletest\example_examplelibrary_tests.exe
+    - dir C:\projects\cpp-exercises\build\tests\cppbdd101.exe
 
 test_script:
   - src\windows\%CONFIGURATION%\cppbdd101.exe

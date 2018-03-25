@@ -45,6 +45,12 @@ Contributor(s):
         <df name="src">
           <df name="main">
             <df name="cpp">
+              <df name="cppbdd101">
+                <df name="edac">
+                  <in>Demangle.cpp</in>
+                  <in>Demangle.hpp</in>
+                </df>
+              </df>
               <df name="edac">
                 <in>EdacError.cpp</in>
                 <in>EdacError.hpp</in>
@@ -57,6 +63,12 @@ Contributor(s):
           </df>
           <df name="test">
             <df name="cpp">
+              <df name="cppbdd101">
+                <df name="edac">
+                  <in>DemangleTest.cpp</in>
+                  <in>DemangleTest.hpp</in>
+                </df>
+              </df>
               <df name="edac">
                 <in>EdacErrorTest.cpp</in>
                 <in>EdacErrorTest.hpp</in>
@@ -71,6 +83,18 @@ Contributor(s):
         <df name="src">
           <df name="main">
             <df name="cpp">
+              <df name="cppbdd101">
+                <df name="lectures">
+                  <in>CopyableAndMovable.cpp</in>
+                  <in>CopyableAndMovable.hpp</in>
+                  <in>CopyableOnly.cpp</in>
+                  <in>CopyableOnly.hpp</in>
+                  <in>MovableOnly.cpp</in>
+                  <in>MovableOnly.hpp</in>
+                  <in>NonCopyableNorMovable.cpp</in>
+                  <in>NonCopyableNorMovable.hpp</in>
+                </df>
+              </df>
               <df name="lectures">
                 <df name="ggltest">
                   <in>Simple.cpp</in>
@@ -90,6 +114,12 @@ Contributor(s):
           </df>
           <df name="test">
             <df name="cpp">
+              <df name="cppbdd101">
+                <df name="lectures">
+                  <in>RuleOfFivesTest.cpp</in>
+                  <in>RuleOfFivesTest.hpp</in>
+                </df>
+              </df>
               <df name="lectures">
                 <df name="ggltest">
                   <in>SimpleTest.cpp</in>
@@ -253,6 +283,16 @@ Contributor(s):
           <preBuildFirst>true</preBuildFirst>
         </preBuild>
       </makefileType>
+      <item path="edac/src/main/cpp/cppbdd101/edac/Demangle.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="edac/src/main/cpp/cppbdd101/edac/Demangle.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="edac/src/main/cpp/edac/EdacError.cpp"
             ex="false"
             tool="1"
@@ -279,6 +319,16 @@ Contributor(s):
             flavor2="0">
       </item>
       <item path="edac/src/main/cpp/edac/LoggingService.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="edac/src/test/cpp/cppbdd101/edac/DemangleTest.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="edac/src/test/cpp/cppbdd101/edac/DemangleTest.hpp"
             ex="false"
             tool="3"
             flavor2="0">
@@ -369,6 +419,46 @@ Contributor(s):
             tool="3"
             flavor2="0">
       </item>
+      <item path="lectures/src/main/cpp/cppbdd101/lectures/CopyableAndMovable.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/cppbdd101/lectures/CopyableAndMovable.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/cppbdd101/lectures/CopyableOnly.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/cppbdd101/lectures/CopyableOnly.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/cppbdd101/lectures/MovableOnly.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/cppbdd101/lectures/MovableOnly.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/cppbdd101/lectures/NonCopyableNorMovable.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/cppbdd101/lectures/NonCopyableNorMovable.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="lectures/src/main/cpp/lectures/ggltest/Simple.cpp"
             ex="false"
             tool="1"
@@ -410,6 +500,16 @@ Contributor(s):
             flavor2="0">
       </item>
       <item path="lectures/src/test/cpp/CMakeLists.txt"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/test/cpp/cppbdd101/lectures/RuleOfFivesTest.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/test/cpp/cppbdd101/lectures/RuleOfFivesTest.hpp"
             ex="false"
             tool="3"
             flavor2="0">
@@ -932,6 +1032,16 @@ Contributor(s):
           <preBuildFirst>true</preBuildFirst>
         </preBuild>
       </makefileType>
+      <item path="edac/src/main/cpp/cppbdd101/edac/Demangle.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="edac/src/main/cpp/cppbdd101/edac/Demangle.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="edac/src/main/cpp/edac/EdacError.cpp"
             ex="false"
             tool="1"
@@ -962,6 +1072,16 @@ Contributor(s):
             tool="3"
             flavor2="0">
       </item>
+      <item path="edac/src/test/cpp/cppbdd101/edac/DemangleTest.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="edac/src/test/cpp/cppbdd101/edac/DemangleTest.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="edac/src/test/cpp/edac/EdacErrorTest.cpp"
             ex="false"
             tool="1"
@@ -985,6 +1105,46 @@ Contributor(s):
       <item path="lectures/CMakeLists.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="lectures/src/main/cpp/CMakeLists.txt"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/cppbdd101/lectures/CopyableAndMovable.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/cppbdd101/lectures/CopyableAndMovable.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/cppbdd101/lectures/CopyableOnly.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/cppbdd101/lectures/CopyableOnly.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/cppbdd101/lectures/MovableOnly.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/cppbdd101/lectures/MovableOnly.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/cppbdd101/lectures/NonCopyableNorMovable.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/main/cpp/cppbdd101/lectures/NonCopyableNorMovable.hpp"
             ex="false"
             tool="3"
             flavor2="0">
@@ -1030,6 +1190,16 @@ Contributor(s):
             flavor2="0">
       </item>
       <item path="lectures/src/test/cpp/CMakeLists.txt"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/test/cpp/cppbdd101/lectures/RuleOfFivesTest.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="lectures/src/test/cpp/cppbdd101/lectures/RuleOfFivesTest.hpp"
             ex="false"
             tool="3"
             flavor2="0">

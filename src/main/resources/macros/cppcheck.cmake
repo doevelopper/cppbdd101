@@ -2,6 +2,7 @@
 set(CPPCHECK_HTMLREPORT_GENERATOR "${PROJECT_SOURCE_DIR}/src/main/resources/scripts/cppcheck-htmlreport")
 set(CONTROVERSIAL "–inconclusive")
 set(CPPCHECK_TEMPLATE_ARG --template gcc) # --template="[{severity}][{id}] {message} {callstack} \(On {file}:{line}\)" 
+set(RUN_CPPCHECK OFF)
 
 set(CPPCHECK_OPTIONS
     ${CONTROVERSIAL}
@@ -48,15 +49,16 @@ if(ENABLE_CPPCHECK)
 #            string(REGEX REPLACE ".+([0-9]+\\.[0-9]+)" "\\1" CPPCHECK_VERSION ${CPPCHECK_VERSION}
 #        )
 #        message(STATUS "${CPPCHECK} : ${CPPCHECK_VERSION}")
-        mark_as_advanced(UNCRUSTIFY)
+        mark_as_advanced(CPPCHECK)
         set(RUN_CPPCHECK ON)
     endif(CPPCHECK)
 
 else(ENABLE_CPPCHECK)
-    message(STATUS "Static code Analysis Skipped.")
+    # message(STATUS "Static code Analysis Skipped.")
+    set(RUN_CPPCHECK OFF)
 endif(ENABLE_CPPCHECK)
 
-function(ADD_CPPCHECK_ANALYSIS target_name bin_folder)
+function(add_cppcheck_analysis target_name bin_folder)
     if(RUN_CPPCHECK)
 
         set(WORKING_DIR "${bin_folder}/qa/cppcheck/${target_name}")
@@ -78,17 +80,11 @@ function(ADD_CPPCHECK_ANALYSIS target_name bin_folder)
     else(RUN_CPPCHECK)
         add_custom_target(
             ${target_name}-cppcheck 
-            COMMAND ${CMAKE_COMMAND} -E echo "No Static Code analysis done"
+            COMMAND ${CMAKE_COMMAND} -E echo "[---SKIPPED---] Static Code analysis. Add -DENABLE_CPPCHECK=ON to Enable"
+			COMMENT "Static code analysis."
         )
     endif(RUN_CPPCHECK)
 
-    # if(NOT TARGET cppcheck)
-        # add_custom_target(cppcheck
-            # COMMENT "Static code analysis."
-        # )
-    # endif()
+    add_dependencies(cppcheck ${target_name}-cppcheck)
 
-    # add_dependencies(cppcheck ${target_name}-cppcheck)
-    add_dependencies(initialize ${target_name}-cppcheck)
-
-endfunction(ADD_CPPCHECK_ANALYSIS)
+endfunction(add_cppcheck_analysis)

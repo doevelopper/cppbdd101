@@ -25,21 +25,21 @@ if(ENABLE_CYCLOMATIC_COMPLEXITY)
         if(ENABLE_CYCLOMATIC_COMPLEXITY)
             set(RUN_LIZARD true)
         else(ENABLE_CYCLOMATIC_COMPLEXITY)
-            message(STATUS "ENABLE_CYCLOMATIC_COMPLEXITY was not given. Skipped running cpplint")
+            # message(STATUS "ENABLE_CYCLOMATIC_COMPLEXITY was not given. Skipped running cpplint")
             set(RUN_LIZARD false)
         endif(ENABLE_CYCLOMATIC_COMPLEXITY)
 
     else(PYTHONINTERP_FOUND)
         set(RUN_LIZARD OFF)
-        message(STATUS "python executable not found. Skipped running Cyclomatic Complexity Analyzer ")
+        # message(STATUS "python executable not found. Skipped running Cyclomatic Complexity Analyzer ")
     endif(PYTHONINTERP_FOUND)
 
 else(ENABLE_CYCLOMATIC_COMPLEXITY)
-    message(STATUS "Skipped running CYCLOMATIC")
+	set(RUN_LIZARD OFF)
 endif(ENABLE_CYCLOMATIC_COMPLEXITY)
 
 
-function(CYCLOMATIC_COMPLEXITY_ANALYZER target_name bin_folder)
+function(add_cyclomatic_complexity_analyzer target_name bin_folder)
 
     if(RUN_LIZARD)
         set(WORKING_DIR "${CMAKE_CURRENT_BINARY_DIR}/qa/lizard/${target_name}")
@@ -56,13 +56,12 @@ function(CYCLOMATIC_COMPLEXITY_ANALYZER target_name bin_folder)
         endif()
 
     else(RUN_LIZARD)
-        add_custom_target(${target_name}-cyclomatic COMMAND ${CMAKE_COMMAND} -E echo "NO Cyclomatic Complexity Analysis")
+        add_custom_target(${target_name}-cyclomatic 
+			COMMAND ${CMAKE_COMMAND} -E echo "[---SKIPPED---] Cyclomatic Complexity Analysis. -DENABLE_CYCLOMATIC_COMPLEXITY=ON"
+			COMMENT "Cyclomatic Complexity Analyzer."
+		)
     endif(RUN_LIZARD)
 
-    if(NOT TARGET cyclomatic)
-        add_custom_target(cyclomatic
-            COMMENT "Cyclomatic Complexity Analyzer."
-        )
-    endif()
     add_dependencies(cyclomatic ${target_name}-cyclomatic)
-endfunction(CYCLOMATIC_COMPLEXITY_ANALYZER)
+
+endfunction(add_cyclomatic_complexity_analyzer)

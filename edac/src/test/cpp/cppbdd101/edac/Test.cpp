@@ -86,27 +86,28 @@ int cppbdd101::test::Test::run (int argc, char * argv[])
                  << "Number Of Iteration " << m_numberOfTestIteration
                  << "xml report ouput path " << outputPath);
 
-	::testing::GTEST_FLAG(repeat) = m_numberOfTestIteration;
+    ::testing::GTEST_FLAG(repeat) = m_numberOfTestIteration;
 
     // ::testing::GTEST_FLAG(filter) = suite;
     // GTEST_FLAG(output) = "xml:" + testOuputPath;
     ::testing::GTEST_FLAG(output)  = "xml:Report.xml";
     ::testing::FLAGS_gmock_verbose = "verbose";
+
     //    ::testing::GTEST_FLAG(print_time) = false;
-	// testing::GTEST_FLAG(also_run_disabled_tests);
-	// testing::GTEST_FLAG(break_on_failure);
-	// testing::GTEST_FLAG(catch_exceptions);
-	// testing::GTEST_FLAG(color);
-	// testing::GTEST_FLAG(death_test_use_fork);
-	// testing::GTEST_FLAG(filter);
-	// testing::GTEST_FLAG(list_tests);
-	// testing::GTEST_FLAG(random_seed);
-	// testing::GTEST_FLAG(repeat);
-	// testing::GTEST_FLAG(show_internal_stack_frames);
-	// testing::GTEST_FLAG(shuffle);
-	// testing::GTEST_FLAG(stack_trace_depth);
-	// testing::GTEST_FLAG(stream_result_to);
-	// testing::GTEST_FLAG(throw_on_failure)
+    // testing::GTEST_FLAG(also_run_disabled_tests);
+    // testing::GTEST_FLAG(break_on_failure);
+    // testing::GTEST_FLAG(catch_exceptions);
+    // testing::GTEST_FLAG(color);
+    // testing::GTEST_FLAG(death_test_use_fork);
+    // testing::GTEST_FLAG(filter);
+    // testing::GTEST_FLAG(list_tests);
+    // testing::GTEST_FLAG(random_seed);
+    // testing::GTEST_FLAG(repeat);
+    // testing::GTEST_FLAG(show_internal_stack_frames);
+    // testing::GTEST_FLAG(shuffle);
+    // testing::GTEST_FLAG(stack_trace_depth);
+    // testing::GTEST_FLAG(stream_result_to);
+    // testing::GTEST_FLAG(throw_on_failure)
 
     try
     {
@@ -115,12 +116,15 @@ int cppbdd101::test::Test::run (int argc, char * argv[])
     }
     catch ( std::exception & e )
     {
-        LOG4CXX_ERROR(logger , "Issues while innitializing test environment" << typeid (e).name () << ": " << e.what () );
+        LOG4CXX_ERROR(logger,
+                      "Issues while innitializing test environment" << typeid ( e ).name () << ": " << e.what () );
+
         // std::cerr << "Issues while innitializing test environment" << typeid ( e ).name () << ": " << e.what () <<std::endl;
     }
     catch ( ... )
     {
-		LOG4CXX_ERROR(logger , "Unhandled exception!");
+        LOG4CXX_ERROR(logger, "Unhandled exception!");
+
         // std::cerr << "Unhandled exception" <<std::endl;
     }
 

@@ -43,14 +43,19 @@ include(CodingStyle)
 include(cppcheck)
 include(CpplintWrapper)
 include(cyclomatic)
+include(GccCoverage)
 include(Rules)
 
-find_package(Log4cxx)
-find_package(Threads)
-find_package(GoogleTest)
-find_package(Cucumber-cpp)
-find_package(GoogleBenchmark)
-
+find_package(Log4cxx REQUIRED)
+find_package(Threads REQUIRED)
+find_package(GTest REQUIRED)
+find_package(GMock REQUIRED)
+find_package(Cucumber-cpp REQUIRED)
+find_package(GoogleBenchmark REQUIRED)
+find_package(Doxygen  REQUIRED
+             dot
+             OPTIONAL_COMPONENTS mscgen dia
+)
 enable_testing()
 
 add_subdirectory(edac)

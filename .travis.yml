@@ -94,6 +94,8 @@ matrix:
               env: COMPILER=clang++-5.0
 
 before_install:
+    - git config user.email "happyman@hotmail.fr"
+    - git config user.name "Travis bot"
     - if [ "$TRAVIS_OS_NAME" = "linux"  ]; then sudo apt-get -qq update;    fi
 
 before_script:
@@ -101,6 +103,7 @@ before_script:
     - if [ "$COMPILER" = "clang++-3.9"  ]; then export CXX="clang++-3.9" CC="clang-3.9";    fi
 
 script:
+    - pip install codecov
     - cmake -E make_directory $BUILD_DIR
     - cmake -E chdir $BUILD_DIR
     - cmake -E time cmake .. -G"Unix Makefiles" 
@@ -126,6 +129,10 @@ script:
         -Dsonar.sources=. -Dsonar.cfamily.build-wrapper-output=bw-output -Dsonar.host.url=https://sonarcloud.io \
         -Dsonar.login=35a07cefead08596f94b4a3b74b351445db2c488
     - sonar-scanner
+
+after_success:
+    - codecov
+
 notifications:
     email:
         recipients:

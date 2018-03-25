@@ -29,7 +29,7 @@ else()
 endif()
 
 
-set(CMAKE_CXX_EXTENSIONS                           ON) ## on g++ this ensures: -std=c++XX and not -std=gnu++XX
+set(CMAKE_CXX_EXTENSIONS                           OFF) ## If OFF ==> without compiler extensions like gnu++xx. Only -std=c++XX and not -std=gnu++XX
 set(CXX_STANDARD_REQUIRED                          ON)
 set(CMAKE_CXX_STANDARD_REQUIRED                    ON)
 set(CMAKE_CXX_FLAGS                                "${CMAKE_CXX_FLAGS} -W -Wall -Wextra ")

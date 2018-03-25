@@ -14,7 +14,7 @@ if(PYTHONINTERP_FOUND)
     if(ENABLE_CPPLINT)
         set(RUN_CPPLINT true)
     else(ENABLE_CPPLINT)
-        message(STATUS "ENABLE_CPPLINT was not given. Skipped running cpplint")
+        # message(STATUS "ENABLE_CPPLINT was not given. Skipped running cpplint")
         set(RUN_CPPLINT false)
     endif(ENABLE_CPPLINT)
 else(PYTHONINTERP_FOUND)
@@ -163,9 +163,9 @@ mark_as_advanced(LINT_LINELENGTH)
 #    The root folder used to determine desired include-guard comments.
 #  bin_folder:
 #    The temporary build folder to store a cpplint history file.
-function(CPPLINT_RECURSIVE target_name src_folder top_level_directory)
+function(add_cpp_linter_recursively target_name src_folder top_level_directory)
     if(RUN_CPPLINT)
-       message(STATUS "${target_name}: src=${src_folder}, rootpository=${top_level_directory}")
+       # message(STATUS "${target_name}: src=${src_folder}, rootpository=${top_level_directory}")
         if(NOT TARGET ${target_name}-lint)
             set(WORKING_DIR "${src_folder}/qa/cpplint/${target_name}")
             file(MAKE_DIRECTORY ${WORKING_DIR})
@@ -196,16 +196,13 @@ function(CPPLINT_RECURSIVE target_name src_folder top_level_directory)
             )
         endif()
     else(RUN_CPPLINT)
-        add_custom_target(${target_name}-lint COMMAND ${CMAKE_COMMAND} -E echo NoLint)
+        add_custom_target(${target_name}-lint 
+			COMMAND ${CMAKE_COMMAND} -E echo "[---SKIPPED---]  C/CPP code linter. Add -DENABLE_CPPLINT=ON to Enable"
+			COMMENT "Check the C++ source code to analyze it for syntax errors and other faults."
+		)
     endif(RUN_CPPLINT)
-
-    if(NOT TARGET lint)
-        add_custom_target(lint
-            COMMENT "Check the C++ source code to analyze it for syntax errors and other faults."
-        )
-    endif()
 
     add_dependencies(lint ${target_name}-lint)
 
-endfunction(CPPLINT_RECURSIVE)
+endfunction(add_cpp_linter_recursively)
 

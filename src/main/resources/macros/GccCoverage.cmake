@@ -1,4 +1,6 @@
 
+set(RUN_COVERAGE OFF)
+
 if(ENABLE_COVERAGE)
 
     if(NOT COVERAGE_LIMITS)
@@ -95,75 +97,86 @@ if(ENABLE_COVERAGE)
 
         set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ${CMAKE_CXX_FLAGS_COVERAGE}")
         set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} ${CMAKE_CXX_FLAGS_COVERAGE}")
-
+		set(RUN_COVERAGE ON)
     else(CMAKE_COMPILER_IS_GNUCXX)
+			set(RUN_COVERAGE OFF)
             message(FATAL_ERROR "No code coverage report, unsupported compiler")
     endif(CMAKE_COMPILER_IS_GNUCXX)
 
 else(ENABLE_COVERAGE)
-    message(STATUS "Code coverage skipped.")
+	set(RUN_COVERAGE OFF)
+    # message(STATUS "Code coverage skipped.")
 endif(ENABLE_COVERAGE)
 
 function(add_coverage_targets TEST_TARGET MODULE_NAME MODULE_DIRECTORY) 
+	if(RUN_COVERAGE)
+		set(COVERAGE_WORKING_DIR "${TARGET_BUILD_DIRECTORY}/qa/coverage/${MODULE_NAME}")
+		set(COVERAGE_RAW_FILE "${COVERAGE_WORKING_DIR}/coverage.raw.info")
+		set(COVERAGE_FILTERED_FILE "${COVERAGE_WORKING_DIR}/coverage.info")
+		set(COVERAGE_REPORT_DIR "${COVERAGE_WORKING_DIR}/coveragereport")
+		file(MAKE_DIRECTORY ${COVERAGE_WORKING_DIR})
 
-    set(COVERAGE_WORKING_DIR "${TARGET_BUILD_DIRECTORY}/qa/coverage/${MODULE_NAME}")
-    set(COVERAGE_RAW_FILE "${COVERAGE_WORKING_DIR}/coverage.raw.info")
-    set(COVERAGE_FILTERED_FILE "${COVERAGE_WORKING_DIR}/coverage.info")
-    set(COVERAGE_REPORT_DIR "${COVERAGE_WORKING_DIR}/coveragereport")
-    file(MAKE_DIRECTORY ${COVERAGE_WORKING_DIR})
+		add_test(NAME ${TEST_TARGET}
+				WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+				COMMAND ${CMAKE_BINARY_DIR}/bin/${TEST_TARGET}
+		)
 
-    add_test(NAME ${TEST_TARGET}
-            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
-            COMMAND ${CMAKE_BINARY_DIR}/bin/${TEST_TARGET}
-    )
+		# if(NOT TARGET coverage)
+			# add_custom_target(coverage
+				# COMMENT "Running ${MODULE_NAME} code coverage analysis and statement-by-statement profiling.."
+			# )
+		# endif()
 
-    if(NOT TARGET coverage)
-        add_custom_target(coverage
-            COMMENT "Running ${MODULE_NAME} coverage report."
-        )
-    endif()
+		add_custom_target( ${TEST_TARGET}-coverage
+			WORKING_DIRECTORY ${COVERAGE_WORKING_DIR}
+	#        COMMAND ${CMAKE_COMMAND} -E echo "Test coverage is disabled"
+			COMMENT "[CPPCHECK-Target:${MODULE_NAME}] ${MODULE_DIRECTORY}."
+	#        DEPENDS
+		)
+		add_custom_command(TARGET ${TEST_TARGET}-coverage
+			COMMENT "Cleaning gcda files ${MODULE_DIRECTORY}"
+			COMMAND lcov --directory ${MODULE_DIRECTORY} --zerocounters
+			WORKING_DIRECTORY ${COVERAGE_WORKING_DIR}
+		)
 
-    add_custom_target( ${TEST_TARGET}-coverage
-        WORKING_DIRECTORY ${COVERAGE_WORKING_DIR}
-#        COMMAND ${CMAKE_COMMAND} -E echo "Test coverage is disabled"
-        COMMENT "[CPPCHECK-Target:${MODULE_NAME}] ${MODULE_DIRECTORY}."
-#        DEPENDS
-    )
-    add_custom_command(TARGET ${TEST_TARGET}-coverage
-        COMMENT "Cleaning gcda files ${MODULE_DIRECTORY}"
-        COMMAND lcov --directory ${MODULE_DIRECTORY} --zerocounters
-        WORKING_DIRECTORY ${COVERAGE_WORKING_DIR}
-    )
+		add_custom_command(TARGET ${TEST_TARGET}-coverage
+			COMMENT "Running ${TEST_TARGET}"
+	#        COMMAND make test
+			COMMAND ${CMAKE_BINARY_DIR}/bin/${TEST_TARGET}
+			WORKING_DIRECTORY ${COVERAGE_WORKING_DIR}
+		)
 
-    add_custom_command(TARGET ${TEST_TARGET}-coverage
-        COMMENT "Running ${TEST_TARGET}"
-#        COMMAND make test
-        COMMAND ${CMAKE_BINARY_DIR}/bin/${TEST_TARGET}
-        WORKING_DIRECTORY ${COVERAGE_WORKING_DIR}
-    )
+		add_custom_command(TARGET ${TEST_TARGET}-coverage
+			COMMENT "Capturing data in ${MODULE_DIRECTORY}"
+			COMMAND lcov --directory ${MODULE_DIRECTORY} --capture --output-file ${COVERAGE_WORKING_DIR}/${MODULE_NAME}.info
+			COMMAND lcov --remove ${COVERAGE_WORKING_DIR}/${MODULE_NAME}.info 'build/*' '/usr/*' --output-file ${COVERAGE_WORKING_DIR}/${MODULE_NAME}.cleaned.info
+			WORKING_DIRECTORY ${COVERAGE_WORKING_DIR}
+		)
 
-    add_custom_command(TARGET ${TEST_TARGET}-coverage
-        COMMENT "Capturing date in ${MODULE_DIRECTORY}"
-        COMMAND lcov --directory ${MODULE_DIRECTORY} --capture --output-file ${COVERAGE_WORKING_DIR}/${MODULE_NAME}.info
-        COMMAND lcov --remove ${COVERAGE_WORKING_DIR}/${MODULE_NAME}.info 'build/*' '/usr/*' --output-file ${COVERAGE_WORKING_DIR}/${MODULE_NAME}.cleaned.info
-        WORKING_DIRECTORY ${COVERAGE_WORKING_DIR}
-    )
+		add_custom_command(TARGET ${TEST_TARGET}-coverage
+			COMMENT "Generating html report ${COVERAGE_WORKING_DIR}"
+	#        COMMAND genhtml -o ${COVERAGE_WORKING_DIR} ${COVERAGE_WORKING_DIR}/${MODULE_NAME}.info
+			COMMAND genhtml --frames --show-details --title ${MODULE_NAME} ${COVERAGE_LIMITS}  -s --legend --highlight --demangle-cpp -o ${COVERAGE_WORKING_DIR} ${COVERAGE_WORKING_DIR}/${MODULE_NAME}.cleaned.info
+			WORKING_DIRECTORY ${COVERAGE_WORKING_DIR}
+		)
 
-    add_custom_command(TARGET ${TEST_TARGET}-coverage
-        COMMENT "Generating html report ${COVERAGE_WORKING_DIR}"
-#        COMMAND genhtml -o ${COVERAGE_WORKING_DIR} ${COVERAGE_WORKING_DIR}/${MODULE_NAME}.info
-        COMMAND genhtml --frames --show-details --title ${MODULE_NAME} ${COVERAGE_LIMITS}  -s --legend --highlight --demangle-cpp -o ${COVERAGE_WORKING_DIR} ${COVERAGE_WORKING_DIR}/${MODULE_NAME}.cleaned.info
-        WORKING_DIRECTORY ${COVERAGE_WORKING_DIR}
-    )
+		add_custom_command(TARGET ${TEST_TARGET}-coverage
+			COMMAND echo "Open ${COVERAGE_WORKING_DIR}/index.html to view the coverage analysis results."
+			WORKING_DIRECTORY ${COVERAGE_WORKING_DIR}
+		)
+	
+	else(RUN_COVERAGE)
 
-    add_custom_command(TARGET ${TEST_TARGET}-coverage
-        COMMAND echo "Open ${COVERAGE_WORKING_DIR}/index.html to view the coverage analysis results."
-        WORKING_DIRECTORY ${COVERAGE_WORKING_DIR}
-    )
+        add_custom_target(${TEST_TARGET}-coverage
+			COMMAND ${CMAKE_COMMAND} -E echo "[---SKIPPED---] source code coverage. Define -DENABLE_COVERAGE=ON to enable"
+			COMMENT "Running code coverage analysis and statement-by-statement profiling."
+		)
 
-    add_dependencies(coverage ${MODULE_NAME}-coverage)
+	endif(RUN_COVERAGE)
 
-endfunction()
+    add_dependencies(gnu-coverage ${MODULE_NAME}-coverage)
+
+endfunction(add_coverage_targets)
 
 # Example post-processing with lcov:
 #

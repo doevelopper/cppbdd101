@@ -25,9 +25,9 @@ if(NOT TARGET lint)
     )
 endif()
 
-if(NOT TARGET coverage)
-    add_custom_target(coverage
-        COMMENT "Running coverage report."
+if(NOT TARGET gnu-coverage)
+    add_custom_target(gnu-coverage
+        COMMENT "Running code coverage analysis and statement-by-statement profiling."
     )
 endif()
 
@@ -57,10 +57,10 @@ else(ENABLE_QA_CHECK)
     )
 endif(ENABLE_QA_CHECK)
 
-add_custom_target(cleanall
-    COMMAND ${CMAKE_COMMAND} --target clean
-    COMMENT "Cleaning target"
-    VERBATIM
+set(dot_files *.log *.gmv *.gnuplot *.gpl *.eps *.pov *.vtk *.ucd *.d2)
+add_custom_target(rmdotdiles
+    COMMAND ${CMAKE_COMMAND} -E remove ${dot_files}
+    COMMENT "Removing dot files"
 )
 
 add_custom_target (distclean
@@ -72,7 +72,7 @@ add_custom_target (distclean
     # COMMAND find ${CMAKE_SOURCE_DIR} -type d -name CMakeFiles | xargs -r rm -rvf
     # COMMAND find ${CMAKE_SOURCE_DIR} -type f -name "*.marks" | xargs -r rm -vf
     COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target clean
-    COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target runclean
+    COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target rmdotdiles
     COMMAND ${CMAKE_COMMAND} -E remove_directory CMakeFiles
 	COMMAND ${CMAKE_COMMAND} -E remove CMakeCache.txt cmake_install.cmake Makefile
 	COMMENT "Cleaning target"
@@ -132,20 +132,21 @@ endif()
 if(NOT TARGET validate)
     add_custom_target(validate
         COMMENT "Validate the project is correct and all necessary information is available."
+		DEPENDS style
     )
 endif()
 
 if(NOT TARGET initialize)
     add_custom_target(initialize
         COMMENT "Initialize build state, e.g. set properties or create directories."
-        DEPENDS validate
+        DEPENDS validate cppcheck lint
     )
 endif()
 
 if(NOT TARGET generate-sources)
     add_custom_target(generate-sources
         COMMENT "Generate any source code for inclusion in compilation."
-        DEPENDS initialize
+        DEPENDS initialize cyclomatic
     )
 endif()
 
@@ -297,6 +298,13 @@ if(NOT TARGET ${PROJECT_NAME}-debug)
 	)
 endif()
 
+if(NOT TARGET coverage-debug)
+    add_custom_target(coverage-debug
+        COMMENT "Running cod ecoverage in debug mode."
+        DEPENDS${PROJECT_NAME}-debug
+    )
+endif()
+
 if(NOT TARGET ${PROJECT_NAME}-release)
 	add_custom_target(${PROJECT_NAME}-release
 		COMMAND ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=Release ${CMAKE_SOURCE_DIR} WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/build-${CMAKE_BUILD_TYPE}
@@ -304,3 +312,11 @@ if(NOT TARGET ${PROJECT_NAME}-release)
 		COMMENT "Switch CMAKE_BUILD_TYPE to Release. Building  Release application"
 	)
 endif()
+
+if(NOT TARGET coverage-release)
+    add_custom_target(coverage-release
+        COMMENT "Running cod ecoverage in debug mode."
+        DEPENDS${PROJECT_NAME}-release
+    )
+endif()
+
