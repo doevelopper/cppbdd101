@@ -121,6 +121,6 @@ Couple of typos fixed:
 
 The commit message format is important because these messages are used to create a changelog for each release. The tag and issue number help to create more consistent and useful changelogs.
 
-Copyright (c) 2018 Nicholas A.L H. All rights reserved.
+Copyright (c) 2018 Arian .L H. All rights reserved.
 Copyright (c) 2014-2017 Google, Inc. http://angular.io
 

@@ -1,0 +1,297 @@
+#ifndef @NSPACE@_CONFIG_HPP
+#defile @NSPACE@_CONFIG_HPP
+
+#include <type_traits>
+#include <cstddef>
+#include <utility>
+
+#ifdef __cplusplus
+#  if __cplusplus < 201402
+#    error requires a C++14 compiler and yours does not seem to be that.
+#  endif
+#endif
+
+#if defined(__linux__) || defined(__linux)
+    #define @NSPACE@_OS_LINUX
+#else
+    #error "Not support this OS"
+#endif
+
+#if defined(__GNUC__)
+    #define @NSPACE@_CC_GNU  (__GNUC__ * 100 + __GNUC_MINOR__)
+    #define @NSPACE@_DECL_DEPRECATED __attribute__ ((__deprecated__))
+    #if !defined(@NSPACE@_NAMESPACE) 
+        #define @NSPACE@_PREPEND_NAMESPACE(name) ::name
+        #define @NSPACE@_USE_NAMESPACE
+        #define @NSPACE@_BEGIN_NAMESPACE
+        #define @NSPACE@_END_NAMESPACE
+        #define @NSPACE@_BEGIN_INCLUDE_NAMESPACE
+        #define @NSPACE@_END_INCLUDE_NAMESPACE
+        #define @NSPACE@_FORWARD_DECLARE_CLASS(name) class name;
+        #define @NSPACE@_FORWARD_DECLARE_STRUCT(name) struct name;
+        #define @NSPACE@_MANGLE_NAMESPACE(name) name
+    #else
+        #define @NSPACE@_PREPEND_NAMESPACE(name) ::@NSPACE@_NAMESPACE::name
+        #define @NSPACE@_USE_NAMESPACE using namespace ::@NSPACE@_NAMESPACE;
+        #define @NSPACE@_BEGIN_NAMESPACE namespace @NSPACE@_NAMESPACE {
+        #define @NSPACE@_END_NAMESPACE }
+        #define @NSPACE@_BEGIN_INCLUDE_NAMESPACE }
+        #define @NSPACE@_END_INCLUDE_NAMESPACE namespace @NSPACE@_NAMESPACE {
+
+        #define @NSPACE@_FORWARD_DECLARE_CLASS(name) \
+            @NSPACE@_BEGIN_NAMESPACE class name; @NSPACE@_END_NAMESPACE \
+            using @NSPACE@_PREPEND_NAMESPACE(name);
+
+        #define @NSPACE@_FORWARD_DECLARE_STRUCT(name) \
+            @NSPACE@_BEGIN_NAMESPACE struct name; @NSPACE@_END_NAMESPACE \
+            using @NSPACE@_PREPEND_NAMESPACE(name);
+
+        #define @NSPACE@_MANGLE_NAMESPACE0(x) x
+        #define @NSPACE@_MANGLE_NAMESPACE1(a, b) a##_##b
+        #define @NSPACE@_MANGLE_NAMESPACE2(a, b) @NSPACE@_MANGLE_NAMESPACE1(a,b)
+        #define @NSPACE@_MANGLE_NAMESPACE(name) @NSPACE@_MANGLE_NAMESPACE2( \
+            @NSPACE@_MANGLE_NAMESPACE0(name), @NSPACE@_MANGLE_NAMESPACE0(@NSPACE@_NAMESPACE))
+
+        namespace @NSPACE@_NAMESPACE
+        {
+        }
+
+    #endif
+
+    @NSPACE@_BEGIN_NAMESPACE
+
+    #if defined(@NSPACE@_SHARED) || !defined(@NSPACE@_STATIC)
+        #ifdef @NSPACE@_STATIC
+            #error "Both @NSPACE@_SHARED and @NSPACE@_STATIC defined, please make up your mind"
+    #endif
+    #ifndef @NSPACE@_SHARED
+            #define @NSPACE@_SHARED
+    #endif
+    #if defined(@NSPACE@_BUILD_LIB)
+        #define @NSPACE@_CORE_EXPORT @NSPACE@_DECL_EXPORT
+    #else
+        #define @NSPACE@_CORE_EXPORT @NSPACE@_DECL_IMPORT
+    #endif
+    #else
+    #define @NSPACE@_CORE_EXPORT
+    #endif
+
+    #if defined(@NSPACE@_CC_GNU)
+        #define @NSPACE@_NEVER_INLINE __attribute__((noinline))
+        #define @NSPACE@_ALWAYS_INLINE inline __attribute__((always_inline))
+    #else
+        #define @NSPACE@_NEVER_INLINE
+        #define @NSPACE@_ALWAYS_INLINE inline
+    #endif
+
+    #define @NSPACE@_UNUSED(x) (void)x;
+    #define NOOP(x) do { } while (0) // ((void)0)
+
+    template < typename T > 
+    static inline T * ptrHelper (T * ptr)
+    {
+        return ptr;
+    }
+    
+    @NSPACE@_END_NAMESPACE
+#else
+
+#endif
+
+    #  ifdef @NSPACE@_OS_LINUX
+    #    define @NSPACE@_DECL_EXPORT         __attribute__((visibility("default")))
+    #    define @NSPACE@_DECL_IMPORT         __attribute__((visibility("default")))
+    #    define @NSPACE@_DECL_HIDDEN         __attribute__((visibility("hidden")))
+    #  else
+    #    define @NSPACE@_DECL_EXPORT         __declspec(dllexport)
+    #    define @NSPACE@_DECL_IMPORT         __declspec(dllimport)
+    #  endif
+
+    #  define @NSPACE@_FUNC_INFO             __PRETTY_FUNCTION__
+    #  define @NSPACE@_DECL_UNUSED           __attribute__((__unused__))
+    #  define @NSPACE@_NORETURN              __attribute__((__noreturn__))
+    #  define @NSPACE@_DECL_PURE_FUNCTION    __attribute__((pure))
+    #  define @NSPACE@_DECL_CONST_FUNCTION   __attribute__((const))
+    #  define @NSPACE@_PACKED                __attribute__ ((__packed__))
+    #  define @NSPACE@_UNREACHABLE_IMPL()    __assume(0)
+
+    #ifdef @NSPACE@_COMPILER_NULLPTR
+    # define @NSPACE@_NULLPTR         nullptr
+    #else
+    # define @NSPACE@_NULLPTR         NULL
+    #endif
+
+    #ifdef @NSPACE@_COMPILER_DEFAULT_MEMBERS
+        #  define @NSPACE@_DECL_EQ_DEFAULT = default
+    #else
+        #  define @NSPACE@_DECL_EQ_DEFAULT
+    #endif
+
+    #ifdef @NSPACE@_COMPILER_DELETE_MEMBERS
+        # define @NSPACE@_DECL_EQ_DELETE = delete
+    #else
+        # define @NSPACE@_DECL_EQ_DELETE
+    #endif
+
+    #if defined @NSPACE@_COMPILER_CONSTEXPR
+        # if defined(__cpp_constexpr) && __cpp_constexpr-0 >= 201304
+            #  define @NSPACE@_DECL_CONSTEXPR constexpr
+            #  define @NSPACE@_DECL_RELAXED_CONSTEXPR constexpr
+            #  define @NSPACE@_CONSTEXPR constexpr
+            #  define @NSPACE@_RELAXED_CONSTEXPR constexpr
+        # else
+            #  define @NSPACE@_DECL_CONSTEXPR constexpr
+            #  define @NSPACE@_DECL_RELAXED_CONSTEXPR
+            #  define @NSPACE@_CONSTEXPR constexpr
+            #  define @NSPACE@_RELAXED_CONSTEXPR const
+        # endif
+    #else
+        # define @NSPACE@_DECL_CONSTEXPR
+        # define @NSPACE@_DECL_RELAXED_CONSTEXPR
+        # define @NSPACE@_CONSTEXPR const
+        # define @NSPACE@_RELAXED_CONSTEXPR const
+    #endif
+
+    #ifdef @NSPACE@_COMPILER_EXPLICIT_OVERRIDES
+        # define @NSPACE@_DECL_OVERRIDE override
+        # define @NSPACE@_DECL_FINAL final
+    #else
+        # ifndef @NSPACE@_DECL_OVERRIDE
+            #  define @NSPACE@_DECL_OVERRIDE
+        # endif
+
+        # ifndef @NSPACE@_DECL_FINAL
+            #  define @NSPACE@_DECL_FINAL
+        # endif
+    #endif
+
+    #if defined @NSPACE@_COMPILER_CONSTEXPR
+        # if defined(__cpp_constexpr) && __cpp_constexpr-0 >= 201304
+            #  define @NSPACE@_DECL_CONSTEXPR constexpr
+            #  define @NSPACE@_DECL_RELAXED_CONSTEXPR constexpr
+            #  define @NSPACE@_CONSTEXPR constexpr
+            #  define @NSPACE@_RELAXED_CONSTEXPR constexpr
+        # else
+            #  define @NSPACE@_DECL_CONSTEXPR constexpr
+            #  define @NSPACE@_DECL_RELAXED_CONSTEXPR
+            #  define @NSPACE@_CONSTEXPR constexpr
+            #  define @NSPACE@_RELAXED_CONSTEXPR const
+        # endif
+    #else
+        # define @NSPACE@_DECL_CONSTEXPR
+        # define @NSPACE@_DECL_RELAXED_CONSTEXPR
+        # define @NSPACE@_CONSTEXPR const
+        # define @NSPACE@_RELAXED_CONSTEXPR const
+    #endif
+
+    #ifdef @NSPACE@_COMPILER_EXPLICIT_OVERRIDES
+        # define @NSPACE@_DECL_OVERRIDE override
+        # define @NSPACE@_DECL_FINAL final
+    #else
+        # ifndef @NSPACE@_DECL_OVERRIDE
+            #  define @NSPACE@_DECL_OVERRIDE
+        # endif
+        # ifndef @NSPACE@_DECL_FINAL
+            #  define @NSPACE@_DECL_FINAL
+        # endif
+    #endif
+
+    #ifdef @NSPACE@_COMPILER_RVALUE_REFS
+        #define nsMove(x) std::move(x)
+    #else
+        #define nsMove(x) (x)
+    #endif
+
+    #ifdef @NSPACE@_COMPILER_RVALUE_REFS
+        #define qMove(x) std::move(x)
+    #else
+        #define qMove(x) (x)
+    #endif
+
+    #define @NSPACE@_UNREACHABLE() \
+        do {\
+            @NSPACE@_ASSERT_X(false, "@NSPACE@_UNREACHABLE()", "@NSPACE@_UNREACHABLE was reached");\
+            @NSPACE@_UNREACHABLE_IMPL();\
+        } while (0)
+
+    #define @NSPACE@_ASSUME(Expr) \
+        do {\
+            const bool valueOfExpression = Expr;\
+            @NSPACE@_ASSERT_X(valueOfExpression, "@NSPACE@_ASSUME()", "Assumption in @NSPACE@_ASSUME(\"" #Expr "\") was not correct");\
+            @NSPACE@_ASSUME_IMPL(valueOfExpression);\
+        } while (0)
+
+    #ifndef @NSPACE@_FALLTHROUGH
+        #  if (defined(@NSPACE@_CC_GNU) && @NSPACE@_CC_GNU >= 700) && !defined(@NSPACE@_CC_INTEL)
+            #    define @NSPACE@_FALLTHROUGH() __attribute__((fallthrough))
+        #  else
+            #    define @NSPACE@_FALLTHROUGH() (void)0
+    #endif
+
+    #if defined(__cplusplus)
+        #if QT_HAS_CPP_ATTRIBUTE(fallthrough)
+            #  define @NSPACE@_FALLTHROUGH() [[fallthrough]]
+        #elif QT_HAS_CPP_ATTRIBUTE(clang::fallthrough)
+            #    define @NSPACE@_FALLTHROUGH() [[clang::fallthrough]]
+        #elif QT_HAS_CPP_ATTRIBUTE(gnu::fallthrough)
+            #    define @NSPACE@_FALLTHROUGH() [[gnu::fallthrough]]
+        #endif
+    #endif
+
+    template < typename T > 
+    static inline T * ptrTypeHelper (T * ptr)
+    {
+        return ptr;
+    }
+
+    template < typename Wrapper > 
+    static inline typename  std::shared_ptr
+    ptrTypeHelper (const Wrapper & p)
+    {
+        return p.get ();
+    }
+
+    #define @NSPACE@_DECLARE_PRIVATE(Class)                                         \
+        inline Class##Private* d_func()                                             \
+        {                                                                           \
+            return reinterpret_cast<Class##Private *>(ptrTypeHelper(d_ptr));        \
+        }                                                                           \
+        inline const Class##Private* d_func() const                                 \
+        {                                                                           \
+            return reinterpret_cast<const Class##Private *>(ptrTypeHelper(d_ptr));  \
+        }                                                                           \
+        friend class Class##Private;
+
+    #define @NSPACE@_DECLARE_PRIVATE_D(Dptr, Class)                                 \
+        inline Class##Private* d_func()                                             \
+        {                                                                           \
+            return reinterpret_cast<Class##Private *>(ptrTypeHelper(Dptr));         \
+        }                                                                           \
+        inline const Class##Private* d_func() const                                 \
+        {                                                                           \
+            return reinterpret_cast<const Class##Private *>(ptrTypeHelper(Dptr));   \
+        }                                                                           \
+        friend class Class##Private;
+
+    #define @NSPACE@_DECLARE_PUBLIC(Class)                                          \
+        inline Class* q_func()                                                      \
+        {                                                                           \
+            return static_cast<Class *>(q_ptr);                                     \
+        }                                                                           \
+        inline const Class* q_func() const                                          \
+        {                                                                           \
+            return static_cast<const Class *>(q_ptr);                               \
+        }                                                                           \
+        friend class Class;
+
+    #define @NSPACE@_DISABLE_COPY(Class)                                            \
+        Class(const Class &) @NSPACE@_DECL_EQ_DELETE; \
+        Class &operator = (const Class &) @NSPACE@_DECL_EQ_DELETE;
+
+    // With @NSPACE@_D you can use the members of Class##Private from Class
+    #define @NSPACE@_D(Class) Class##Private * const d = d_func()
+
+    // With @NSPACE@_Q you can use the members of Class from Class##Private
+    #define @NSPACE@_Q(Class) Class * const q = q_func()
+
+#endif

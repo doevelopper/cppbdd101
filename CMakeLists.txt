@@ -31,7 +31,7 @@ list(APPEND CMAKE_MODULE_PATH
     "${CMAKE_SOURCE_DIR}/src/test/resources/cmakeTestModule"
 )
 
-set (NS "cpp101")
+set (NSPACE "L")
 
 include(PreventInSourceBuilds)
 include(DefinePlatformSpecifc)
@@ -56,6 +56,12 @@ find_package(Doxygen  REQUIRED
              dot
              OPTIONAL_COMPONENTS mscgen dia
 )
+
+configure_file("${PROJECT_SOURCE_DIR}/src/main/resources/Config.hpp.in"
+               "${CMAKE_CURRENT_BINARY_DIR}/cppbdd101/Config.hpp"
+				@ONLY
+)
+
 enable_testing()
 
 add_subdirectory(edac)

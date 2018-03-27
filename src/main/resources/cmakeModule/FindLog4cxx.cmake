@@ -5,7 +5,7 @@
 # FindPNG
 # -------
 #
-# Find libpng, the official reference library for the LOG4CXX image format.
+# Find liblog4cxx, the official reference library for the LOG4CXX image format.
 #
 # Imported targets
 # ^^^^^^^^^^^^^^^^
@@ -13,7 +13,7 @@
 # This module defines the following :prop_tgt:`IMPORTED` target:
 #
 # ``LOG4CXX::LOG4CXX``
-#   The libpng library, if found.
+#   The liblog4cxx library, if found.
 #
 # Result variables
 # ^^^^^^^^^^^^^^^^
@@ -21,12 +21,12 @@
 # This module will set the following variables in your project:
 #
 # ``LOG4CXX_INCLUDE_DIRS``
-#   where to find png.h, etc.
+#   where to find log4cxx.h, etc.
 # ``LOG4CXX_LIBRARIES``
 #   the libraries to link against to use LOG4CXX.
 # ``LOG4CXX_DEFINITIONS``
 #   You should add_definitions(${LOG4CXX_DEFINITIONS}) before compiling code
-#   that includes png library files.
+#   that includes log4cxx library files.
 # ``LOG4CXX_FOUND``
 #   If false, do not try to use LOG4CXX.
 # ``LOG4CXX_VERSION_STRING``
@@ -84,7 +84,7 @@ if(APR_FOUND AND APRUTIL_FOUND)
         set(LOG4CXX_INCLUDE_DIRS ${LOG4CXX_LOG4CXX_INCLUDE_DIR} ${APR_INCLUDE_DIR} )
         set(LOG4CXX_INCLUDE_DIR ${LOG4CXX_LOG4CXX_INCLUDE_DIR} ) # for backward compatibility
         set(LOG4CXX_LIBRARIES ${LOG4CXX_LIBRARY} ${APR_LIBRARY} ${EXPAT_LIBRARY} ${APRUTIL_LIBRARY})
-        set(LOG4CXX_DEFINITIONS -DLOG4CXX_STATIC)
+        # set(LOG4CXX_DEFINITIONS -DLOG4CXX_STATIC)
 
         if(NOT TARGET LOG4CXX::LOG4CXX)
             add_library(LOG4CXX::LOG4CXX UNKNOWN IMPORTED)
@@ -111,7 +111,7 @@ if(APR_FOUND AND APRUTIL_FOUND)
                 set_property(TARGET LOG4CXX::LOG4CXX APPEND PROPERTY
                     IMPORTED_CONFIGURATIONS DEBUG)
                 set_target_properties(LOG4CXX::LOG4CXX PROPERTIES
-                    IMPORTED_LINK_INTERFACE_LANGUAGES_DEBUG "C"
+                    IMPORTED_LINK_INTERFACE_LANGUAGES_DEBUG "CXX"
                     IMPORTED_LOCATION_DEBUG "${LOG4CXX_LIBRARY_DEBUG}")
             endif(EXISTS "${LOG4CXX_LIBRARY_DEBUG}")
 
@@ -124,7 +124,8 @@ if(APR_FOUND AND APRUTIL_FOUND)
                                       REQUIRED_VARS LOG4CXX_LIBRARY LOG4CXX_LOG4CXX_INCLUDE_DIR
                                       VERSION_VAR LOG4CXX_VERSION_STRING)
 else(APR_FOUND AND APRUTIL_FOUND)
-    MESSAGE(FATAL_ERROR "Could not find APR library")
+    MESSAGE(FATAL_ERROR "Could not find APR/APRu library")
 endif(APR_FOUND AND APRUTIL_FOUND)
-
+# message (STATUS "LOG4CXX_LIBRARY ${LOG4CXX_LIBRARY}")
+# message (STATUS "LOG4CXX_LOG4CXX_INCLUDE_DIR ${LOG4CXX_LOG4CXX_INCLUDE_DIR}")
 mark_as_advanced(LOG4CXX_LOG4CXX_INCLUDE_DIR LOG4CXX_LIBRARY )
