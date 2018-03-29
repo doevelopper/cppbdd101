@@ -11,80 +11,86 @@
 #  endif
 #endif
 
-#if defined(__linux__) || defined(__linux)
-    #define @NSPACE@_OS_LINUX
+#if defined(__linux__) || defined(__linux) || defined(__MINGW64__)
+    #define ABI_OS_LINUX
+    #define ABI_OS_LINUX_LIKE
 #else
-    #error "Not support this OS"
+    #error "This OS is not supported "
 #endif
 
 #if defined(__GNUC__)
-    #define @NSPACE@_CC_GNU  (__GNUC__ * 100 + __GNUC_MINOR__)
-    #define @NSPACE@_DECL_DEPRECATED __attribute__ ((__deprecated__))
-    #if !defined(@NSPACE@_NAMESPACE) 
-        #define @NSPACE@_PREPEND_NAMESPACE(name) ::name
-        #define @NSPACE@_USE_NAMESPACE
-        #define @NSPACE@_BEGIN_NAMESPACE
-        #define @NSPACE@_END_NAMESPACE
-        #define @NSPACE@_BEGIN_INCLUDE_NAMESPACE
-        #define @NSPACE@_END_INCLUDE_NAMESPACE
-        #define @NSPACE@_FORWARD_DECLARE_CLASS(name) class name;
-        #define @NSPACE@_FORWARD_DECLARE_STRUCT(name) struct name;
-        #define @NSPACE@_MANGLE_NAMESPACE(name) name
+    #define CC_GNU  (__GNUC__ * 100 + __GNUC_MINOR__)
+    #define ABI_DECL_DEPRECATED __attribute__ ((__deprecated__))
+
+    #if !defined(ABI_NAMESPACE) 
+        #define ABI_PREPEND_NAMESPACE(name) ::name
+        #define ABI_USE_NAMESPACE
+        #define ABI_BEGIN_NAMESPACE
+        #define ABI_END_NAMESPACE
+        #define ABI_BEGIN_INCLUDE_NAMESPACE
+        #define ABI_END_INCLUDE_NAMESPACE
+        #define ABI_FORWARD_DECLARE_CLASS(name) class name;
+        #define ABI_FORWARD_DECLARE_STRUCT(name) struct name;
+        #define ABI_MANGLE_NAMESPACE(name) name
     #else
-        #define @NSPACE@_PREPEND_NAMESPACE(name) ::@NSPACE@_NAMESPACE::name
-        #define @NSPACE@_USE_NAMESPACE using namespace ::@NSPACE@_NAMESPACE;
-        #define @NSPACE@_BEGIN_NAMESPACE namespace @NSPACE@_NAMESPACE {
-        #define @NSPACE@_END_NAMESPACE }
-        #define @NSPACE@_BEGIN_INCLUDE_NAMESPACE }
-        #define @NSPACE@_END_INCLUDE_NAMESPACE namespace @NSPACE@_NAMESPACE {
+        #define ABI_PREPEND_NAMESPACE(name) ::ABI_NAMESPACE::name
+        #define ABI_USE_NAMESPACE using namespace ::ABI_NAMESPACE;
+        #define ABI_BEGIN_NAMESPACE namespace ABI_NAMESPACE {
+        #define ABI_END_NAMESPACE }
+        #define ABI_BEGIN_INCLUDE_NAMESPACE }
+        #define ABI_END_INCLUDE_NAMESPACE namespace ABI_NAMESPACE {
 
-        #define @NSPACE@_FORWARD_DECLARE_CLASS(name) \
-            @NSPACE@_BEGIN_NAMESPACE class name; @NSPACE@_END_NAMESPACE \
-            using @NSPACE@_PREPEND_NAMESPACE(name);
+        #define ABI_FORWARD_DECLARE_CLASS(name) \
+            ABI_BEGIN_NAMESPACE class name; ABI_END_NAMESPACE \
+            using ABI_PREPEND_NAMESPACE(name);
 
-        #define @NSPACE@_FORWARD_DECLARE_STRUCT(name) \
-            @NSPACE@_BEGIN_NAMESPACE struct name; @NSPACE@_END_NAMESPACE \
-            using @NSPACE@_PREPEND_NAMESPACE(name);
+        #define ABI_FORWARD_DECLARE_STRUCT(name) \
+            ABI_BEGIN_NAMESPACE struct name; ABI_END_NAMESPACE \
+            using ABI_PREPEND_NAMESPACE(name);
 
-        #define @NSPACE@_MANGLE_NAMESPACE0(x) x
-        #define @NSPACE@_MANGLE_NAMESPACE1(a, b) a##_##b
-        #define @NSPACE@_MANGLE_NAMESPACE2(a, b) @NSPACE@_MANGLE_NAMESPACE1(a,b)
-        #define @NSPACE@_MANGLE_NAMESPACE(name) @NSPACE@_MANGLE_NAMESPACE2( \
-            @NSPACE@_MANGLE_NAMESPACE0(name), @NSPACE@_MANGLE_NAMESPACE0(@NSPACE@_NAMESPACE))
+        #define ABI_MANGLE_NAMESPACE0(x) x
+        #define ABI_MANGLE_NAMESPACE1(a, b) a##_##b
+        #define ABI_MANGLE_NAMESPACE2(a, b) ABI_MANGLE_NAMESPACE1(a,b)
+        #define ABI_MANGLE_NAMESPACE(name) ABI_MANGLE_NAMESPACE2( \
+            ABI_MANGLE_NAMESPACE0(name), ABI_MANGLE_NAMESPACE0(ABI_NAMESPACE))
 
-        namespace @NSPACE@_NAMESPACE
+        namespace ABI_NAMESPACE
         {
         }
 
     #endif
 
-    @NSPACE@_BEGIN_NAMESPACE
+    ABI_BEGIN_NAMESPACE
 
-    #if defined(@NSPACE@_SHARED) || !defined(@NSPACE@_STATIC)
-        #ifdef @NSPACE@_STATIC
-            #error "Both @NSPACE@_SHARED and @NSPACE@_STATIC defined, please make up your mind"
-    #endif
-    #ifndef @NSPACE@_SHARED
-            #define @NSPACE@_SHARED
-    #endif
-    #if defined(@NSPACE@_BUILD_LIB)
-        #define @NSPACE@_CORE_EXPORT @NSPACE@_DECL_EXPORT
-    #else
-        #define @NSPACE@_CORE_EXPORT @NSPACE@_DECL_IMPORT
-    #endif
-    #else
-    #define @NSPACE@_CORE_EXPORT
-    #endif
+    #if defined(ABI_SHARED) || !defined(ABI_STATIC)
 
-    #if defined(@NSPACE@_CC_GNU)
-        #define @NSPACE@_NEVER_INLINE __attribute__((noinline))
-        #define @NSPACE@_ALWAYS_INLINE inline __attribute__((always_inline))
+        #ifdef ABI_STATIC
+            #error "Both ABI_SHARED and ABI_STATIC defined, please make up your mind"
+		#endif
+
+		#ifndef ABI_SHARED
+				#define ABI_SHARED
+		#endif
+
+		#if defined(ABI_BUILD_LIB)
+			#define ABI_CORE_EXPORT ABI_DECL_EXPORT
+		#else
+			#define ABI_CORE_EXPORT ABI_DECL_IMPORT
+		#endif
+
     #else
-        #define @NSPACE@_NEVER_INLINE
-        #define @NSPACE@_ALWAYS_INLINE inline
+		#define ABI_CORE_EXPORT
     #endif
 
-    #define @NSPACE@_UNUSED(x) (void)x;
+    #if defined(ABI_CC_GNU)
+        #define ABI_NEVER_INLINE __attribute__((noinline))
+        #define ABI_ALWAYS_INLINE inline __attribute__((always_inline))
+    #else
+        #define ABI_NEVER_INLINE
+        #define ABI_ALWAYS_INLINE inline
+    #endif
+
+    #define ABI_UNUSED(x) (void)x;
     #define NOOP(x) do { } while (0) // ((void)0)
 
     template < typename T > 
@@ -93,148 +99,92 @@
         return ptr;
     }
     
-    @NSPACE@_END_NAMESPACE
+    ABI_END_NAMESPACE
 #else
 
 #endif
 
-    #  ifdef @NSPACE@_OS_LINUX
-    #    define @NSPACE@_DECL_EXPORT         __attribute__((visibility("default")))
-    #    define @NSPACE@_DECL_IMPORT         __attribute__((visibility("default")))
-    #    define @NSPACE@_DECL_HIDDEN         __attribute__((visibility("hidden")))
+    #  ifdef ABI_OS_LINUX
+    #    define ABI_DECL_EXPORT         __attribute__((visibility("default")))
+    #    define ABI_DECL_IMPORT         __attribute__((visibility("default")))
+    #    define ABI_DECL_HIDDEN         __attribute__((visibility("hidden")))
     #  else
-    #    define @NSPACE@_DECL_EXPORT         __declspec(dllexport)
-    #    define @NSPACE@_DECL_IMPORT         __declspec(dllimport)
+    #    define ABI_DECL_EXPORT         __declspec(dllexport)
+    #    define ABI_DECL_IMPORT         __declspec(dllimport)
+    #    define ABI_DECL_HIDDEN
     #  endif
 
-    #  define @NSPACE@_FUNC_INFO             __PRETTY_FUNCTION__
-    #  define @NSPACE@_DECL_UNUSED           __attribute__((__unused__))
-    #  define @NSPACE@_NORETURN              __attribute__((__noreturn__))
-    #  define @NSPACE@_DECL_PURE_FUNCTION    __attribute__((pure))
-    #  define @NSPACE@_DECL_CONST_FUNCTION   __attribute__((const))
-    #  define @NSPACE@_PACKED                __attribute__ ((__packed__))
-    #  define @NSPACE@_UNREACHABLE_IMPL()    __assume(0)
+    #  define ABI_FUNC_INFO             __PRETTY_FUNCTION__
+    #  define ABI_DECL_UNUSED           __attribute__((__unused__))
+    #  define ABI_NORETURN              __attribute__((__noreturn__))
+    #  define ABI_DECL_PURE_FUNCTION    __attribute__((pure))
+    #  define ABI_DECL_CONST_FUNCTION   __attribute__((const))
+    #  define ABI_PACKED                __attribute__ ((__packed__))
+    #  define ABI_UNREACHABLE_IMPL()    __assume(0)
+    #  define ABI_NULLPTR         		nullptr
+    #  define ABI_DECL_EQ_DEFAULT 		= default
+    #  define ABI_DECL_EQ_DELETE 		= delete
+	#  define ABI_DECL_OVERRIDE         override
+	#  define ABI_DECL_FINAL            final
 
-    #ifdef @NSPACE@_COMPILER_NULLPTR
-    # define @NSPACE@_NULLPTR         nullptr
-    #else
-    # define @NSPACE@_NULLPTR         NULL
-    #endif
-
-    #ifdef @NSPACE@_COMPILER_DEFAULT_MEMBERS
-        #  define @NSPACE@_DECL_EQ_DEFAULT = default
-    #else
-        #  define @NSPACE@_DECL_EQ_DEFAULT
-    #endif
-
-    #ifdef @NSPACE@_COMPILER_DELETE_MEMBERS
-        # define @NSPACE@_DECL_EQ_DELETE = delete
-    #else
-        # define @NSPACE@_DECL_EQ_DELETE
-    #endif
-
-    #if defined @NSPACE@_COMPILER_CONSTEXPR
+    #if defined ABI_COMPILER_CONSTEXPR
         # if defined(__cpp_constexpr) && __cpp_constexpr-0 >= 201304
-            #  define @NSPACE@_DECL_CONSTEXPR constexpr
-            #  define @NSPACE@_DECL_RELAXED_CONSTEXPR constexpr
-            #  define @NSPACE@_CONSTEXPR constexpr
-            #  define @NSPACE@_RELAXED_CONSTEXPR constexpr
+            #  define ABI_DECL_CONSTEXPR constexpr
+            #  define ABI_DECL_RELAXED_CONSTEXPR constexpr
+            #  define ABI_CONSTEXPR constexpr
+            #  define ABI_RELAXED_CONSTEXPR constexpr
         # else
-            #  define @NSPACE@_DECL_CONSTEXPR constexpr
-            #  define @NSPACE@_DECL_RELAXED_CONSTEXPR
-            #  define @NSPACE@_CONSTEXPR constexpr
-            #  define @NSPACE@_RELAXED_CONSTEXPR const
+            #  define ABI_DECL_CONSTEXPR constexpr
+            #  define ABI_DECL_RELAXED_CONSTEXPR
+            #  define ABI_CONSTEXPR constexpr
+            #  define ABI_RELAXED_CONSTEXPR const
         # endif
     #else
-        # define @NSPACE@_DECL_CONSTEXPR
-        # define @NSPACE@_DECL_RELAXED_CONSTEXPR
-        # define @NSPACE@_CONSTEXPR const
-        # define @NSPACE@_RELAXED_CONSTEXPR const
+        # define ABI_DECL_CONSTEXPR
+        # define ABI_DECL_RELAXED_CONSTEXPR
+        # define ABI_CONSTEXPR const
+        # define ABI_RELAXED_CONSTEXPR const
     #endif
 
-    #ifdef @NSPACE@_COMPILER_EXPLICIT_OVERRIDES
-        # define @NSPACE@_DECL_OVERRIDE override
-        # define @NSPACE@_DECL_FINAL final
-    #else
-        # ifndef @NSPACE@_DECL_OVERRIDE
-            #  define @NSPACE@_DECL_OVERRIDE
-        # endif
-
-        # ifndef @NSPACE@_DECL_FINAL
-            #  define @NSPACE@_DECL_FINAL
-        # endif
-    #endif
-
-    #if defined @NSPACE@_COMPILER_CONSTEXPR
-        # if defined(__cpp_constexpr) && __cpp_constexpr-0 >= 201304
-            #  define @NSPACE@_DECL_CONSTEXPR constexpr
-            #  define @NSPACE@_DECL_RELAXED_CONSTEXPR constexpr
-            #  define @NSPACE@_CONSTEXPR constexpr
-            #  define @NSPACE@_RELAXED_CONSTEXPR constexpr
-        # else
-            #  define @NSPACE@_DECL_CONSTEXPR constexpr
-            #  define @NSPACE@_DECL_RELAXED_CONSTEXPR
-            #  define @NSPACE@_CONSTEXPR constexpr
-            #  define @NSPACE@_RELAXED_CONSTEXPR const
-        # endif
-    #else
-        # define @NSPACE@_DECL_CONSTEXPR
-        # define @NSPACE@_DECL_RELAXED_CONSTEXPR
-        # define @NSPACE@_CONSTEXPR const
-        # define @NSPACE@_RELAXED_CONSTEXPR const
-    #endif
-
-    #ifdef @NSPACE@_COMPILER_EXPLICIT_OVERRIDES
-        # define @NSPACE@_DECL_OVERRIDE override
-        # define @NSPACE@_DECL_FINAL final
-    #else
-        # ifndef @NSPACE@_DECL_OVERRIDE
-            #  define @NSPACE@_DECL_OVERRIDE
-        # endif
-        # ifndef @NSPACE@_DECL_FINAL
-            #  define @NSPACE@_DECL_FINAL
-        # endif
-    #endif
-
-    #ifdef @NSPACE@_COMPILER_RVALUE_REFS
+    #ifdef ABI_COMPILER_RVALUE_REFS
         #define nsMove(x) std::move(x)
     #else
         #define nsMove(x) (x)
     #endif
 
-    #ifdef @NSPACE@_COMPILER_RVALUE_REFS
+    #ifdef ABI_COMPILER_RVALUE_REFS
         #define qMove(x) std::move(x)
     #else
         #define qMove(x) (x)
     #endif
 
-    #define @NSPACE@_UNREACHABLE() \
+    #define ABI_UNREACHABLE() \
         do {\
-            @NSPACE@_ASSERT_X(false, "@NSPACE@_UNREACHABLE()", "@NSPACE@_UNREACHABLE was reached");\
-            @NSPACE@_UNREACHABLE_IMPL();\
+            ABI_ASSERT_X(false, "ABI_UNREACHABLE()", "ABI_UNREACHABLE was reached");\
+            ABI_UNREACHABLE_IMPL();\
         } while (0)
 
-    #define @NSPACE@_ASSUME(Expr) \
+    #define ABI_ASSUME(Expr) \
         do {\
             const bool valueOfExpression = Expr;\
-            @NSPACE@_ASSERT_X(valueOfExpression, "@NSPACE@_ASSUME()", "Assumption in @NSPACE@_ASSUME(\"" #Expr "\") was not correct");\
-            @NSPACE@_ASSUME_IMPL(valueOfExpression);\
+            ABI_ASSERT_X(valueOfExpression, "ABI_ASSUME()", "Assumption in ABI_ASSUME(\"" #Expr "\") was not correct");\
+            ABI_ASSUME_IMPL(valueOfExpression);\
         } while (0)
 
-    #ifndef @NSPACE@_FALLTHROUGH
-        #  if (defined(@NSPACE@_CC_GNU) && @NSPACE@_CC_GNU >= 700) && !defined(@NSPACE@_CC_INTEL)
-            #    define @NSPACE@_FALLTHROUGH() __attribute__((fallthrough))
+    #ifndef ABI_FALLTHROUGH
+        #  if (defined(ABI_CC_GNU) && ABI_CC_GNU >= 700) && !defined(ABI_CC_INTEL)
+            #    define ABI_FALLTHROUGH() __attribute__((fallthrough))
         #  else
-            #    define @NSPACE@_FALLTHROUGH() (void)0
+            #    define ABI_FALLTHROUGH() (void)0
     #endif
 
     #if defined(__cplusplus)
-        #if QT_HAS_CPP_ATTRIBUTE(fallthrough)
-            #  define @NSPACE@_FALLTHROUGH() [[fallthrough]]
-        #elif QT_HAS_CPP_ATTRIBUTE(clang::fallthrough)
-            #    define @NSPACE@_FALLTHROUGH() [[clang::fallthrough]]
-        #elif QT_HAS_CPP_ATTRIBUTE(gnu::fallthrough)
-            #    define @NSPACE@_FALLTHROUGH() [[gnu::fallthrough]]
+        #if HAS_CPP_ATTRIBUTE(fallthrough)
+            #  define ABI_FALLTHROUGH() [[fallthrough]]
+        #elif HAS_CPP_ATTRIBUTE(clang::fallthrough)
+            #    define ABI_FALLTHROUGH() [[clang::fallthrough]]
+        #elif HAS_CPP_ATTRIBUTE(gnu::fallthrough)
+            #    define ABI_FALLTHROUGH() [[gnu::fallthrough]]
         #endif
     #endif
 
@@ -251,7 +201,7 @@
         return p.get ();
     }
 
-    #define @NSPACE@_DECLARE_PRIVATE(Class)                                         \
+    #define ABI_DECLARE_PRIVATE(Class)                                         \
         inline Class##Private* d_func()                                             \
         {                                                                           \
             return reinterpret_cast<Class##Private *>(ptrTypeHelper(d_ptr));        \
@@ -262,7 +212,7 @@
         }                                                                           \
         friend class Class##Private;
 
-    #define @NSPACE@_DECLARE_PRIVATE_D(Dptr, Class)                                 \
+    #define ABI_DECLARE_PRIVATE_D(Dptr, Class)                                 \
         inline Class##Private* d_func()                                             \
         {                                                                           \
             return reinterpret_cast<Class##Private *>(ptrTypeHelper(Dptr));         \
@@ -273,7 +223,7 @@
         }                                                                           \
         friend class Class##Private;
 
-    #define @NSPACE@_DECLARE_PUBLIC(Class)                                          \
+    #define ABI_DECLARE_PUBLIC(Class)                                          \
         inline Class* q_func()                                                      \
         {                                                                           \
             return static_cast<Class *>(q_ptr);                                     \
@@ -284,14 +234,71 @@
         }                                                                           \
         friend class Class;
 
-    #define @NSPACE@_DISABLE_COPY(Class)                                            \
-        Class(const Class &) @NSPACE@_DECL_EQ_DELETE; \
-        Class &operator = (const Class &) @NSPACE@_DECL_EQ_DELETE;
+    #define ABI_DISABLE_COPY(Class)                                            \
+        Class(const Class &) ABI_DECL_EQ_DELETE; \
+        Class &operator = (const Class &) ABI_DECL_EQ_DELETE;
 
-    // With @NSPACE@_D you can use the members of Class##Private from Class
-    #define @NSPACE@_D(Class) Class##Private * const d = d_func()
+    // With ABI_D you can use the members of Class##Private from Class
+    #define ABI_D(Class) Class##Private * const d = d_func()
 
-    // With @NSPACE@_Q you can use the members of Class from Class##Private
-    #define @NSPACE@_Q(Class) Class * const q = q_func()
+    // With ABI_Q you can use the members of Class from Class##Private
+    #define ABI_Q(Class) Class * const q = q_func()
+/*!
+ * How to
+ * 
 
+    std::function<void(int)> f1 = noop{};
+    f1(3);
+    std::function<int(std::string, char, double)> f2 = noop{};
+    
+    std::function<std::string const&(int)> f3 = noop{};
+    
+    int x = noop::anything{};
+    (void)x;
+    int const& y = noop::anything{};
+    (void)y;
+    
+    std::cout << "f3 creates: " << f3(2) << std::endl;
+*/
+class NoOp 
+{
+    class anything 
+    {
+        template<class T>
+        operator T()
+        { 
+            return {}; 
+        }
+
+        // optional reference support.  Somewhat evil.
+        template<class T>
+        operator const T&()const
+        { 
+            static T t{}; 
+            return t; 
+        }
+    };
+	
+    template<class...Args>
+    anything operator()(Args&&...)const
+    {
+        return {};
+    }
+	
+    template<class...Args>
+    operator std::function<void(Args...)>() 
+    {
+        return [](auto&&...){};
+    }
+	
+    template <typename RESULT, typename... Args>
+    std::function<RESULT(Args...)> getFuncNoOp()
+    {
+            // && avoids unnecessary copying. Thanks @Yakk
+            return [](Args&&...) 
+        { 
+            return RESULT(); 
+        }; 
+    }	
+};
 #endif

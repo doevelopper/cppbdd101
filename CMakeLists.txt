@@ -62,6 +62,7 @@ configure_file("${PROJECT_SOURCE_DIR}/src/main/resources/Config.hpp.in"
 				@ONLY
 )
 
+include(CTest)
 enable_testing()
 
 add_subdirectory(edac)

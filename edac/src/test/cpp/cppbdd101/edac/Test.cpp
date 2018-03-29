@@ -111,8 +111,9 @@ int cppbdd101::test::Test::run (int argc, char * argv[])
 
     try
     {
+        // LOG4CXX_TRACE(didactics::test::logger , "Innitializing google mock");
         // ::testing::InitGoogleTest(&argc , argv);
-        ::testing::InitGoogleMock(&argc, argv);
+		::testing::InitGoogleMock(&argc , argv);
     }
     catch ( std::exception & e )
     {
@@ -123,11 +124,20 @@ int cppbdd101::test::Test::run (int argc, char * argv[])
     }
     catch ( ... )
     {
-        LOG4CXX_ERROR(logger, "Unhandled exception!");
+        LOG4CXX_FATAL(logger, "Unhandled exception!");
 
         // std::cerr << "Unhandled exception" <<std::endl;
     }
+    const ::testing::TestInfo * const testInfo = ::testing::UnitTest::GetInstance()->current_test_info();
+    //    LOG4CXX_TRACE(logger , ">>>>>>>>!!!!Test Name!!!!>>>>>>>> ("
+    //                << testInfo->name() <<")");
+    //
+    //    LOG4CXX_TRACE(logger , ">>>>>>>>!!!!Test Case Name!!!!>>>>>>>> ("
+    //                << testInfo->test_case_name() <<")");
 
+    //    LOG4CXX_TRACE(logger , ">>>>>>>>!!!!Star running unit test!!!!>>>>>>>> ("
+    //                << ::testing::UnitTest::GetInstance()->test_case_to_run_count() <<")");
+//    LOG4CXX_TRACE(didactics::test::logger , "Running unit test" <<  ::testing::UnitTest::GetInstance()->current_test_info())
     return RUN_ALL_TESTS();
 }
 

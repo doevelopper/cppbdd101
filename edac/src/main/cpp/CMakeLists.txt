@@ -30,15 +30,21 @@ target_compile_features(
 
 target_link_libraries(
     ${ModuleName}.main
-    PUBLIC LOG4CXX::LOG4CXX
+    ${APR_LIBRARY} ${EXPAT_LIBRARY} ${APRUTIL_LIBRARY} ${LOG4CXX_LIBRARY}
 )
 
 target_include_directories(${ModuleName}.main PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/edac>
-  $<INSTALL_INTERFACE:${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/edac>  # <prefix>/include/edac
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/cppbdd101>
+  $<INSTALL_INTERFACE:${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/cppbdd101>  # <prefix>/include/edac
 )
 
-add_dependencies(compile ${ModuleName}.main)
+# target_link_libraries(
+    # ${ModuleName}.main
+    # PUBLIC LOG4CXX::LOG4CXX
+# )
+
+
+# add_dependencies(compile ${ModuleName}.main)
 
 
 #target_sources(edac
