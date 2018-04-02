@@ -1,6 +1,6 @@
 set(SOURCE_FILES
-    cppbdd101/edac/ErrorsListTest
-    cppbdd101/edac/EdacErrorTest
+    # cppbdd101/edac/ErrorsListTest
+    # cppbdd101/edac/EdacErrorTest
     cppbdd101/edac/Test
 )
 
@@ -21,16 +21,16 @@ target_link_libraries(${ModuleName}.test PRIVATE ${GTEST_LIBRARY} ${ModuleName}.
 
 
 target_link_libraries (${ModuleName}.test.bin
-                        ${LOG4CXX_LIBRARIES}
-                        ${APRUTIL_LIBRARY}
+						${ModuleName}.test
                         ${APR_LIBRARY}
                         ${EXPAT_LIBRARY}
+                        ${APRUTIL_LIBRARY}
                         ${GTEST_LIBRARY}
+                        ${LOG4CXX_LIBRARIES}
                         ## ${GMOCK_LIBRARIES}
                         ## gmock_main.d
                         # pthread
-                        ${ModuleName}.main
-						${ModuleName}.test
+                        # ${ModuleName}.main
 )
 
 

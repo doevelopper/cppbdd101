@@ -21,7 +21,7 @@ cppbdd101::test::Test::~Test()
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
 }
-
+/*
 int cppbdd101::test::Test::run (int argc, char * argv[])
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
@@ -86,12 +86,12 @@ int cppbdd101::test::Test::run (int argc, char * argv[])
                  << "Number Of Iteration " << m_numberOfTestIteration
                  << "xml report ouput path " << outputPath);
 
-    ::testing::GTEST_FLAG(repeat) = m_numberOfTestIteration;
+    // ::testing::GTEST_FLAG(repeat) = m_numberOfTestIteration;
 
     // ::testing::GTEST_FLAG(filter) = suite;
     // GTEST_FLAG(output) = "xml:" + testOuputPath;
-    ::testing::GTEST_FLAG(output)  = "xml:Report.xml";
-    ::testing::FLAGS_gmock_verbose = "verbose";
+    // ::testing::GTEST_FLAG(output)  = "xml:Report.xml";
+    // ::testing::FLAGS_gmock_verbose = "verbose";
 
     //    ::testing::GTEST_FLAG(print_time) = false;
     // testing::GTEST_FLAG(also_run_disabled_tests);
@@ -111,14 +111,13 @@ int cppbdd101::test::Test::run (int argc, char * argv[])
 
     try
     {
-        // LOG4CXX_TRACE(didactics::test::logger , "Innitializing google mock");
+        LOG4CXX_TRACE(logger , "Innitializing google mock");
         // ::testing::InitGoogleTest(&argc , argv);
-		::testing::InitGoogleMock(&argc , argv);
+		// ::testing::InitGoogleMock(&argc , argv);
     }
     catch ( std::exception & e )
     {
-        LOG4CXX_ERROR(logger,
-                      "Issues while innitializing test environment" << typeid ( e ).name () << ": " << e.what () );
+        LOG4CXX_ERROR(logger,"Issues while innitializing test environment" << typeid ( e ).name () << ": " << e.what () );
 
         // std::cerr << "Issues while innitializing test environment" << typeid ( e ).name () << ": " << e.what () <<std::endl;
     }
@@ -128,7 +127,7 @@ int cppbdd101::test::Test::run (int argc, char * argv[])
 
         // std::cerr << "Unhandled exception" <<std::endl;
     }
-    const ::testing::TestInfo * const testInfo = ::testing::UnitTest::GetInstance()->current_test_info();
+    // const ::testing::TestInfo * const testInfo = ::testing::UnitTest::GetInstance()->current_test_info();
     //    LOG4CXX_TRACE(logger , ">>>>>>>>!!!!Test Name!!!!>>>>>>>> ("
     //                << testInfo->name() <<")");
     //
@@ -138,7 +137,7 @@ int cppbdd101::test::Test::run (int argc, char * argv[])
     //    LOG4CXX_TRACE(logger , ">>>>>>>>!!!!Star running unit test!!!!>>>>>>>> ("
     //                << ::testing::UnitTest::GetInstance()->test_case_to_run_count() <<")");
 //    LOG4CXX_TRACE(didactics::test::logger , "Running unit test" <<  ::testing::UnitTest::GetInstance()->current_test_info())
-    return RUN_ALL_TESTS();
+    // return RUN_ALL_TESTS();
 }
 
 void cppbdd101::test::Test::showUsage(std::string name)
@@ -151,3 +150,4 @@ void cppbdd101::test::Test::showUsage(std::string name)
               << "\t-l,--list Specify the list of tests to be executed\t Default netx to executable"
               << std::endl;
 }
+*/

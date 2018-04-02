@@ -1,33 +1,40 @@
+set(CUKE_BOOST_LIBS thread system regex date_time program_options)
+find_package(Boost COMPONENTS ${CUKE_BOOST_LIBS} QUIET)
 
-set(CUCUMBER_SOURCE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/cucumber)
-set(CUCUMBER_BUILD_DIRECTORY ${TARGET_BUILD_DIRECTORY}/cucumber-build)
+if(Boost_FOUND)
+	include(ExternalProject)
+	set(CUCUMBER_ROOT "${CMAKE_CURRENT_BINARY_DIR}/cucumber")
+	set(CUCUMBER_LIBRARY "${CUCUMBER_ROOT}/src/cucumber-cpp-build/src/libcucumber-cpp.a")
+	set(CUCUMBER_LIBRARY_NO_MAIN "${CUCUMBER_ROOT}/src/cucumber-cpp-build/src/libcucumber-cpp-nomain.a")
+	ExternalProject_Add(
+            cucumber-cpp 
+            # GIT_REPOSITORY https://github.com/konserw/cucumber-cpp.git
+            GIT_REPOSITORY https://github.com/cucumber/cucumber-cpp.git
+            GIT_TAG master
+            PREFIX ${CUCUMBER_ROOT}
+            CMAKE_ARGS -DCUKE_DISABLE_BOOST_TEST:bool=on -DCUKE_DISABLE_GTEST:bool=on -DCUKE_DISABLE_E2E_TESTS:bool=on -DCUKE_DISABLE_UNIT_TESTS:bool=on -DCUKE_ENABLE_EXAMPLES:bool=off -DGMOCK_VER:string=1.7.0
+            INSTALL_COMMAND ""
+            LOG_DOWNLOAD ON
+            LOG_CONFIGURE ON
+            LOG_BUILD ON
+            BUILD_BYPRODUCTS "${CUCUMBER_LIBRARY}"
+       #     BUILD_BYPRODUCTS "${CUCUMBER_LIBRARY_NO_MAIN}"
+	)
 
-file(MAKE_DIRECTORY ${CUCUMBER_BUILD_DIRECTORY}
-)
+	add_library(libcucumber-cpp IMPORTED STATIC GLOBAL)
+	# add_dependencies(libcucumber-cpp cucumber-cpp)
 
-set(CONFIGURE_FLAGS ${COMMON_CONFIGURE_FLAGS})
+	ExternalProject_Get_Property(cucumber-cpp source_dir binary_dir)
 
-add_custom_command(OUTPUT ${APR_UTIL_BUILD_DIRECTORY}/Makefile
-    COMMAND CC=${CMAKE_C_COMPILER} ${APR_UTIL_SOURCE_DIRECTORY}/configure ${CONFIGURE_FLAGS}
-    DEPENDS gtest
-    DEPENDS gmock
-    WORKING_DIRECTORY ${CUCUMBER_BUILD_DIRECTORY}
-)
+	if(NOT TARGET Cucumber::Cucumber-cpp)
+		add_library(Cucumber::Cucumber-cpp UNKNOWN IMPORTED)
+		set_target_properties(
+			Cucumber::Cucumber-cpp PROPERTIES
+			IMPORTED_LINK_INTERFACE_LANGUAGES "CXX"
+			IMPORTED_LOCATION "${CUKE_LIBRARY}"
+			INTERFACE_LINK_LIBRARIES "Threads::Threads"
+			INTERFACE_INCLUDE_DIRECTORIES "${CUKE_INCLUDE_DIRS}"
+		)
+	endif(NOT TARGET Cucumber::Cucumber-cpp)	
 
-add_custom_target(apr-util ALL make
-    DEPENDS ${CUCUMBER_BUILD_DIRECTORY}/Makefile
-    WORKING_DIRECTORY ${CUCUMBER_BUILD_DIRECTORY}
-    COMMENT "Build of cucumber-cpp library"
-)
-
-#add_dependencies(gmock gtest)
-
-install(
-    DIRECTORY ${APR_UTIL_LIBS_DIRECTORY}/
-    DESTINATION ${TARGET_BUILD_DIRECTORY}/lib
-    USE_SOURCE_PERMISSIONS
-    #FILES_MATCHING PATTERN libaprutil-1.so*
-    FILES_MATCHING PATTERN libcucumber-cpp.*
-)
-
-mark_as_advanced( FORCE CUCUMBER_BUILD_DIRECTORY)
+endif(Boost_FOUND)

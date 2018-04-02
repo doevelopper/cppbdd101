@@ -14,7 +14,7 @@ int main(int argc, char * argv[])
 
 	// delete whole;
 
-    cppbdd101::test::Test cppbdd101Test;    // = new cppbdd101::test::Test();
+    // cppbdd101::test::Test cppbdd101Test;    // = new cppbdd101::test::Test();
 
     // cppbdd101Test.run(&argc,&argv);
     return ( EXIT_SUCCESS );

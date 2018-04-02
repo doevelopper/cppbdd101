@@ -1,16 +1,16 @@
 
 set(SOURCE_FILES
-    cppbdd101/edac/ErrorsList
-    cppbdd101/edac/EdacError
-    cppbdd101/edac/LoggingService
-	cppbdd101/edac/ErrnoMapper
-	cppbdd101/edac/SystemError
-	cppbdd101/edac/FutureError
-	cppbdd101/edac/GenericError
-	cppbdd101/edac/IOError
-	cppbdd101/edac/LowLevelApiError
-	cppbdd101/edac/IsErrorActive
-	cppbdd101/edac/private/ErrorCodePrivate
+    # cppbdd101/edac/ErrorsList
+    # cppbdd101/edac/EdacError
+    # cppbdd101/edac/LoggingService
+	# cppbdd101/edac/ErrnoMapper
+	# cppbdd101/edac/SystemError
+	# cppbdd101/edac/FutureError
+	# cppbdd101/edac/GenericError
+	# cppbdd101/edac/IOError
+	# cppbdd101/edac/LowLevelApiError
+	# cppbdd101/edac/IsErrorActive
+	# cppbdd101/edac/private/ErrorCodePrivate
 	cppbdd101/edac/Exceptions
 )
 
@@ -30,7 +30,14 @@ target_compile_features(
 
 target_link_libraries(
     ${ModuleName}.main
-    ${APR_LIBRARY} ${EXPAT_LIBRARY} ${APRUTIL_LIBRARY} ${LOG4CXX_LIBRARY}
+    # ${APR_LIBRARY} 
+	# ${APRUTIL_LIBRARY} 
+	# ${EXPAT_LIBRARY} 
+	# ${LOG4CXX_LIBRARY}
+	${APR_LIBRARY}
+	${EXPAT_LIBRARY}
+	${APRUTIL_LIBRARY}
+	${LOG4CXX_LIBRARIES}
 )
 
 target_include_directories(${ModuleName}.main PUBLIC

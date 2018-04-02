@@ -65,6 +65,7 @@ configure_file("${PROJECT_SOURCE_DIR}/src/main/resources/Config.hpp.in"
 include(CTest)
 enable_testing()
 
+add_subdirectory(external)
 add_subdirectory(edac)
 add_subdirectory(lectures)
 
