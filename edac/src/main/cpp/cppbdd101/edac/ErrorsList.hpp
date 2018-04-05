@@ -10,7 +10,8 @@ class ErrorsList
 
         using HRESULT = std::uint32_t;
         HRESULT EDAC_SUCCESS = (std::uint32_t)( 0ULL );
-        HRESULT EDAC_ERROR = ( !EDAC_SUCCESS );
+        // HRESULT EDAC_ERROR = ( !EDAC_SUCCESS );
+        HRESULT EDAC_ERROR = 0xFFFFFFFF;
         enum class EdacErr : std::uint32_t
         {
             EDAC_OK = 0,        /**< No Error. */
@@ -24,7 +25,12 @@ class ErrorsList
             EDAC_ERR_SEV_WARN,  /**< Warning level. Inconsistent or incorrect data seen but can carry on decode processing */
             EDAC_ERR_SEV_INFO,  /**< Information only message. Use for debugging code or suspect input data. */
         };
-
+		enum class operation
+		{
+			EDAC_FLAG_RD	0x80000000	/* Allow reads of variable */
+			EDAC_FLAG_WR	0x40000000	/* Allow writes to the variable */
+			EDAC_FLAG_RW	(EDAC_FLAG_RD|EDAC_FLAG_WR)
+		}
         ErrorsList();
         virtual ~ErrorsList();
 

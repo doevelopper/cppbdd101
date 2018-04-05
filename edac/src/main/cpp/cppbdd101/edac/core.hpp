@@ -30,6 +30,15 @@
 
 namespace openvpn {
 
+	 int n_cores()
+	 {
+		long ret = ::sysconf(_SC_NPROCESSORS_ONLN);
+		if (ret <= 0)
+		{
+			ret = 1;
+		}
+		return ret
+	 }
   inline int bind_to_core(const int core_id)
   {
     const int num_cores = n_cores();
