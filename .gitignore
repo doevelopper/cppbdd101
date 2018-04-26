@@ -151,4 +151,11 @@ apr-1.6.3/
 apr-iconv-1.2.2/
 expat-2.1.1/
 logging-log4cxx/
+OpenDDS-DDS-3.12.2/
+opensplice/opensplice/
+fast-rtps/fast-RTPS
 docs/
+src/main/resources/guides/coding-style.md
+src/main/resources/guides/extended-coding-style-guide.md
+src/main/resources/scripts/cpplint-python-3.py
+uncrustifyDoc.cfg
