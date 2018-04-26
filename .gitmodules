@@ -10,7 +10,15 @@
 [submodule "Catch2"]
     path = external/src/test/cpp/cppbdd101/external/googletest/Catch2/Catch2
     url = https://github.com/catchorg/Catch2.git 
-[submodule "source/cucumber-cpp"]
+[submodule "cucumber-cpp"]
     path = external/src/it/cppbdd101/external/cucumber/cucumber-cpp
     url = https://github.com/cucumber/cucumber-cpp.git
-
+[submodule "OpenDDS"]
+    path = external/src/main/cpp/cppbdd101/external/opendds
+    url = https://github.com/objectcomputing/OpenDDS.git
+[submodule "OpenSplice"]
+    path = external/src/main/cpp/cppbdd101/external/opensplice
+    url = https://github.com/ADLINK-IST/opensplice.git
+#[submodule "RTI Connext DDS"]
+#    path = external/src/main/cpp/cppbdd101/external/
+#    url =

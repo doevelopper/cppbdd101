@@ -12,11 +12,12 @@ class DummyTest : public ::testing::Test
 	static log4cxx::LoggerPtr logger;
 
     public:
+	DummyTest(); 
         DummyTest(const DummyTest&) = default;
         DummyTest(DummyTest&&) = default;
         DummyTest& operator=(const DummyTest&) = default;
         DummyTest& operator=(DummyTest&&) = default;
-        virtual ~DummyTest() = default;
+        virtual ~DummyTest();
 
         virtual void SetUp ();
         virtual void TearDown ();
