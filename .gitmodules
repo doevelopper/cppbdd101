@@ -1,0 +1,16 @@
+[submodule "boost"]
+    path = external/src/main/cpp/cppbdd101/external/boost//boost
+    url = https://github.com/boostorg/boost
+[submodule "benchmark"]
+    path = external/src/test/cpp/cppbdd101/external/benchmark/benchmark
+    url = https://github.com/google/benchmark.git
+[submodule "googletest"]
+    path = external/src/test/cpp/cppbdd101/external/googletest/googletest
+    url = https://github.com/google/googletest.git
+[submodule "Catch2"]
+    path = external/src/test/cpp/cppbdd101/external/googletest/Catch2/Catch2
+    url = https://github.com/catchorg/Catch2.git 
+[submodule "source/cucumber-cpp"]
+    path = external/src/it/cppbdd101/external/cucumber/cucumber-cpp
+    url = https://github.com/cucumber/cucumber-cpp.git
+

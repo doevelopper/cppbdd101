@@ -1,0 +1,16 @@
+if(APR_FOUND)
+    set (APR_WITH --with-apr=${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
+else(APR_FOUND)
+    add_subdirectory(cppbdd101/external/apr)
+    add_subdirectory(cppbdd101/external/expat)
+    add_subdirectory(cppbdd101/external/apru)
+#    add_subdirectory(cppbdd101/external/apri)
+    add_subdirectory(cppbdd101/external/logging)
+   add_subdirectory(cppbdd101/external/boost)
+endif(APR_FOUND)
+
+#if(BUILD_DDS)
+#add_subdirectory(cppbdd101/external/tao-ace) # No NEED! OpendDDS will build qnd instqll it
+    #add_subdirectory(cppbdd101/external/opendds)
+    # add_subdirectory(cppbdd101/external/opensplice) 
+#endif(BUILD_DDS)
