@@ -20,10 +20,15 @@ This with respoect to modern best practices of software engineering.
 Todo
 ----
 
+* [ ] :volcano: RTI Shapes Demo of OMG's Data Distribution Service (DDS): OpenDDS, OpenSplice and Fast RTPS
 * [ ] :feet: CI script covering many cloud ci and local storage ci solutions
 * [ ] :skull: Provide custom script for runing static coverage analysis tools
 * [ ] :fu: Provide ability to generate specifications from code sources
 * [ ] :ok_hand: Provide seamless integration with common IDE CLion/Eclipse-cdt/Netbeans... 
+* [ ] :point_up_2: Define a version number inside CMake and print it to the output of the executable.
+* [ ] :point_right: Print the Git hash to the output of the executable.
+* [ ] :star: Create an installer so the program can be installed properly (GNU standards).
+* [ ] :pill: Create a DEB or RPM package (if relevant for your distribution).
 * [ ] :zzz: More specific FAQ and Troubleshooting help
 * [ ] :cyclone: C++11/14/17 Features
 * [ ] :alien: Design patterns lectures
@@ -95,6 +100,30 @@ Branch      | Linux/OSX | Windows | Coverage | Documentation | Test |
     $ cmake -E chdir build cmake -DCMAKE_INSTALL_PREFIX=/usr/ ..
     $ cmake --build build
     $ cmake --build build --target install
+```
+
+* _OpenDDS_
+
+```sh
+    $ git clone https://github.com/objectcomputing/OpenDDS.git
+    $ cd OpenDDS
+    $ ./configure --static
+```
+
+* _OpenSPlice_
+
+```sh
+    $ git clone https://github.com/ADLINK-IST/opensplice.git
+    $ export DDS_ROOT=<OppenDDS Roof Folder>
+    $ export ACE_ROOT=<${DDS_ROOT}/ACE_wrappers>
+	$ export TAO_ROOT=<${ACE_ROOT}/TAO>
+    $ export MPC_ROOT=<${ACE_ROOT}/MPC>
+	$ export PATH=${PATH}:${ACE_ROOT}/bin:${DDS_ROOT}/bin
+    $ export SPLICE_TARGET=x86_64.linux-dev
+    $ export SPLICE_HOST=x86_64.linux-dev
+	$ export SPLICE_ORB=
+    $ cd opensplice
+    $ ./configure
 ```
 
 * _Style and coverage_ [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/google/styleguide)
