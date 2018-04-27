@@ -8,8 +8,7 @@
  *        or a reference to an implementation-defined error_category object
  *        for errors originating elsewhere.
  */
-class SystemError :
-    public std::error_category
+class SystemError : public std::error_category
 {
     public:
 

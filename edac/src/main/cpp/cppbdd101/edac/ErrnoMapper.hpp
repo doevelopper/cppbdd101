@@ -4,8 +4,7 @@
 
 #include <system_error>
 
-class ErrnoMapper :
-    public std::system_error
+class ErrnoMapper : public std::system_error
 {
     public:
 

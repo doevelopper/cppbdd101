@@ -89,11 +89,11 @@ find_package(CustomBoost)
 #message(STATUS "${Boost_INCLUDE_DIRS} ${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY} ${Boost_REGEX_LIBRARY} ${Boost_DATE_TIME_LIBRARY}")
 
 #if(Boost_FOUND)
-    message(STATUS "Boost is ${BOOST_ROOT}")
-    message(STATUS "Boost directories found at ${Boost_INCLUDE_DIRS}")
-    message(STATUS "Boost libraries found at ${Boost_LIBRARY_DIRS}")
-    message(STATUS "Boost component libraries to be linked are ${Boost_LIBRARIES}")
-    message(STATUS "Boost version found is ${Boost_VERSION}")
+#message(STATUS "Boost is ${BOOST_ROOT}")
+#   message(STATUS "Boost directories found at ${Boost_INCLUDE_DIRS}")
+#   message(STATUS "Boost libraries found at ${Boost_LIBRARY_DIRS}")
+#   message(STATUS "Boost component libraries to be linked are ${Boost_LIBRARIES}")
+#   message(STATUS "Boost version found is ${Boost_VERSION}")
 
     find_path(CUCUMBER_INCLUDE_DIR cucumber-cpp/autodetect.hpp
         HINTS ${CMAKE_INSTALL_INCLUDEDIR}
@@ -154,8 +154,8 @@ find_package(CustomBoost)
          REQUIRED_VARS CUCUMBER_LIBRARY CUCUMBER_NO_MAIN_LIBRARY CUCUMBER_INCLUDE_DIR
      )
 
-     message (STATUS "CUCUMBER_LIBRARY ${CUCUMBER_LIBRARY}")
-     message (STATUS "CUCUMBER_INCLUDE_DIR ${CUCUMBER_INCLUDE_DIR}")
+#     message (STATUS "CUCUMBER_LIBRARY ${CUCUMBER_LIBRARY}")
+#     message (STATUS "CUCUMBER_INCLUDE_DIR ${CUCUMBER_INCLUDE_DIR}")
      mark_as_advanced(CUCUMBER_CUCUMBER_INCLUDE_DIR CUCUMBER_LIBRARY CUCUMBER_NO_MAIN_LIBRARY)
 
 #else(Boost_FOUND)

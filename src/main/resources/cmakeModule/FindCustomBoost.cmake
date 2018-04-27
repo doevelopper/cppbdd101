@@ -34,66 +34,66 @@ list(APPEND commonBoostLibs
 if(NOT TARGET Boost::chrono)
     add_library(Boost::chrono UNKNOWN IMPORTED)
     set_target_properties(Boost::chrono PROPERTIES
- IMPORTED_LINK_INTERFACE_LANGUAGES "CXX"
- IMPORTED_LOCATION "${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/libboost_chrono.a"
+        IMPORTED_LINK_INTERFACE_LANGUAGES "CXX"
+        IMPORTED_LOCATION "${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/libboost_chrono.a"
     )
 endif()
 
 if(NOT TARGET Boost::atomic)
     add_library(Boost::atomic UNKNOWN IMPORTED)
     set_target_properties(Boost::atomic PROPERTIES
- IMPORTED_LINK_INTERFACE_LANGUAGES "CXX"
- IMPORTED_LOCATION "${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/libboost_atomic.a"
+        IMPORTED_LINK_INTERFACE_LANGUAGES "CXX"
+        IMPORTED_LOCATION "${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/libboost_atomic.a"
     )
 endif()
 
 if(NOT TARGET Boost::date_time)
     add_library(Boost::date_time UNKNOWN IMPORTED)
     set_target_properties(Boost::date_time PROPERTIES
- IMPORTED_LINK_INTERFACE_LANGUAGES "CXX"
- IMPORTED_LOCATION "${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/libboost_date_time.a"
+        IMPORTED_LINK_INTERFACE_LANGUAGES "CXX"
+        IMPORTED_LOCATION "${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/libboost_date_time.a"
    )
 endif()
 
 if(NOT TARGET Boost::regex)
     add_library(Boost::regex UNKNOWN IMPORTED)
     set_target_properties(Boost::regex PROPERTIES
- IMPORTED_LINK_INTERFACE_LANGUAGES "CXX"
- IMPORTED_LOCATION "${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/libboost_regex.a"
+        IMPORTED_LINK_INTERFACE_LANGUAGES "CXX"
+        IMPORTED_LOCATION "${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/libboost_regex.a"
     )
 endif()
 
 if(NOT TARGET Boost::system)
    add_library(Boost::system UNKNOWN IMPORTED)
    set_target_properties(Boost::system PROPERTIES
- IMPORTED_LINK_INTERFACE_LANGUAGES "CXX"
- IMPORTED_LOCATION "${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/libboost_system.a"
+       IMPORTED_LINK_INTERFACE_LANGUAGES "CXX"
+       IMPORTED_LOCATION "${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/libboost_system.a"
    )
 endif()
 
 if(NOT TARGET Boost::filesystem)
     add_library(Boost::filesystem UNKNOWN IMPORTED)
     set_target_properties(Boost::filesystem PROPERTIES
- IMPORTED_LINK_INTERFACE_LANGUAGES "CXX"
- IMPORTED_LOCATION "${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/libboost_filesystem.a"
- INTERFACE_LINK_LIBRARIES Boost::system
+        IMPORTED_LINK_INTERFACE_LANGUAGES "CXX"
+        IMPORTED_LOCATION "${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/libboost_filesystem.a"
+        INTERFACE_LINK_LIBRARIES Boost::system
     )
 endif()
 
 if(NOT TARGET Boost::random)
     add_library(Boost::random UNKNOWN IMPORTED)
     set_target_properties(Boost::random PROPERTIES
- IMPORTED_LINK_INTERFACE_LANGUAGES "CXX"
- IMPORTED_LOCATION "${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/libboost_random.a"
+        IMPORTED_LINK_INTERFACE_LANGUAGES "CXX"
+        IMPORTED_LOCATION "${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/libboost_random.a"
     )
 endif()
 
 if(NOT TARGET Boost::thread)
-     add_library(Boost::thread UNKNOWN IMPORTED)
-     set_target_properties(Boost::thread PROPERTIES
-         IMPORTED_LINK_INTERFACE_LANGUAGES "CXX"
-         IMPORTED_LOCATION "${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/libboost_thread.a"
-         INTERFACE_LINK_LIBRARIES Boost::chrono  Boost::date_time Boost::regex
+    add_library(Boost::thread UNKNOWN IMPORTED)
+    set_target_properties(Boost::thread PROPERTIES
+        IMPORTED_LINK_INTERFACE_LANGUAGES "CXX"
+        IMPORTED_LOCATION "${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/libboost_thread.a"
+        INTERFACE_LINK_LIBRARIES Boost::chrono Boost::date_time Boost::regex
 )
 endif()
 
@@ -153,8 +153,8 @@ endif()
 # all listed variables are TRUE
 
 include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(BOOST DEFAULT_MSG BOOST_INCLUDE_DIR BOOST_LIBRARIES)
-mark_as_advanced(BOOST_FOUND BOOST_INCLUDE_DIR BOOST_LIBRARIE)
+find_package_handle_standard_args(BOOST DEFAULT_MSG BOOST_INCLUDE_DIR ) #BOOST_LIBRARIES)
+mark_as_advanced(BOOST_FOUND BOOST_INCLUDE_DIR )# BOOST_LIBRARIES)
 
 if(BOOST_INCLUDE_DIR)
     set(Boost_FOUND ON )

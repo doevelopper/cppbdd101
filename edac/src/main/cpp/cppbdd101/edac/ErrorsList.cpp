@@ -1,5 +1,7 @@
 
+
 #include <cppbdd101/edac/ErrorsList.hpp>
+
 log4cxx::LoggerPtr ErrorsList::logger = log4cxx::Logger::getLogger(std::string("cppbdd101.edac.ErrorsList") );
 ErrorsList::ErrorsList()
 {

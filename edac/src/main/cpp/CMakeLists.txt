@@ -1,20 +1,20 @@
 
-set(SOURCE_FILES
-    # cppbdd101/edac/ErrorsList
-    # cppbdd101/edac/EdacError
+
+add_library(${ModuleName}.main
+    cppbdd101/edac/ErrorsList
+    cppbdd101/edac/EdacError
     cppbdd101/edac/LoggingService
-	# cppbdd101/edac/ErrnoMapper
-	# cppbdd101/edac/SystemError
-	# cppbdd101/edac/FutureError
-	# cppbdd101/edac/GenericError
-	# cppbdd101/edac/IOError
-	# cppbdd101/edac/LowLevelApiError
-	# cppbdd101/edac/IsErrorActive
-	# cppbdd101/edac/private/ErrorCodePrivate
+    cppbdd101/edac/ErrnoMapper
+    cppbdd101/edac/SystemError
+    cppbdd101/edac/FutureError
+    cppbdd101/edac/GenericError
+    cppbdd101/edac/IOError
+    cppbdd101/edac/LowLevelApiError
+    cppbdd101/edac/IsErrorActive
+    cppbdd101/edac/Demangle
+    # cppbdd101/edac/private/ErrorCodePrivate
     cppbdd101/edac/Exceptions
 )
-
-add_library(${ModuleName}.main ${SOURCE_FILES})
 
 target_compile_features(
     ${ModuleName}.main
@@ -22,6 +22,17 @@ target_compile_features(
         cxx_strong_enums
         cxx_variadic_templates
         cxx_nullptr
+        cxx_alias_templates
+        cxx_auto_type
+        cxx_constexpr
+        cxx_defaulted_functions
+        cxx_final
+        cxx_lambdas
+        cxx_noexcept
+        cxx_nullptr
+        cxx_rvalue_references
+        cxx_thread_local
+	cxx_variadic_templates
     PRIVATE
         cxx_lambdas
         cxx_range_for
@@ -36,9 +47,8 @@ target_link_libraries(
 target_include_directories(${ModuleName}.main 
   PUBLIC
       $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/cppbdd101>
-      $<INSTALL_INTERFACE:${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/cppbdd101>  # <prefix>/include/edac
-      #  PRIVATE
-      #${CMAKE_INSTALL_INCLUDEDIR} to fix apr-1/apr.h include in logger
+      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/cppbdd101/edac>
+      $<INSTALL_INTERFACE:${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/cppbdd101/edac>  # <prefix>/include/edac
 )
 
 # target_link_libraries(

@@ -3,18 +3,22 @@
 #include <cppbdd101/edac/Demangle.hpp>
 
 using namespace cppbdd101::edac;
+log4cxx::LoggerPtr logger = log4cxx::Logger::getLogger(std::string("cppbdd101.edac.Demangle") );
 
 Demangle::Demangle() 
 {
+    LOG4CXX_TRACE(logger , __LOG4CXX_FUNC__);
 }
 
 
 Demangle::~Demangle() 
 {
+    LOG4CXX_TRACE(logger , __LOG4CXX_FUNC__);
 }
 
-Demangle::cxaDemangle(const std::type_info &typeInfo)
+const char*  Demangle::cxaDemangle(const std::type_info &typeInfo)
 {
+    LOG4CXX_TRACE(logger , __LOG4CXX_FUNC__);
     static std::map<std::type_index, std::unique_ptr<char, void (*)(void *)>> cache;
     auto typeIndex = std::type_index(typeInfo);
     auto iter = cache.find(typeIndex);
@@ -25,16 +29,19 @@ Demangle::cxaDemangle(const std::type_info &typeInfo)
     }
     
     int status;
+
     std::unique_ptr<char, void (*)(void *)> result(
         abi::__cxa_demangle(typeInfo.name(), nullptr, nullptr, &status),
-        std::free);
+        std::free
+    );
 
-        if (status != 0) 
-        {
-            throw std::runtime_error("Demangle failed.");
-        }
+    if (status != 0) 
+    {
+	LOG4CXX_ERROR(logger,"Demangle failed.");
+        //throw std::runtime_error("Demangle failed.");
+    }
 
     std::tie(iter, std::ignore) = cache.emplace(typeIndex, std::move(result));
 
-    return iter->second.get();
+    return (iter->second.get());
 }

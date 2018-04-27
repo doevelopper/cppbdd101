@@ -7,7 +7,7 @@
 #include <typeindex>
 #include <typeinfo>
 #include <cxxabi.h>
-
+#include <log4cxx/logger.h>
 namespace cppbdd101 
 {
     namespace edac
@@ -21,7 +21,7 @@ namespace cppbdd101
              * Since abi::__cxa_demangle returns a `char *` to a 
              * heap-allocated string, we cache based on the `type_index`. 
              */
-            cxaDemangle(const std::type_info &type_info);
+	    const char * cxaDemangle(const std::type_info &type_info);
             template <typename T>
             const char * cxaDemangle()
             {
@@ -29,7 +29,10 @@ namespace cppbdd101
                 return result;
             }
         private:
-
+        /*!
+	 * @brief Class logger.
+	 */
+	     static log4cxx::LoggerPtr logger;
         };
     }
 }
