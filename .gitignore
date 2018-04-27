@@ -44,6 +44,11 @@
 *.idb
 *.pdb
 
+#Vim swap files
+*.swp
+*.swo
+
+
 # Kernel Module Compile Results
 *.mod*
 *.cmd
@@ -147,7 +152,7 @@ fabric.properties
 
 !catch2-v2.2.2/CMakeLists.txt
 !googletest-release-1.8.0/CMakeLists.txt
-!cucumber-cpp/CMakeLists.txt
+!cucumber-cpp-v0.4/CMakeLists.txt
 !benchmark-v1.4.0/CMakeLists.txt
 
 apr-util-1.6.1/
@@ -164,7 +169,7 @@ libexpat-R_2_2_5/
 OpenDDS-DDS-3.12.2/
 VortexOpenSplice-6.7.180404OSS/
 fast-RTPS/
-cucumber-cpp/
+cucumber-cpp-v0.4/
 boost_1_66_0/
 docs/
 src/main/resources/guides/coding-style.md

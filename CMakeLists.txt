@@ -42,21 +42,14 @@ ProcessorCount(N)
 
 include(Rules)
 
-add_subdirectory (external)
-
-#set(Boost_NO_SYSTEM_PATHS TRUE)
-#if(Boost_NO_SYSTEM_PATHS)
-   #set(BOOST_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../../external/boost")
-   #   set(BOOST_ROOT "${CMAKE_INSTALL_PREFIX}")
-   #set(BOOST_INCLUDE_DIRS "${BOOST_ROOT}/include")
-   #set(BOOST_LIBRARY_DIRS "${BOOST_ROOT}/lib")
-#endif (Boost_NO_SYSTEM_PATHS)
-
+#add_subdirectory (external)
 
 find_package(Log4cxx)
 find_package(GoogleTest)
 
 include(CTest)
+
+add_subdirectory(edac)
 
 add_subdirectory (src/main/cpp)
 add_subdirectory (src/test/cpp)

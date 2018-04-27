@@ -12,7 +12,7 @@ set(CUCUMBER_CPP_BUILD_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-build)
 
 ExternalProject_Add(extern_cucumber_cpp
     PREFIX "${CMAKE_CURRENT_BINARY_DIR}/cucumber-cpp"
-    SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cucumber-cpp"
+    SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cucumber-cpp-v0.4"
     CMAKE_ARGS
         -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
         -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}

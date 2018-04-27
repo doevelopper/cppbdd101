@@ -126,7 +126,7 @@ set(BENCHMARK_BUILD_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/benchmark-build)
 
 ExternalProject_Add(extern_benchmark
     PREFIX "${CMAKE_CURRENT_BINARY_DIR}/benchmark"
-    SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/benchmark"
+    SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/benchmark-v1.4.0"
     # configure
     CMAKE_ARGS
         -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}

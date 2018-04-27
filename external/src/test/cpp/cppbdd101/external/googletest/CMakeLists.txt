@@ -22,7 +22,7 @@ set(GOOGLETEST_BUILD_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-build)
 
 ExternalProject_Add(extern_googletest
     PREFIX "${CMAKE_CURRENT_BINARY_DIR}/googletest"
-    SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/googletest"
+    SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/googletest-release-1.8.0"
     # configure
     CMAKE_ARGS
         -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}

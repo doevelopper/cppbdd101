@@ -4,8 +4,8 @@ include(ExternalProject)
 set(CATCH_BUILD_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/benchmark-build)
 
 ExternalProject_Add(extern_catch2
-    PREFIX "${CMAKE_CURRENT_BINARY_DIR}/catch2"
-    SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/catch2"
+    PREFIX "${CMAKE_CURRENT_BINARY_DIR}/catch2-v2.2.2"
+    SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/catch2-v2.2.2"
     # configure
     CMAKE_ARGS
             -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
