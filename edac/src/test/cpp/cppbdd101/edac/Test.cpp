@@ -33,6 +33,8 @@ int cppbdd101::edac::Test::run (int argc, char * argv[])
 
     if ( argc < 3 )
     {
+        LOG4CXX_ERROR(logger, "requires at leats 3  arguments.");
+
         showUsage(argv[0]);
 
         return (EXIT_FAILURE);
@@ -114,9 +116,24 @@ int cppbdd101::edac::Test::run (int argc, char * argv[])
 
     try
     {
-        LOG4CXX_TRACE(logger , "Innitializing google mock");
-        // ::testing::InitGoogleTest(&argc , argv);
-		// ::testing::InitGoogleMock(&argc , argv);
+        LOG4CXX_TRACE(logger , "Innitializing google test");
+        ::testing::InitGoogleTest(&argc , argv);
+	/*
+	// Remove the test default listener
+        testing::TestEventListeners &listeners = testing::UnitTest::GetInstance()->listeners();
+        auto printer = listeners.Release(listeners.default_result_printer());
+        // Configure new listener
+        auto *listener = GoogleTestCustomEventListener::set(printer)
+                         .showFailures()
+		         .showEnvironment()
+		         .showTestCases()
+		         .showTestNames()
+		         .showSuccesses()
+		         .showInlineFailures()
+			 .set();
+	listeners.Append(listener);
+        */ 
+	// ::testing::InitGoogleMock(&argc , argv);
     }
     catch ( std::exception & e )
     {
@@ -145,12 +162,12 @@ void cppbdd101::edac::Test::showUsage(std::string name)
 {
     LOG4CXX_TRACE(logger ,"Usage called");
 
-    std::cerr << "Usage: " << name << " <option(s)> SOURCES"
+    std::cerr << "Usage: " << name << " <option(s)> SOURCES \n"
               << "Options:\n"
-              << "\t-h,--help\t\tShow this help message\n"
-              << "\t-i,--iterration Number of iteration on test\t Default 1"
-              << "\t-o,--outputpath Specify the destination path\t Default netx to executable"
-              << "\t-l,--list Specify the list of tests to be executed\t Default netx to executable"
+              << "\t-h,--help \t Show this help message\n"
+              << "\t-i,--iterration \t Number of iteration on test Default 1\n"
+              << "\t-o,--outputpath \t Specify the destination path Default netx to executable\n"
+              << "\t-l,--list \t Specify the list of tests to be executed Default netx to executable\n"
               << std::endl;
 }
 
