@@ -55,9 +55,8 @@ Branch      | Linux/OSX | Windows | Coverage | Documentation | Test |
 
 ```sh
     # Intall boost libraries
-    $ sudo apt-get install libboost1.63-dev libboost1.63-all-dev libboost1.63-tools-dev
-    $ sudo apt-get install
-    # Intall make and cmake 3.8 or later
+    $ sudo apt-get install libboost[1.63]-all-dev libboost[1.63]-tools-dev libboost[1.63]-dev 
+    # Intall make and cmake 3.10 or later
     $ sudo apt-get install  make cmake  cmake-extra cmake-data 
 ```
 
@@ -71,7 +70,10 @@ Branch      | Linux/OSX | Windows | Coverage | Documentation | Test |
 ```sh
     $ git clone https://github.com/cucumber/cucumber-cpp.git
     $ cd cucumber-cpp
-    $ gem install bundler
+    $ sudo apt-get install ruby
+    $ ruby --version
+    $ sudo apt-get install ruby-dev
+    $ sudo gem install bundler
     $ bundle install
     $ git submodule init
     $ git submodule update
@@ -116,12 +118,12 @@ Branch      | Linux/OSX | Windows | Coverage | Documentation | Test |
     $ git clone https://github.com/ADLINK-IST/opensplice.git
     $ export DDS_ROOT=<OppenDDS Roof Folder>
     $ export ACE_ROOT=<${DDS_ROOT}/ACE_wrappers>
-	$ export TAO_ROOT=<${ACE_ROOT}/TAO>
+    $ export TAO_ROOT=<${ACE_ROOT}/TAO>
     $ export MPC_ROOT=<${ACE_ROOT}/MPC>
-	$ export PATH=${PATH}:${ACE_ROOT}/bin:${DDS_ROOT}/bin
+    $ export PATH=${PATH}:${ACE_ROOT}/bin:${DDS_ROOT}/bin
     $ export SPLICE_TARGET=x86_64.linux-dev
     $ export SPLICE_HOST=x86_64.linux-dev
-	$ export SPLICE_ORB=
+    $ export SPLICE_ORB=
     $ cd opensplice
     $ ./configure
 ```
