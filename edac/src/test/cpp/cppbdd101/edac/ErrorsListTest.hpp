@@ -28,7 +28,7 @@ class ErrorsListTest :
         /*!
          * @brief Object that is about to be tested.
          */
-        ErrorsList * objectUnderTest;
+        ErrorsList * errorsList;
         /*!
          * @brief Class logger.
          */

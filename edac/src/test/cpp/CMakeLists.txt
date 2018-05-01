@@ -1,38 +1,60 @@
 
-add_library(${ModuleName}.test ${SOURCE_FILES}
-    cppbdd101/edac/ErrorsListTest
-    cppbdd101/edac/EdacErrorTest
-    cppbdd101/edac/DemangleTest
+add_library(${ModuleName}.test STATIC
+    #cppbdd101/edac/ErrorsListTest
+    #cppbdd101/edac/EdacErrorTest
+    #cppbdd101/edac/DemangleTest
     cppbdd101/edac/GoogleTestCustomEventListener
     cppbdd101/edac/Test
+    #cppbdd101/edac/GtestIssue
 )
+
+#add_library(example "")
+#target_sources(example
+#    PRIVATE
+#        cppbdd101/edac/ErrorsListTest
+#	# PUBLIC
+#	#${CMAKE_CURRENT_LIST_DIR}/example.h
+#)
+#target_link_libraries(example GTest::GTest ${ModuleName}.main)
+#target_include_directories( example
+#    PUBLIC
+#      ${CMAKE_CURRENT_LIST_DIR}
+#)
+
 
 target_include_directories(${ModuleName}.test 
     PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/cppbdd101/edac>
-        $<INSTALL_INTERFACE:${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/cppbdd101/edac>  # <prefix>/include/edac
+        $<INSTALL_INTERFACE:${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/cppbdd101/edac>
 )
 
 add_executable(${ModuleName}.test.bin
     cppbdd101/edac/cppbdd101Test
+    #cppbdd101/edac/GtestIssue
+    cppbdd101/edac/DemangleTest
+    cppbdd101/edac/ErrorsListTest
+    cppbdd101/edac/EdacErrorTest
 )
 
-target_link_libraries(${ModuleName}.test 
-    PUBLIC 
+target_link_libraries(${ModuleName}.test
+    PUBLIC
         ${ModuleName}.main
-    PRIVATE 
-        GMock::GMock
-        GTest::GTest
-	#PUBLIC BENCHMARK::BENCHMARK
+         GMock::GMock
+         GTest::GTest
+         #PUBLIC BENCHMARK::BENCHMARK
 )
 
 target_link_libraries (${ModuleName}.test.bin
-    PUBLIC ${ModuleName}.test
+    PUBLIC 
+        ${ModuleName}.test
+        ${ModuleName}.main
+    #   GMock::GMock
+    #   GTest::GTest
 )
 
 add_test(NAME ${ModuleName}.bin
     WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} 
-    COMMAND ${ModuleName}.test.bin
+    COMMAND ${ModuleName}.test.bin #--iterration 1 --outputpath ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} --module ${ModuleName}.test
 )
 
 
@@ -61,3 +83,4 @@ add_custom_command(
 )
 
 add_dependencies(${ModuleName}.test copy_cfg)
+

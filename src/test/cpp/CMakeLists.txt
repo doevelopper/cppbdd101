@@ -2,6 +2,8 @@ set(ModuleName "cppbdd101.test")
 
 add_library(${ModuleName}
     cppbdd101/DummyTest
+    cppbdd101/MockInterface
+    cppbdd101/InterfaceTest
 )
 
 #set_target_properties(
@@ -38,8 +40,8 @@ target_link_libraries(${ModuleName}.bin
 )
 
 add_test(NAME ${ModuleName}.bin
-	WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} 
-	COMMAND ${ModuleName}.bin
+    WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} 
+    COMMAND ${ModuleName}.bin
 )
 #target_include_directories(${ModuleName} PUBLIC
 #    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}>

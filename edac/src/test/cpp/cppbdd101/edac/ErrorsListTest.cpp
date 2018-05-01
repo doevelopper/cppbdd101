@@ -4,6 +4,7 @@
 log4cxx::LoggerPtr ErrorsListTest::logger = log4cxx::Logger::getLogger(std::string("cppbdd101.edac.ErrorsListTest") );
 
 ErrorsListTest::ErrorsListTest()
+ : errorsList()
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
 }
@@ -16,13 +17,13 @@ ErrorsListTest::~ErrorsListTest()
 void ErrorsListTest::SetUp ()
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
-    objectUnderTest = new ErrorsList();
+    errorsList = new ErrorsList();
 }
 
 void ErrorsListTest::TearDown ()
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
-    delete objectUnderTest;
+    delete errorsList;
 }
 
 TEST_F(ErrorsListTest, testCpy1)

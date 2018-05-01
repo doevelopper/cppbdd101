@@ -3,6 +3,7 @@ set(ModuleName "cppbdd101.main")
 
 add_library(${ModuleName}
 	cppbdd101/Dummy	
+	cppbdd101/Interface
 )
 
 target_include_directories(${ModuleName} PUBLIC
@@ -18,7 +19,7 @@ target_include_directories(${ModuleName} PUBLIC
 
 add_executable (
     ${ModuleName}.bin
-    cppbdd101/main.cpp
+    cppbdd101/main
 )
 
 include(GenerateExportHeader)

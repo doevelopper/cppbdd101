@@ -23,11 +23,12 @@ protected:
 
     struct Derived : Base {};
 
-    cppbdd101::edac::Demangle * objectUnderTest;
+    cppbdd101::edac::Demangle * demangle;
     /*!
      * @brief Class logger.
      */
-    static log4cxx::LoggerPtr logger;    
+    static log4cxx::LoggerPtr logger;
+ 
 private:
 
 };

@@ -7,7 +7,9 @@
 #include <typeindex>
 #include <typeinfo>
 #include <cxxabi.h>
+
 #include <log4cxx/logger.h>
+
 namespace cppbdd101 
 {
     namespace edac

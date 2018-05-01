@@ -176,3 +176,4 @@ src/main/resources/guides/coding-style.md
 src/main/resources/guides/extended-coding-style-guide.md
 src/main/resources/scripts/cpplint-python-3.py
 uncrustifyDoc.cfg
+Report.xml

@@ -6,7 +6,8 @@
 
 using cucumber::ScenarioScope;
 
-class ItTest {
+class ItTest 
+{
 public:
     ItTest();
     ItTest(int argc, char* argv[]);

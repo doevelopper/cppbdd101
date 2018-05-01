@@ -22,7 +22,7 @@ class EdacErrorTest : public ::testing::Test
         /*!
          * @brief Object that is about to be tested.
          */
-        EdacError * objectUnderTest;
+        EdacError * edacError;
         /*!
          * @brief Class logger.
          */

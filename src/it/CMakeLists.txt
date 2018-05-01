@@ -19,7 +19,8 @@ add_library(${ModuleName}
 #)
 
 add_executable(${ModuleName}.bin
-    cppbdd101/features/step_definitions/ApplicationSteps
+	# cppbdd101/features/step_definitions/ApplicationSteps
+    cppbdd101/features/step_definitions/MockInterfaceContext
 )
 
 target_link_libraries(${ModuleName}

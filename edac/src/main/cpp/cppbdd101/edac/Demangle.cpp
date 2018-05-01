@@ -3,13 +3,13 @@
 #include <cppbdd101/edac/Demangle.hpp>
 
 using namespace cppbdd101::edac;
-log4cxx::LoggerPtr logger = log4cxx::Logger::getLogger(std::string("cppbdd101.edac.Demangle") );
+
+log4cxx::LoggerPtr Demangle::logger = log4cxx::Logger::getLogger(std::string("cppbdd101.edac.Demangle") );
 
 Demangle::Demangle() 
 {
     LOG4CXX_TRACE(logger , __LOG4CXX_FUNC__);
 }
-
 
 Demangle::~Demangle() 
 {

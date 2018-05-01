@@ -13,6 +13,13 @@ const std::map< std::uint32_t, std::pair< std::string, std::string > > ERRORCODE
     {std::numeric_limits< int >::max(), {"EDAC_ERR_LAST", "No Error."} },
 };
 
+EdacError::EdacError()
+  : m_error_code(ErrorsList::EdacErr::EDAC_OK)
+  , m_sev(ErrorsList::EdacErrSeverity::EDAC_ERR_SEV_NONE)
+{
+    LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
+}
+
 EdacError::EdacError(const ErrorsList::EdacErrSeverity sev_type, const ErrorsList::EdacErr code)
     : m_error_code(code)
     , m_sev(sev_type)
@@ -37,7 +44,7 @@ EdacError::getMessage() const
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
 
-    return m_err_message;
+    return (m_err_message);
 }
 
 ErrorsList::EdacErr
@@ -45,7 +52,7 @@ EdacError::getErrorCode() const
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
 
-    return m_error_code;
+    return (m_error_code);
 }
 
 ErrorsList::EdacErrSeverity
@@ -53,7 +60,7 @@ EdacError::getErrorSeverity() const
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
 
-    return m_sev;
+    return (m_sev);
 }
 
 const std::string
@@ -82,7 +89,7 @@ void EdacError::appendErrorDetails(std::string & errStr, const EdacError & error
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
     std::uint32_t code = static_cast< std::uint32_t >( error.getErrorCode() );
-
+/*
     std::ostringstream oss;
     oss << "0x" << std::hex << std::setfill('0') << std::setw(8) << code;
 
@@ -97,4 +104,5 @@ void EdacError::appendErrorDetails(std::string & errStr, const EdacError & error
 
     oss << error.getMessage();
     errStr = oss.str();
+*/
 }

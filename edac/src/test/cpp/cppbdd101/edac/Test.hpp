@@ -5,6 +5,7 @@
 #include <vector>
 #include <gmock/gmock.h>
 #include <cppbdd101/edac/LoggingService.hpp>
+
 namespace cppbdd101
 {
     namespace edac

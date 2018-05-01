@@ -9,7 +9,6 @@
 
 class DummyTest : public ::testing::Test
 {
-	static log4cxx::LoggerPtr logger;
 
     public:
 	DummyTest(); 
@@ -22,9 +21,13 @@ class DummyTest : public ::testing::Test
         virtual void SetUp ();
         virtual void TearDown ();
 
+    protected:
+
+	static log4cxx::LoggerPtr logger;
+	cpp101::Dummy * dummy;
+
     private:
         //boost::shared_ptr<Dummy> testObject;
-	cpp101::Dummy * objectToTest;
 };
 #endif
 

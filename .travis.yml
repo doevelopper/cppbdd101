@@ -1,0 +1,79 @@
+dist: trusty
+sudo: false
+group: travis_latest
+language: c++
+cache: ccache
+
+
+env:
+  global:
+  - COMPILER=g++
+
+addons:
+  apt:
+    sources: &apt_sources
+      - ubuntu-toolchain-r-test
+      - llvm-toolchain-trusty-4.0
+      - llvm-toolchain-trusty-5.0
+      - llvm-toolchain-trusty-6.0
+
+compiler: 
+    - clang
+    - gcc
+os: linux
+
+
+matrix:
+  fast_finish: true
+  include
+    - env: COMPILER=g++-6
+      compiler: gcc
+      addons: &gcc6
+        apt:
+          packages: ["g++-6", "python3-pip", "lcov"]
+          sources: *apt_sources
+
+    - env: COMPILER=g++-7
+      compiler: gcc
+      addons: &gcc7
+        apt:
+          packages: ["g++-7", "python3-pip", "lcov"]
+          sources: *apt_sources
+
+    - env: COMPILER=clang++-4.0
+          compiler: clang
+          addons: &clang40
+            apt:
+              packages: ["clang-4.0", "g++-7", "python3-pip", "lcov"]
+              sources: *apt_sources
+
+    - env: COMPILER=clang++-5.0
+          compiler: clang
+          addons: &clang50
+            apt:
+              packages: ["clang-5.0", "g++-7", "python3-pip", "lcov"]
+              sources: *apt_sources
+
+    - env: COMPILER=clang++-6.0
+          compiler: clang
+          addons: &clang60
+            apt:
+              packages: ["clang-6.0", "g++-7", "python3-pip", "lcov"]
+              sources: *apt_sources
+
+allow_failures:
+    - env: COMPILER=clang++-5.0
+      compiler: clang
+    - env: COMPILER=clang++-6.0
+      compiler: clang
+
+script:
+    - export CXX=$COMPILER
+    - cmake -E make_directory build
+    - cmake -E chdir build cmake .. \
+              -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG \
+              -DWERROR_LEVEL_1=ON -DRELEASE_LEVEL="SNAPSHOOT" \
+              -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
+    - cmake --build build
+    - cmake --build build --target test
+#    - cmake --build build && ctest

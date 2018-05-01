@@ -31,3 +31,25 @@ function(run_it_test TARGET_TEST_NAME FEATURES_LOCATION)
     )
 endfunction(run_it_test)
 
+
+
+macro(ADD_NEW_CUCUMBER_TEST TEST_SOURCE FOLDER_NAME FEATURE_FOLDER)
+    set (TARGET_NAME ${TEST_SOURCE}_TESTTARGET)
+    add_executable(${TARGET_NAME} 
+	    ${FEATURE_FOLDER}/features/step_definitions/${TEST_SOURCE}
+    )
+    
+    target_link_libraries(${TARGET_NAME} 
+	    CUCUMBER-CPP::CUCUMBER-CPP 
+    )
+   
+    add_test(NAME ${TEST_SOURCE} 
+	    COMMAND ${TARGET_NAME}
+    )
+
+    set_property(TARGET ${TARGET_NAME} 
+	    PROPERTY FOLDER ${FOLDER_NAME}
+    )
+endmacro()
+
+
