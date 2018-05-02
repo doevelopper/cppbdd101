@@ -155,14 +155,14 @@ int cppbdd101::edac::Test::run (int argc, char * argv[])
 
         // std::cerr << "Unhandled exception" <<std::endl;
     }
-
-    const ::testing::TestInfo * const testInfo = ::testing::UnitTest::GetInstance()->current_test_info();
-    LOG4CXX_TRACE(logger , ">>>>>>>>!!!!Test Name!!!!>>>>>>>> ("<< testInfo->name() <<")");
-    LOG4CXX_TRACE(logger , ">>>>>>>>!!!!Test Case Name!!!!>>>>>>>> ("<< testInfo->test_case_name() <<")");
-
-    LOG4CXX_TRACE(logger , ">>>>>>>>!!!!Star running unit test!!!!>>>>>>>> ("
-                    << ::testing::UnitTest::GetInstance()->test_case_to_run_count() <<")")
 */
+    const ::testing::TestInfo * const testInfo = ::testing::UnitTest::GetInstance()->current_test_info();
+    LOG4CXX_TRACE(logger , ">>>>>>>>!!!!Test Name!!!!>>>>>>>> ("<< "testInfo->name().c_str()" <<")");
+    LOG4CXX_TRACE(logger , ">>>>>>>>!!!!Test Case Name!!!!>>>>>>>> ("<< "testInfo->test_case_name()" <<")");
+
+//    LOG4CXX_TRACE(logger , ">>>>>>>>!!!!Star running unit test!!!!>>>>>>>> ("
+//                    << ::testing::UnitTest::GetInstance()->test_case_to_run_count() <<")");
+
     ::testing::InitGoogleTest(&argc , argv);
     return RUN_ALL_TESTS();
 }
