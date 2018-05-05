@@ -44,14 +44,17 @@ include(Rules)
 
 #add_subdirectory (external)
 
+
 find_package(Log4cxx)
 find_package(GoogleTest)
-
+find_package(Cucumber-cpp)
+include(GoogleTest) #gtest_discover_tests
 include(CTest)
+
 
 add_subdirectory(edac)
 
 add_subdirectory (src/main/cpp)
 add_subdirectory (src/test/cpp)
-add_subdirectory (src/it)
+#add_subdirectory (src/it)
 

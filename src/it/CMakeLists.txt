@@ -1,8 +1,5 @@
 
 set(ModuleName "cppbdd101.it-test")
-
-find_package(Cucumber-cpp)
-
 add_library(${ModuleName}
     cppbdd101/features/step_definitions/ItTest
     #cppbdd101/features/step_definitions/ApplicationSteps

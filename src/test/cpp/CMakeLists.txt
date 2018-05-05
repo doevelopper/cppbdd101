@@ -1,62 +1,60 @@
-set(ModuleName "cppbdd101.test")
 
-add_library(${ModuleName}
+add_library(cppbdd101.test
     cppbdd101/DummyTest
     cppbdd101/MockInterface
     cppbdd101/InterfaceTest
 )
 
-target_include_directories(${ModuleName} PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/cppbdd101>
-    $<INSTALL_INTERFACE:${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/cppbdd101>
+target_include_directories(cppbdd101.test 
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/cppbdd101>
+        $<INSTALL_INTERFACE:${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/cppbdd101>
 )
 
-add_executable (${ModuleName}.bin
-    cppbdd101/unitTest
-    cppbdd101/Test
-    #cppbdd101/MockInterface
-    #cppbdd101/InterfaceTest
-)
-
-target_link_libraries(${ModuleName}
+target_link_libraries(cppbdd101.test
     PUBLIC cppbdd101.main
-           cppbdd101.edac.main
-    #       cppbdd101.edac.test
-    #PUBLIC LOG4CXX::LOG4CXX
-    PUBLIC GMock::GMock
-    PUBLIC GTest::GTest
-    #PUBLIC BENCHMARK::BENCHMARK
 )
 
-target_link_libraries(${ModuleName}.bin
-    PUBLIC ${ModuleName}
-    cppbdd101.edac.test
+add_executable (cppbdd101.test.bin
+    cppbdd101/unitTest
+#    cppbdd101/Test
+    # cppbdd101/MockInterface
+    # cppbdd101/InterfaceTest
 )
 
-add_test(NAME ${ModuleName}.bin
-    WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} 
-    COMMAND ${ModuleName}.bin
+target_link_libraries(cppbdd101.test.bin
+    PUBLIC cppbdd101.test
+           cppbdd101.edac.test
+)
+
+gtest_discover_tests(cppbdd101.test.bin
+    TEST_PREFIX "CPPBDD101:-: "
+    TEST_SUFFIX ----
+    PROPERTIES LABELS CPPBDD101 TEST
+    DISCOVERY_TIMEOUT 10
+    EXTRA_ARGS --iterration 1 --outputpath ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} --module cppbdd101.test.test
+    WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
 )
 
 #set_target_properties(
-#    ${ModuleName}
+#    cppbdd101.test
 #    PROPERTIES IMPORTED_LOCATION
-#    "${CMAKE_CURRENT_LIST_DIR}/vendor/foo.a"
+#    "${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/cppbdd101.test"
 #)
 
 #set_target_properties(
-#    ${ModuleName} PROPERTIES
+#    cppbdd101.test PROPERTIES
 #    INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/cppbdd101"
 #)
 
 
-#target_include_directories(${ModuleName} PUBLIC
+#target_include_directories(cppbdd101.test PUBLIC
 #    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}>
 #    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/cppbdd101>
 #    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/cppbdd101>
 #)
 
-#target_compile_definitions(${ModuleName} PUBLIC
+#target_compile_definitions(cppbdd101.test PUBLIC
 #    ${TEST_BUILD_OPTIONS}
 #    $<$<OR:$<CONFIG:Release>,$<CONFIG:Profiling>>:DISABLE_CONF>
 #)

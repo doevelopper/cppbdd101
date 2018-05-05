@@ -1,6 +1,5 @@
 
-
-add_library(${ModuleName}.main
+add_library(cppbdd101.edac.main
     cppbdd101/edac/ErrorsList
     cppbdd101/edac/EdacError
     cppbdd101/edac/LoggingService
@@ -16,8 +15,7 @@ add_library(${ModuleName}.main
     cppbdd101/edac/Exceptions
 )
 
-target_compile_features(
-    ${ModuleName}.main
+target_compile_features(cppbdd101.edac.main
     PUBLIC
         cxx_strong_enums
         cxx_variadic_templates
@@ -32,51 +30,36 @@ target_compile_features(
         cxx_nullptr
         cxx_rvalue_references
         cxx_thread_local
-	cxx_variadic_templates
+        cxx_variadic_templates
     PRIVATE
         cxx_lambdas
         cxx_range_for
         $<$<CXX_COMPILER_ID:GNU>:cxx_attributes>
 )
 
-target_link_libraries(
-    ${ModuleName}.main
+if(NOT TARGET EDAC-MAIN::EDAC-MAIN)
+    add_library(EDAC-MAIN::EDAC-MAIN UNKNOWN IMPORTED)
+    set_target_properties(EDAC-MAIN::EDAC-MAIN PROPERTIES
+        INTERFACE_COMPILE_DEFINITIONS "${EDAC_MAIN_DEFINITIONS}"
+        IMPORTED_LINK_INTERFACE_LANGUAGES "CXX"
+        IMPORTED_LOCATION "${CMAKE_INSTALL_LIBDIR}/cppbdd101.edac.main.a"
+        INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/cppbdd101"
+        INTERFACE_LINK_LIBRARIES "LOG4CXX::LOG4CXX"
+    )
+endif(NOT TARGET EDAC-MAIN::EDAC-MAIN)
+
+target_compile_options(cppbdd101.edac.main INTERFACE
+#-std=c++17
+# $<$<CONFIG:Debug>:-g3 -O0 -fstack-protector>
+$<$<CONFIG:Release>:-g0 -O2>
+)
+
+target_link_libraries(cppbdd101.edac.main
     LOG4CXX::LOG4CXX
 )
 
-target_include_directories(${ModuleName}.main 
-  PUBLIC
-      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/cppbdd101>
-      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/cppbdd101/edac>
-      $<INSTALL_INTERFACE:${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/cppbdd101/edac>  # <prefix>/include/edac
+target_include_directories(cppbdd101.edac.main
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/cppbdd101/edac>
+        $<INSTALL_INTERFACE:${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/cppbdd101/edac>
 )
-
-if(NOT TARGET MAIN::MAIN)
-    add_library(MAIN::MAIN UNKNOWN IMPORTED)
-    set_target_properties(MAIN::MAIN PROPERTIES
-       INTERFACE_COMPILE_DEFINITIONS "${MAIN_DEFINITIONS}"
-        IMPORTED_LINK_INTERFACE_LANGUAGES "CXX"
-	IMPORTED_LOCATION "${CMAKE_INSTALL_LIBDIR}/${ModuleName}.main"
-	INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/cppbdd101"
-	#INTERFACE_LINK_LIBRARIES ${APR_LIBRARY};${EXPAT_LIBRARY};${APRUTIL_LIBRARY}
-    )
-endif(NOT TARGET MAIN::MAIN)
-
-
-# target_link_libraries(
-    # ${ModuleName}.main
-    # PUBLIC LOG4CXX::LOG4CXX
-# )
-
-
-# add_dependencies(compile ${ModuleName}.main)
-
-
-#target_sources(edac
-#    PRIVATE EdacError EdacError
-#    PUBLIC Header.hpp)
-
-#target_compile_options(edac INTERFACE
-#   #-std=c++17
-#   $<$<CONFIG:Debug>:-g3 -O0 -fstack-protector>
-#   $<$<CONFIG:Release>:-g0 -O2>)

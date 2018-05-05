@@ -1,11 +1,11 @@
 #include <iostream>
 #include <cstdlib>
 
-#include <cppbdd101/Test.hpp>
+#include <cppbdd101/edac/Test.hpp>
 
 int main(int argc, char**argv) 
 {
-    cppbdd101::Test cppbdd101Test;
+    cppbdd101::edac::Test cppbdd101Test;
 
 #if !defined(HAVE_LOG4CXX)
     std::cout << "TEST CPP-101: C++ Object Oriented Programming!" << std::endl;

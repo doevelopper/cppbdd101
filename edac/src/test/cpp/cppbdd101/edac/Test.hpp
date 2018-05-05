@@ -25,9 +25,10 @@ namespace cppbdd101
             private:
 
                 std::string m_testSuites;
+                std::string m_xmlTestReportName;
                 unsigned int m_numberOfTestIteration;
-		static const  unsigned long LOGGER_WATCH_DELAY;
-   	        LoggingService * m_loggerService;
+                static const  unsigned long LOGGER_WATCH_DELAY;
+                LoggingService * m_loggerService;
                 /*!
                  * @brief Class logger.
                  */
