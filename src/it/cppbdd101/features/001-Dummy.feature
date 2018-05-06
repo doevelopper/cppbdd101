@@ -1,13 +1,13 @@
 # language: en
 Feature: Hello World feature
-  As a developer starting a new project
-  I want to have a dummy feature test
-  In order to get started and now that the toolchain works
+    As a developer starting a new project
+    I want to have a dummy feature test
+    In order to get started and now that the toolchain works
 
 Scenario Outline: Single dummy says Hello World
-  Given a dummy initialised with <hello> and <world>
-  When I command the dummy to say hello
-  Then the dummy should say <hello world>
+    Given  a dummy initialised with <hello> and <world>
+     When  I command the dummy to say hello
+     Then  the dummy should say <hello world>
 
 Examples:
   | hello     | world          | hello world             |
@@ -19,7 +19,7 @@ Examples:
 
 
 Scenario Outline: Multiple dummies say Hello World
-  Given the following dummies:
+    Given the following dummies:
     | hello   | world         |
     | Hello   | World         |
     | Hallo   | Welt          |
@@ -27,8 +27,8 @@ Scenario Outline: Multiple dummies say Hello World
     | Hola    | mundo         |
     | Hello   | vilag         |
 
-  When I command the dummy <index> to say hello
-  Then the dummy should say <hello world>
+     When I command the dummy <index> to say hello
+     Then the dummy should say <hello world>
 
 Examples:
   | index | hello world             |

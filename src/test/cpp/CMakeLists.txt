@@ -1,8 +1,6 @@
 
 add_library(cppbdd101.test
-    cppbdd101/DummyTest
-    cppbdd101/MockInterface
-    cppbdd101/InterfaceTest
+	cppbdd101/Test
 )
 
 target_include_directories(cppbdd101.test 
@@ -12,19 +10,20 @@ target_include_directories(cppbdd101.test
 )
 
 target_link_libraries(cppbdd101.test
-    PUBLIC cppbdd101.main
+    PUBLIC  cppbdd101.main
+            GMock::GMock
+            GTest::GTest
 )
 
 add_executable (cppbdd101.test.bin
     cppbdd101/unitTest
-#    cppbdd101/Test
-    # cppbdd101/MockInterface
-    # cppbdd101/InterfaceTest
+    cppbdd101/DummyTest
+    cppbdd101/MockInterface
+    cppbdd101/InterfaceTest
 )
 
 target_link_libraries(cppbdd101.test.bin
     PUBLIC cppbdd101.test
-           cppbdd101.edac.test
 )
 
 gtest_discover_tests(cppbdd101.test.bin
@@ -36,6 +35,12 @@ gtest_discover_tests(cppbdd101.test.bin
     WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
 )
 
+# add_custom_command(TARGET cppbdd101.test.bin
+                   # POST_BUILD
+                   # COMMAND ctest -C $<CONFIGURATION> --output-on-failure
+# )
+
+				   
 #set_target_properties(
 #    cppbdd101.test
 #    PROPERTIES IMPORTED_LOCATION

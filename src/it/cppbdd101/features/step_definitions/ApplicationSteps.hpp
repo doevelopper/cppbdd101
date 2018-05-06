@@ -6,7 +6,6 @@
 
 //#include <cppbdd101/features/step_definitions/Application.hpp>
 
-using cucumber::ScenarioScope;
 
 #endif
 

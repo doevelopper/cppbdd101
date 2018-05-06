@@ -92,8 +92,7 @@ LoggingService::LoggingService(unsigned long delay)
     }
 
     LOG4CXX_INFO(log4cxx::Logger::getRootLogger(), "----START LOGGING-----" );
-    LOG4CXX_TRACE(
-        log4cxx::Logger::getRootLogger(),
+    LOG4CXX_TRACE( log4cxx::Logger::getRootLogger(),
         "Logger initialized. Appenders sise:" << log4cxx::Logger::getRootLogger()->getAllAppenders().size() );
 }
 

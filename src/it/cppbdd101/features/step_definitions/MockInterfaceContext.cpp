@@ -2,7 +2,7 @@
 #include <cppbdd101/features/step_definitions/MockInterfaceContext.hpp>
 
 using cucumber::ScenarioScope;
-
+/*
 GIVEN("^a mock class with method foo$") 
 {
    ScenarioScope<MockInterfaceContext> context{};
@@ -26,4 +26,4 @@ THEN("^the test should pass$")
    ScenarioScope<MockInterfaceContext> context{};
    ASSERT_TRUE(::testing::Mock::VerifyAndClearExpectations(context->mock.get()));
 }
-
+*/

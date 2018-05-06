@@ -23,11 +23,11 @@ class DummyTest : public ::testing::Test
 
     protected:
 
-	static log4cxx::LoggerPtr logger;
 	cpp101::Dummy * dummy;
+	static log4cxx::LoggerPtr logger;
 
     private:
-        //boost::shared_ptr<Dummy> testObject;
+        //boost::shared_ptr<Dummy> dummy;
 };
 #endif
 

@@ -17,6 +17,7 @@ add_library(cppbdd101.edac.main
 
 target_compile_features(cppbdd101.edac.main
     PUBLIC
+        cxx_std_17
         cxx_strong_enums
         cxx_variadic_templates
         cxx_nullptr
@@ -31,6 +32,7 @@ target_compile_features(cppbdd101.edac.main
         cxx_rvalue_references
         cxx_thread_local
         cxx_variadic_templates
+		cxx_override
     PRIVATE
         cxx_lambdas
         cxx_range_for
@@ -40,6 +42,7 @@ target_compile_features(cppbdd101.edac.main
 if(NOT TARGET EDAC-MAIN::EDAC-MAIN)
     add_library(EDAC-MAIN::EDAC-MAIN UNKNOWN IMPORTED)
     set_target_properties(EDAC-MAIN::EDAC-MAIN PROPERTIES
+        # EXCLUDE_FROM_ALL 1
         INTERFACE_COMPILE_DEFINITIONS "${EDAC_MAIN_DEFINITIONS}"
         IMPORTED_LINK_INTERFACE_LANGUAGES "CXX"
         IMPORTED_LOCATION "${CMAKE_INSTALL_LIBDIR}/cppbdd101.edac.main.a"
@@ -63,3 +66,6 @@ target_include_directories(cppbdd101.edac.main
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/cppbdd101/edac>
         $<INSTALL_INTERFACE:${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/cppbdd101/edac>
 )
+
+# add_dependencies(compile cppbdd101.edac.main)
+

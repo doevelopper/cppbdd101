@@ -17,11 +17,14 @@ cpp101::Dummy::Dummy (const std::string& hello,  const std::string& world)
   , m_world{world}
   , m_speechless{}
 {
-   m_speechless = (hello.empty() && world.empty());
+    LOG4CXX_TRACE(logger , __LOG4CXX_FUNC__);
+    m_speechless = (hello.empty() && world.empty());
 }
 
 std::string cpp101::Dummy::speak() const
 {
+    LOG4CXX_TRACE(logger , __LOG4CXX_FUNC__);
+
     auto hello = m_hello;
     hello.append(" ");
     hello.append(m_world);
@@ -30,6 +33,7 @@ std::string cpp101::Dummy::speak() const
 
 bool cpp101::Dummy::speechless() const
 {
+    LOG4CXX_TRACE(logger , __LOG4CXX_FUNC__);
     return m_speechless;
 }
 

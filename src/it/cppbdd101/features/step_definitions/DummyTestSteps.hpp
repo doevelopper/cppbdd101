@@ -10,7 +10,7 @@
 
 struct DummyCtx
 {
-    std::vector<cppbdd101::Dummy> dummies{};
+    std::vector<cpp101::Dummy> dummies{};
     std::string say_hello_result{};
 };
 

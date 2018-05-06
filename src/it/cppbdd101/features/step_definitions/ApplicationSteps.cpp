@@ -1,5 +1,7 @@
 #include <cppbdd101/features/step_definitions/ApplicationSteps.hpp>
 
+using cucumber::ScenarioScope;
+/*
 // return to known state before every scenario
 BEFORE()
 {
@@ -26,8 +28,8 @@ THEN("^control should be disabled$")
     
 }
 
-/*
- 
+
+//* 
 GIVEN("^an animal is created (.*)$")
 {
     REGEX_PARAM(int, sensor_val);
@@ -49,4 +51,4 @@ THEN("^the (.*) solenoid should be activated with duty cycle (.*)$")
     REGEX_PARAM(int, duty_cycle);
 }
  
- */
+*/

@@ -27,6 +27,7 @@
 #include <log4cxx/rolling/sizebasedtriggeringpolicy.h>
 #include <log4cxx/rolling/fixedwindowrollingpolicy.h>
 #include <log4cxx/xml/domconfigurator.h>
+
 class LoggingService
 {
     public:
@@ -93,5 +94,4 @@ class LoggingService
 
     private:
 };
-
 #endif

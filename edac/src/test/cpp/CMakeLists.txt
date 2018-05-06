@@ -23,9 +23,9 @@ target_include_directories(cppbdd101.edac.test
 
 target_link_libraries(cppbdd101.edac.test
     PUBLIC 
-		GMock::GMock 
-		GTest::GTest 
-		cppbdd101.edac.main
+    GMock::GMock 
+    GTest::GTest 
+    cppbdd101.edac.main
 )
 
 add_executable(cppbdd101.edac.test.bin
@@ -42,13 +42,16 @@ target_link_libraries (cppbdd101.edac.test.bin
 )
 
 gtest_discover_tests(cppbdd101.edac.test.bin
-	WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
-	TEST_PREFIX "EDAC:-: "
-	TEST_SUFFIX ---- 
-	PROPERTIES LABELS EDAC TEST
-	DISCOVERY_TIMEOUT 10
-	EXTRA_ARGS --iterration 1 --outputpath ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} --module ${ModuleName}.test
+    WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+    TEST_PREFIX "EDAC:-: "
+    TEST_SUFFIX ---- 
+    PROPERTIES LABELS EDAC TEST
+    DISCOVERY_TIMEOUT 10
+    EXTRA_ARGS --iterration 1 --outputpath ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} --module ${ModuleName}.test
 )
+
+# add_dependencies(test-compile cppbdd101.edac.test)
+# add_dependencies(m-test cppbdd101.edac.test.bin)
 
 # if(ENABLE_COVERAGE)
    # add_coverage_targets(${PROJECT_NAME}CoreTest.bin ${PROJECT_NAME}CoreTest ${CORE_MODULE_ROOT_DIRECTORY})

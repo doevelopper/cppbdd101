@@ -10,10 +10,12 @@ target_link_libraries(cppbdd101.edac.it-test.steps
         #BENCHMARK::BENCHMARK
 )
 
-add_custom_target(cppbdd101.edac.integration
-    COMMAND cppbdd101.edac.it-test.steps  --host localhost --port 3902  >/dev/null &
-    COMMAND cucumber --format pretty --color --strict ${CMAKE_CURRENT_SOURCE_DIR}/cppbdd101/edac/features
-    DEPENDS cppbdd101.edac.it-test.steps
+add_custom_target(cppbdd101.edac.integration-test
+    COMMAND cppbdd101.edac.it-test.steps --port 3902  >/dev/null &
+    # COMMAND cucumber --verbose --format progress --backtrace --format html --color --out ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/edac-cucumber-report.html --strict ${CMAKE_CURRENT_SOURCE_DIR}/cppbdd101/edac/features 
+    COMMAND cucumber --format progress --backtrace --format html --color --out ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/edac-cucumber-report.html --strict ${CMAKE_CURRENT_SOURCE_DIR}/cppbdd101/edac/features 
+    # DEPENDS cppbdd101.edac.it-test.steps
+    # DEPENDS cppbdd101.edac.test
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
 

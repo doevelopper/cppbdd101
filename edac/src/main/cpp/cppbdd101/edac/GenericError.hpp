@@ -4,8 +4,7 @@
 
 #include <system_error>
 #include <cerrno>
-class GenericError :
-    public std::error_category                  //: std::generic_category
+class GenericError : public std::error_category                  //: std::generic_category
 {
     enum class GenericErrorErrorCodes : std::uint32_t
     {
