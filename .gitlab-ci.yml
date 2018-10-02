@@ -1,0 +1,174 @@
+.dedicated-runner: &dedicated-runner
+    retry: 1
+    tags:
+        - gitlab-org
+
+.default-cache: &default-cache
+
+
+.push-cache: &push-cache
+    cache:
+        <<: *default-cache
+    policy: push
+
+.pull-cache: &pull-cache
+    cache:
+        <<: *default-cache
+    policy: pull
+
+.docker: &docker
+    services:
+        - docker:dind
+    variables:
+        DOCKER_DRIVER: overlay
+        DOCKER_HOST: tcp://docker:2375
+    tags:
+        - docker
+
+.except-docs: &except-docs
+    except:
+        - /(^docs[\/-].*|.*-docs$)/
+
+.except-qa: &except-qa
+    except:
+        - /(^qa[\/-].*|.*-qa$)/
+
+.except-docs-and-qa: &except-docs-and-qa
+    except:
+        - /(^docs[\/-].*|.*-docs$)/
+        - /(^qa[\/-].*|.*-qa$)/
+
+.only-canonical-masters: &only-canonical-masters
+    only:
+        - master@gitlab-org/doevlopper/cppbdd101
+
+.setupt-dev-tools: &setupt-dev-tools
+    script:
+        - echo "shudl install gtest gbenchmark..."
+    artifacts:
+        when: on_failure
+        expire_in: 31d
+        paths:
+            - log/development.log
+
+.single-script-job: &single-script-job
+#    image: ruby:2.4-alpine
+    stage: test
+    cache: {}
+    dependencies: []
+    variables: &single-script-job-variables
+        GIT_STRATEGY: none
+    before_script:
+        - echo "blqblq"
+
+# Review docs base
+.review-docs: &review-docs
+    <<: *dedicated-runner
+    <<: *single-script-job
+    variables:
+        <<: *single-script-job-variables
+    environment:
+        name: review-docs/$CI_COMMIT_REF_SLUG
+        url: http://$CI_ENVIRONMENT_SLUG.$DOCS_REVIEW_APPS_DOMAIN/$DOCS_GITLAB_REPO_SUFFIX
+        on_stop: review-docs-cleanup
+
+review-docs-deploy-manual:
+    <<: *review-docs
+    stage: site
+    script:
+        - echo "To preview the docs changes live."
+    when: manual
+    only:
+        - branches@gitlab-org/doevlopper/cppbdd101
+        <<: *except-docs-and-qa
+
+review-docs-deploy:
+    <<: *review-docs
+    stage: deploy
+    script:
+        - echo "" 
+    only:
+        - /(^docs[\/-].*|.*-docs$)/@gitlab-org/gitlab-ce
+        - /(^docs[\/-].*|.*-docs$)/@gitlab-org/gitlab-ee
+        <<: *except-qa
+
+review-docs-cleanup:
+    <<: *review-docs
+    stage: clean
+    environment:
+        name: review-docs/$CI_COMMIT_REF_SLUG
+        action: stop
+    script:
+        - echo "Cleanup remote environment of docs"
+    when: manual
+    only:
+        - branches@gitlab-org/doevlopper/cppbdd101
+
+review:
+    allow_failure: true
+    before_script:
+        - echo "Code Review"
+    variables:
+        GIT_DEPTH: "1"
+        HOST_SUFFIX: "$CI_ENVIRONMENT_SLUG"
+        DOMAIN: "-$CI_ENVIRONMENT_SLUG.$REVIEW_APPS_DOMAIN"
+        GITLAB_HELM_CHART_REF: "master"
+    script:
+        - echo " "
+    environment:
+        name: review/$CI_COMMIT_REF_NAME
+        url: https://gitlab-$CI_ENVIRONMENT_SLUG.$REVIEW_APPS_DOMAIN
+        on_stop: stop_review
+    only:
+        refs:
+            - branches@gitlab-org/doevlopper/cppbdd101
+    except:
+        refs:
+           - master
+           - /(^docs[\/-].*|.*-docs$)/
+
+stop_review:
+    <<: *single-script-job
+    stage: test
+    allow_failure: true
+    cache: {}
+    dependencies: []
+    before_script: []
+    script:
+        - echo "Stop review"
+    when: manual
+    environment:
+        name: review/$CI_COMMIT_REF_NAME
+        action: stop
+    only:
+        refs:
+            - branches@gitlab-org/doevlopper/cppbdd101
+    except:
+        refs:
+               - master
+                - /(^docs[\/-].*|.*-docs$)/
+            
+variables:
+    GIT_DEPTH: "2"
+    GIT_SUBMODULE_STRATEGY: "none"
+    GET_SOURCES_ATTEMPTS: "3"
+
+before_script:
+    - date
+
+after_script:
+    - date
+
+stages:
+    - prepare
+    - compile
+    - test
+    - integration-test
+    - review
+    - site
+    - deploy
+    - clean
+
+
+
+
