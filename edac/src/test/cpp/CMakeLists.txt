@@ -41,6 +41,8 @@ target_link_libraries (cppbdd101.edac.test.bin
         cppbdd101.edac.test
 )
 
+#https://blog.kitware.com/dynamic-google-test-discovery-in-cmake-3-10/
+
 gtest_discover_tests(cppbdd101.edac.test.bin
     WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
     TEST_PREFIX "EDAC:-: "
@@ -49,6 +51,9 @@ gtest_discover_tests(cppbdd101.edac.test.bin
     DISCOVERY_TIMEOUT 10
     EXTRA_ARGS --iterration 1 --outputpath ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} --module ${ModuleName}.test
 )
+
+#add_test(NAME monolithic COMMAND cppbdd101.edac.test.bin)
+
 
 # add_dependencies(test-compile cppbdd101.edac.test)
 # add_dependencies(m-test cppbdd101.edac.test.bin)

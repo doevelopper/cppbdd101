@@ -23,6 +23,8 @@ set(${PROJECT_NAME}_VERSION
 #set(VSTR MAJOR MINOR MICRO PATCH TWEAK PREFIX)
 
 option(BUILD_SHARED_LIBS            "If enabled, shared libs will be built by default, otherwise static libs" OFF)
+#set("BUILD_SHARED_LIBS" "OFF" CACHE INTERNAL "If enabled, shared libs will be built by default, otherwise static libs")
+
 add_definitions(-DRELEASE_LEVEL="SNAPSHOOT") # SNAPSHOOT ,ALPHA , BETA , CANDIDATE , FINAL.
 
 list(APPEND CMAKE_MODULE_PATH
@@ -51,9 +53,10 @@ find_package(Cucumber-cpp)
 include(GoogleTest) #gtest_discover_tests
 # include(goals)
 include(CTest)
-
+set (CMAKE_TEST_COMMAND ctest -V) # Work aroound do console output
 
 add_subdirectory(edac)
+add_subdirectory(lectures)
 
 add_subdirectory (src/main/cpp)
 add_subdirectory (src/test/cpp)

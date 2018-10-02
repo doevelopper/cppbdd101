@@ -12,14 +12,36 @@ target_link_libraries(cppbdd101.it-test.steps
     ##PUBLIC BENCHMARK::BENCHMARK
 )
 
+add_custom_target(start-cucumber-wireserver
+    COMMAND cppbdd101.it-test.steps --port 3902  >/dev/null &
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    COMMENT "Start cucumber's wireserver."
+)
 
 add_custom_target(cppbdd101.integration-test
     COMMAND cppbdd101.it-test.steps --port 3902  >/dev/null &
     COMMAND cucumber --format progress --backtrace --format html --color --out ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/cppbdd101-cucumber-report.html --strict ${CMAKE_CURRENT_SOURCE_DIR}/cppbdd101/features
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    COMMENT "Start wire server and run integration test."
 )
 
+# Target: run wip features
+# Run cucumber with --wip argument and run only features tagged @wip
 
+#add_custom_target(run_wip_features
+#    ${CUCUMBER_RUBY} -P --tags @wip --wip --tags ~@proposal --no-color -f pretty -s features
+#    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+#    COMMENT "Running cucumber (wip features)."
+#)
+
+# Target: document features
+# Run all features except features tagged @wip or @proposal and generate html output
+
+#add_custom_target(document_features
+#    ${CUCUMBER_RUBY} -P --tags ~@wip --tags ~@proposal --no-color -f pretty --no-source -f html -o ${DOC_DIR}/Features.html features
+#    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+#    COMMENT "Running cucumber (features documentation)."
+#)
 
 ##target_sources( ddsShapeDemo
 ##	PRIVATE Ishape.cpp

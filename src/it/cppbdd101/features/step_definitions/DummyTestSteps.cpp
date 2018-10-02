@@ -2,6 +2,22 @@
 #include <cppbdd101/features/step_definitions/DummyTestSteps.hpp>
 
 using cucumber::ScenarioScope;
+using namespace ::testing;
+
+DummyCtx::DummyCtx()
+{
+	
+}
+
+DummyCtx::~DummyCtx()
+{
+	
+}
+
+void DummyCtx::loop(std::mutex & mutex, bool const & running)
+{
+    std::lock_guard<std::mutex> lock(mutex);
+}
 
 /*
 GIVEN("^a dummy initialised with \"([^\"]*)\" and \"([^\"]*)\"$")

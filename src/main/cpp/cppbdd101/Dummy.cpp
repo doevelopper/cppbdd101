@@ -1,3 +1,4 @@
+
 #include <cppbdd101/Dummy.hpp>
 
 log4cxx::LoggerPtr cpp101::Dummy::logger = log4cxx::Logger::getLogger(std::string("cppbdd101.Dummy"));

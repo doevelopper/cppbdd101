@@ -15,26 +15,26 @@ namespace cpp101
 
      public:
 
-         Dummy();
+        Dummy();
         /*!
-         * @brief Dummy who knows how to say hello world
-         * @param hello_string 'Hello' in my language
-         * @param world_string 'World' in my language
-         */
-	 Dummy (const std::string& hello_string, const std::string& world_string);
-         Dummy(const Dummy&) = default;
-         Dummy(Dummy&&) = default;
-         Dummy& operator=(const Dummy&) = default;
-         Dummy& operator=(Dummy&&) = default;
-         virtual ~Dummy();
+        * @brief Dummy who knows how to say hello world
+        * @param hello_string 'Hello' in my language
+        * @param world_string 'World' in my language
+        */
+        Dummy (const std::string& hello_string, const std::string& world_string);
+        Dummy(const Dummy&) = default;
+        Dummy(Dummy&&) = default;
+        Dummy& operator=(const Dummy&) = default;
+        Dummy& operator=(Dummy&&) = default;
+        virtual ~Dummy();
 
-	 std::string speak() const;
-	 bool speechless() const;
+        std::string speak() const;
+        bool speechless() const;
 
      private:
-	 std::string m_hello{};
-	 std::string m_world{};
-	 bool m_speechless {true};
+        std::string m_hello{};
+        std::string m_world{};
+        bool m_speechless {true};
     };
 }
 #endif
