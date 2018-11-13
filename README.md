@@ -69,6 +69,7 @@ Branch      | Linux/OSX | Windows | Coverage | Documentation | Test |
 
 ```sh
     $ git clone https://github.com/cucumber/cucumber-cpp.git
+      [git clone https://github.com/cucumber/cucumber-cpp.git --config "http.proxy=proxyHost:proxyPort"]
     $ cd cucumber-cpp
     $ sudo apt-get install ruby
     $ ruby --version
