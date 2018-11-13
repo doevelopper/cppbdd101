@@ -73,7 +73,7 @@ Branch      | Linux/OSX | Windows | Coverage | Documentation | Test |
     $ sudo apt-get install ruby
     $ ruby --version
     $ sudo apt-get install ruby-dev
-    $ sudo gem install bundler
+    $ sudo gem install bundler [sudo gem install bundler --http-proxy=http://PROXY_HOST:PROXY_PORT/]
     $ bundle install
     $ git submodule init
     $ git submodule update
