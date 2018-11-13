@@ -74,7 +74,7 @@ Branch      | Linux/OSX | Windows | Coverage | Documentation | Test |
     $ ruby --version
     $ sudo apt-get install ruby-dev
     $ sudo gem install bundler [sudo gem install bundler --http-proxy=http://PROXY_HOST:PROXY_PORT/]
-    $ bundle install
+    $ bundle install  [ http_proxy=http://PROXY_HOST:PROXY_PORT/ bundler install]
     $ git submodule init
     $ git submodule update
     $ cmake -E chdir build cmake -DCUKE_ENABLE_EXAMPLES=on -DCMAKE_INSTALL_PREFIX=/usr/ ..
