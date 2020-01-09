@@ -40,3 +40,43 @@
   # This will only run after steps within scenarios tagged
   # with @cucumis AND @sativus.
 #end
+
+
+# add this to ./features/support/hooks.rb
+After('@debug') do
+  puts response.body
+end
+
+# tag any features with @debug to get the output printed
+# especially handy for testing json and xml responses
+
+# File: features/support/hooks.rb
+#
+Before('@foo') do |scenario|
+  print "Before starting scenario #{scenario.name}"
+end
+
+After('@foo') do |scenario|
+  puts "> after scenario #{scenario.name}"
+end 
+
+# File: features/support/hooks.rb
+#
+Around('@foo') do |scenario, block|
+  print "Before starting scenario #{scenario.name}"
+  block.call
+  puts "> after scenario #{scenario.name}"
+end
+
+AfterStep do |result, step_info|
+  print "Result: #{result} - Step: #{step_info.name}"
+end
+
+# After each scenario that fails, run the debugger, needs ruby-debug gem
+# How to use: cucumber DEBUG=1
+After do |s|
+  if s.failed?
+    debugger if ENV['DEBUG']
+    DatabaseCleaner.clean
+  end
+end
